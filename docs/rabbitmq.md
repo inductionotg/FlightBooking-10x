@@ -33,21 +33,21 @@ Publisher confirmation and consumer acknowledgement serve different purposes; se
 Dependencies are pinned in the booking and reminder lockfiles (`amqplib@2.2.0`). Run `npm ci` in both repositories after updating. With the existing local MySQL setup:
 
 ```powershell
-node scripts/configure-rabbitmq.cjs
-node scripts/configure-local-smtp.cjs
+node scripts/configure-rabbitmq.js
+node scripts/configure-local-smtp.js
 # Existing model-sync baseline only; fresh setups already include these migrations:
-node scripts/apply-rabbitmq-migrations.cjs
+node scripts/apply-rabbitmq-migrations.js
 docker compose -f compose.local.yml --profile messaging up -d --wait rabbitmq mailpit
 # Restart booking and reminder processes to load their updated environment and code.
-node scripts/rabbitmq-status.cjs
-node scripts/verify-rabbitmq.cjs
+node scripts/rabbitmq-status.js
+node scripts/verify-rabbitmq.js
 ```
 
 Generate configuration before starting the messaging profile. The generator preserves existing values and stores random local credentials in ignored `.local/rabbitmq.env`, with connection URLs in each service's ignored `.env`. The additive migration helper is restricted to the known local baseline schemas; do not use it as a production migration-history repair tool. Fresh deployments use the service migration chains.
 
 RabbitMQ is pinned to `rabbitmq:4.3.6-management`. AMQP uses localhost port **35672**; the [management UI](http://127.0.0.1:35673) uses **35673**, with credentials from the ignored local file. The named Docker volume retains broker data. Stop just RabbitMQ with `docker compose -f compose.local.yml --profile messaging stop rabbitmq`.
 
-`configure-local-smtp.cjs` sets the notification worker to `smtp` with `SMTP_HOST=127.0.0.1`, port **31025**, and a local sender. It refuses to overwrite a different SMTP host or port. [Mailpit](http://127.0.0.1:38025) captures actual SMTP messages on localhost; it does not forward them to external mailboxes. This exercises Nodemailer's network handoff and the worker's `Sent` transition. Mailpit storage is ephemeral in this Compose setup.
+`configure-local-smtp.js` sets the notification worker to `smtp` with `SMTP_HOST=127.0.0.1`, port **31025**, and a local sender. It refuses to overwrite a different SMTP host or port. [Mailpit](http://127.0.0.1:38025) captures actual SMTP messages on localhost; it does not forward them to external mailboxes. This exercises Nodemailer's network handoff and the worker's `Sent` transition. Mailpit storage is ephemeral in this Compose setup.
 
 Existing requests remain valid without `notificationEmail`; these become `NeedsRecipient`. To exercise delivery, add `"notificationEmail":"demo@example.test"` to the existing booking body. Reusing an idempotency key with a different recipient returns 409. Production should derive the recipient from the authenticated user's profile. For external delivery, configure a real SMTP host, port, sender, optional username/password and TLS according to that provider; external delivery has not been tested here.
 
@@ -55,7 +55,7 @@ Existing requests remain valid without `notificationEmail`; these become `NeedsR
 
 The booking stores its original `traceparent`; the publisher carries it in message headers and the consumer persists it for delivery. This allows the original trace ID to connect booking, flight reservation, publication, receipt and delivery even across worker restarts. Recovery attempts also retain their separate attempt traces linked by booking ID.
 
-New Prometheus counters are `booking_events_total`, `booking_notifications_total`, and `booking_notification_deliveries_total`. Rabbit publication also records dependency latency. `node scripts/rabbitmq-status.cjs` reports ready messages, unacknowledged messages and consumer counts without printing credentials. Queue depth is not yet a Prometheus/Grafana panel.
+New Prometheus counters are `booking_events_total`, `booking_notifications_total`, and `booking_notification_deliveries_total`. Rabbit publication also records dependency latency. `node scripts/rabbitmq-status.js` reports ready messages, unacknowledged messages and consumer counts without printing credentials. Queue depth is not yet a Prometheus/Grafana panel.
 
 ## Verification and limits
 
@@ -77,4 +77,4 @@ SMTP delivery was verified against the local Mailpit server. Acceptance by Mailp
 - `Booking_Service/src/services/outbox-publisher.js`: recoverable confirmed publication.
 - `ReminderService/src/services/booking-consumer.js`: validation, durable inbox, retries and acknowledgements.
 - `ReminderService/src/services/booking-delivery.js`: leased delivery, SMTP and optional dry-run.
-- `messaging/rabbitmq.js`: canonical topology and confirmed publishing; run `node scripts/sync-rabbitmq.cjs` after editing it.
+- `messaging/rabbitmq.js`: canonical topology and confirmed publishing; run `node scripts/sync-rabbitmq.js` after editing it.

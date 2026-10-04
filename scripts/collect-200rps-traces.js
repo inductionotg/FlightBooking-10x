@@ -2,7 +2,7 @@
 const fs=require('node:fs'),path=require('node:path');
 const root=path.resolve(__dirname,'..');
 const run=process.argv[2];
-if(!/^diagnose-200-[a-z0-9-]+$/.test(run||''))throw new Error('Usage: node scripts/collect-200rps-traces.cjs diagnose-200-...');
+if(!/^diagnose-200-[a-z0-9-]+$/.test(run||''))throw new Error('Usage: node scripts/collect-200rps-traces.js diagnose-200-...');
 const d=JSON.parse(fs.readFileSync(path.join(root,'load-tests/results',run,'diagnostics.json')));
 const begin=Date.parse(d.started),end=Date.parse(d.finished);
 const logs=[['flights','FlightandSearchService'],['booking','Booking_Service'],['notifications','ReminderService']].flatMap(([name,dir])=>

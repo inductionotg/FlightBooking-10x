@@ -18,15 +18,15 @@ Run from the workspace root:
 
 ```powershell
 ./load-tests/install-k6.ps1 # Only needed when the portable binary is absent
-node load-tests/run.cjs baseline warmup-01 10s
-node load-tests/run.cjs baseline baseline-01 60s
-node load-tests/run.cjs 10x tenfold-01 60s
-node load-tests/run.cjs baseline baseline-02 60s
-node load-tests/run.cjs 10x tenfold-02 60s
-node load-tests/run.cjs gateway gateway-01 10s
-node load-tests/run.cjs contention contention-01 1s
-node load-tests/analyze.cjs
-node load-tests/reconcile.cjs
+node load-tests/run.js baseline warmup-01 10s
+node load-tests/run.js baseline baseline-01 60s
+node load-tests/run.js 10x tenfold-01 60s
+node load-tests/run.js baseline baseline-02 60s
+node load-tests/run.js 10x tenfold-02 60s
+node load-tests/run.js gateway gateway-01 10s
+node load-tests/run.js contention contention-01 1s
+node load-tests/analyze.js
+node load-tests/reconcile.js
 ```
 
 Choose a new name for every run; results and fixtures are never overwritten. Execute sequentially so loads do not overlap. Wait two minutes after other gateway requests before the gateway probe; its fixed rate-limit window must be unused. Direct service load runs do not consume that limit.
@@ -51,7 +51,7 @@ The separate contention probe sends 20 concurrent booking attempts for one newly
 
 ## Scope
 
-Backend tests call flights and booking directly on IPv6 loopback. They do not claim gateway/auth throughput: the gateway has a five-request/IP/two-minute limit and no booking proxy. A separate gateway probe preserves and measures that policy. Payments are outside the chosen scope. RabbitMQ now receives booking events, but this workload omits `notificationEmail`, so it does not send SMTP messages. The runner itself does not change application settings. Original `before-*` runs predate transactions and Redis; `transactions-*` runs include transactional recovery; `redis-*` runs also include caching, per-process request coalescing and a ten-load fallback limit. The `diagnose-200-*` runs include the later index and RabbitMQ; the second diagnostic run samples cache deadlines and flight event-loop delay each second. The `profile-200-20261004-a` run used a temporary loopback Node inspector and a 20-second k6 workload to capture a flight CPU profile; its shorter duration and profiler overhead exclude it from capacity comparisons. The normal service launch was restored afterward. The raw profile stays in ignored `.local/profiles/`; `node scripts/summarize-flight-profile.cjs profile-200-20261004-a` reproduces the [sanitized counts](../docs/flight-cpu-profile-results.json).
+Backend tests call flights and booking directly on IPv6 loopback. They do not claim gateway/auth throughput: the gateway has a five-request/IP/two-minute limit and no booking proxy. A separate gateway probe preserves and measures that policy. Payments are outside the chosen scope. RabbitMQ now receives booking events, but this workload omits `notificationEmail`, so it does not send SMTP messages. The runner itself does not change application settings. Original `before-*` runs predate transactions and Redis; `transactions-*` runs include transactional recovery; `redis-*` runs also include caching, per-process request coalescing and a ten-load fallback limit. The `diagnose-200-*` runs include the later index and RabbitMQ; the second diagnostic run samples cache deadlines and flight event-loop delay each second. The `profile-200-20261004-a` run used a temporary loopback Node inspector and a 20-second k6 workload to capture a flight CPU profile; its shorter duration and profiler overhead exclude it from capacity comparisons. The normal service launch was restored afterward. The raw profile stays in ignored `.local/profiles/`; `node scripts/summarize-flight-profile.js profile-200-20261004-a` reproduces the [sanitized counts](../docs/flight-cpu-profile-results.json).
 
 Before/after comparisons must use the same rates, durations, data distribution, settings, versions, and host, with fresh booking inventory. Short local runs show behavior at these loads; they do not establish sustained production capacity.
 

@@ -1,5 +1,5 @@
 'use strict';
-// Copied into booking and notification repositories by scripts/sync-rabbitmq.cjs.
+// Copied into booking and notification repositories by scripts/sync-rabbitmq.js.
 const amqp=require('amqplib');
 const topology={exchange:'booking.events',key:'booking.confirmed.v1',queue:'notifications.booking-confirmed.v1',dead:'booking.events.dead'};
 async function connect(){

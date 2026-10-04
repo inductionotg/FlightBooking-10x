@@ -66,17 +66,17 @@ Flight reservation endpoints require `x-reservation-key` matching `RESERVATION_S
 
 ## Migrations and local application
 
-Fresh setup runs the full migration histories and configures one generated service key for both services. For the existing model-sync baseline, `node scripts/apply-reservation-migrations.cjs` applied only these two additive migrations and recorded them in `LocalSchemaChanges`, preserving existing booking/flight rows. It does not fabricate old SequelizeMeta history. The running Flight and Booking processes were restarted.
+Fresh setup runs the full migration histories and configures one generated service key for both services. For the existing model-sync baseline, `node scripts/apply-reservation-migrations.js` applied only these two additive migrations and recorded them in `LocalSchemaChanges`, preserving existing booking/flight rows. It does not fabricate old SequelizeMeta history. The running Flight and Booking processes were restarted.
 
 Existing bookings with a null requestKey are deliberately excluded from automatic recovery: old confirmed bookings have no reservation records, and automatically reserving them again would corrupt inventory. Historical overselling from the earlier audit remains test evidence and is not silently repaired. Production adoption of legacy records needs a separate reconciliation plan. A failed MySQL DDL migration can be partially applied; inspect it before rerunning. Down migrations destroy the new workflow metadata and should only be exercised on disposable test databases after quiescing services.
 
 ## Verification
 
-- `node scripts/verify-migrations.cjs`: 18 checks passed on four fresh disposable schemas, including full rollback/reapplication; test schemas removed.
-- `node scripts/verify-reservations.cjs`: 13 integration checks passed: concurrency, duplicate keys, conflicting payloads, protected inventory edits, price stability, repeated cancellation, transactional rollback, lost reply, process exit after remote commit, automatic retry after service failure, retry after failed release, cancellation-before-reserve, and validation/internal endpoint protection.
+- `node scripts/verify-migrations.js`: 18 checks passed on four fresh disposable schemas, including full rollback/reapplication; test schemas removed.
+- `node scripts/verify-reservations.js`: 13 integration checks passed: concurrency, duplicate keys, conflicting payloads, protected inventory edits, price stability, repeated cancellation, transactional rollback, lost reply, process exit after remote commit, automatic retry after service failure, retry after failed release, cancellation-before-reserve, and validation/internal endpoint protection.
 - The crash check starts a separate process running the actual BookingService, commits a real Flight Service reservation, and exits with code 86 before booking confirmation. The running booking recovery worker finishes that persisted booking. Other outage tests inject client failures; they are not claims that the live Flight Service was killed.
-- `node scripts/smoke-local.cjs`: all 14 existing functional checks passed, including gateway routing and notifications ticket creation/deletion.
-- `node load-tests/run.cjs contention after-transactions-contention 1s`: exact outcome **1 confirmed, 19 insufficient-seat responses, inventory drift 0**, exit code 0. The scenario sends 20 concurrent iterations; it is not a one-second arrival-rate test. Its assertions were strengthened to require exactly one confirmation, 19 explicit rejections, and no unexpected response.
+- `node scripts/smoke-local.js`: all 14 existing functional checks passed, including gateway routing and notifications ticket creation/deletion.
+- `node load-tests/run.js contention after-transactions-contention 1s`: exact outcome **1 confirmed, 19 insufficient-seat responses, inventory drift 0**, exit code 0. The scenario sends 20 concurrent iterations; it is not a one-second arrival-rate test. Its assertions were strengthened to require exactly one confirmation, 19 explicit rejections, and no unexpected response.
 
 Results: `reservation-test-results.json`, `migration-check-results.json`, `step-1-smoke-results.json`, and `../load-tests/results/after-transactions-contention/summary.json`. Expected 409 responses in a last-seat test are not infrastructure errors even though k6's default HTTP-failure metric counts them. No new 20/200 requests-per-second performance comparison has been run for this change yet; correctness results do not prove 10x capacity.
 

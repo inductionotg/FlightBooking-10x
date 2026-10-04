@@ -19,7 +19,7 @@ foreach ($service in $services) {
     Pop-Location
 }
 docker compose -f compose.local.yml up -d --wait
-node scripts/setup-local.cjs
+node scripts/setup-local.js
 ```
 
 The setup script is first-run only: it refuses to overwrite configuration or reuse existing baseline schemas. It uses a local-only database password defined in the Compose file. No production credentials are needed. The initial smoke test does not send email; the optional Mailpit setup below exercises SMTP without external credentials. Use only generated local credentials. The observability retrofit removes legacy sensitive console dumps; older saved logs are not retroactively sanitized.
@@ -31,7 +31,7 @@ New setups now apply each service's Sequelize migrations instead of creating tab
 With local MySQL running and dependencies installed:
 
 ```powershell
-node scripts/verify-migrations.cjs
+node scripts/verify-migrations.js
 ```
 
 This creates random `migration_check_*` databases on localhost port 33306, exercises migrations and rollbacks, and removes only the databases it created. It checks booking defaults and model compatibility, user-role associations and database constraints, and full rollback/reapplication for all four database-backed services. Results are written to `docs/migration-check-results.json`.
@@ -42,7 +42,7 @@ The earlier local baseline used model sync and has no migration history. Do not 
 
 ```powershell
 ./scripts/start-local.ps1
-node scripts/smoke-local.cjs
+node scripts/smoke-local.js
 ```
 
 Services run on ports 3001–3004 and 3010, accessed over IPv6 loopback (`http://[::1]:PORT`). Startup launches processes but does not assert readiness; inspect `.local/*.stderr.log` if the smoke test fails. Results are saved to `docs/step-1-smoke-results.json`; the smoke command exits nonzero if a check or gateway routing fails. Repeated gateway requests may trigger its existing five-request/two-minute limit.
@@ -57,19 +57,19 @@ The k6 audit is now captured: normal traffic of 20 requests/s passed both runs, 
 
 Transactional reservations and durable booking recovery are now implemented. The last-seat probe changed from 20 confirmations for one seat to exactly 1 confirmation and 19 rejections, with zero inventory drift. See [code changes, API usage, and test results](docs/transactional-reservations.md). Existing legacy records were preserved; they are not automatically re-reserved or corrected.
 
-For this existing model-sync local setup, the additive upgrade was applied with `node scripts/apply-reservation-migrations.cjs`. Fresh setup already includes the new migrations and shared service key. Run `node scripts/verify-reservations.cjs` to repeat the integration checks.
+For this existing model-sync local setup, the additive upgrade was applied with `node scripts/apply-reservation-migrations.js`. Fresh setup already includes the new migrations and shared service key. Run `node scripts/verify-reservations.js` to repeat the integration checks.
 
 Redis now runs in Docker and caches flight search and details for up to five seconds. Booking and cancellation invalidate affected entries after MySQL commits. See [Redis architecture, setup and code behavior](docs/redis-caching.md). Cache, transaction and smoke checks pass, including booking with Redis stopped. The 200 requests/s test still fails reliability thresholds; this is not yet a completed 10x-capacity claim. See [actual results](docs/before-after-metrics.md).
 
-For the existing local setup, `REDIS_URL=redis://127.0.0.1:36379` has been added to the flight service configuration. Start Redis with `docker compose -f compose.local.yml up -d --wait redis`; install the flight service's updated locked dependencies and restart that service when applying these changes elsewhere. Run `node scripts/verify-redis.cjs` to check the cache. The missing payments scope remains separate work.
+For the existing local setup, `REDIS_URL=redis://127.0.0.1:36379` has been added to the flight service configuration. Start Redis with `docker compose -f compose.local.yml up -d --wait redis`; install the flight service's updated locked dependencies and restart that service when applying these changes elsewhere. Run `node scripts/verify-redis.js` to check the cache. The missing payments scope remains separate work.
 
-Flight search now also has a composite `(departureAirportId, arrivalAirportId, price)` index, justified by the measured full-table scans. The existing local schema was upgraded with `node scripts/apply-search-index.cjs`; fresh setups use the new migration automatically. See [query plans, migration and rollback details](docs/search-index.md) and [before/after traffic measurements](docs/before-after-metrics.md).
+Flight search now also has a composite `(departureAirportId, arrivalAirportId, price)` index, justified by the measured full-table scans. The existing local schema was upgraded with `node scripts/apply-search-index.js`; fresh setups use the new migration automatically. See [query plans, migration and rollback details](docs/search-index.md) and [before/after traffic measurements](docs/before-after-metrics.md).
 
-Structured JSON logging, trace propagation and protected Prometheus-format metrics are now implemented across the five existing services. See [observability architecture, metric definitions and commands](docs/observability.md). Run `node scripts/read-metrics.cjs booking` to inspect local metrics, or `node scripts/verify-observability.cjs` to verify the integration. This instrumentation by itself makes no capacity claim.
+Structured JSON logging, trace propagation and protected Prometheus-format metrics are now implemented across the five existing services. See [observability architecture, metric definitions and commands](docs/observability.md). Run `node scripts/read-metrics.js booking` to inspect local metrics, or `node scripts/verify-observability.js` to verify the integration. This instrumentation by itself makes no capacity claim.
 
-Prometheus and Grafana now run in Docker under the optional `observability` profile. Open the [service dashboard](http://127.0.0.1:33000/d/flight-booking-overview) or [Prometheus targets](http://127.0.0.1:39090/targets). All five targets are UP. See [setup, ports, start/stop commands and validation](docs/monitoring-dashboard.md). Run `node scripts/verify-monitoring.cjs` to verify collection and the Grafana data source.
+Prometheus and Grafana now run in Docker under the optional `observability` profile. Open the [service dashboard](http://127.0.0.1:33000/d/flight-booking-overview) or [Prometheus targets](http://127.0.0.1:39090/targets). All five targets are UP. See [setup, ports, start/stop commands and validation](docs/monitoring-dashboard.md). Run `node scripts/verify-monitoring.js` to verify collection and the Grafana data source.
 
-RabbitMQ and Mailpit now run in Docker under the optional `messaging` profile. Booking confirmation writes a transactional outbox event; a publisher forwards it to notifications with durable storage, duplicate handling, delayed retries and dead-lettering. The notification worker sends through SMTP to the [local captured-mail inbox](http://127.0.0.1:38025). All ten messaging checks passed, including a captured email; the earlier broker-outage check also passed. See [RabbitMQ and SMTP architecture, setup, code and limitations](docs/rabbitmq.md). Run `node scripts/rabbitmq-status.cjs` for queue depth or `node scripts/verify-rabbitmq.cjs` for integration checks. A payments service was not added.
+RabbitMQ and Mailpit now run in Docker under the optional `messaging` profile. Booking confirmation writes a transactional outbox event; a publisher forwards it to notifications with durable storage, duplicate handling, delayed retries and dead-lettering. The notification worker sends through SMTP to the [local captured-mail inbox](http://127.0.0.1:38025). All ten messaging checks passed, including a captured email; the earlier broker-outage check also passed. See [RabbitMQ and SMTP architecture, setup, code and limitations](docs/rabbitmq.md). Run `node scripts/rabbitmq-status.js` for queue depth or `node scripts/verify-rabbitmq.js` for integration checks. A payments service was not added.
 
 The [scaling plan](docs/scaling-plan.md) maps measured failures to completed changes and conditional next steps. Its [before](docs/architecture-diagram-before.png) and [after](docs/architecture-diagram-after.png) diagrams distinguish the original audit, current implementation and proposed replicas. The indexed 200 requests/s runs still fail; the plan does not claim 10x capacity.
 

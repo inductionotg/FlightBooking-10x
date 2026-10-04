@@ -34,13 +34,13 @@ The migration is `FlightandSearchService/src/migrations/20260930140000-add-fligh
 For the existing local databases created originally with model sync:
 
 ```powershell
-node scripts/apply-search-index.cjs
+node scripts/apply-search-index.js
 ```
 
 This checks the exact local schema and port, applies only this migration, records it in `LocalSchemaChanges`, captures query plans, and verifies equal query results. A repeated run validates the existing index without duplicating it. It does not fabricate historical `SequelizeMeta` records. No app restart is required for MySQL to use a new index.
 
 For a deployment with reconciled Sequelize migration history, use its normal migration process. MySQL DDL auto-commits and can wait for metadata locks; production execution needs its own timing and lock-impact assessment. The local measurement does not establish online-build safety for a large production table. To roll back, execute this migration's `down` through that deployment's migration process; remove only `flights_route_price_idx`, preserving flight and reservation data.
 
-Validation uses `node scripts/verify-migrations.cjs` on disposable schemas, including index rollback/reapplication around an existing flight record. k6 uses unchanged Redis settings, request mix and thresholds, with fresh booking inventory. No cache timeout, concurrency cap, service count or database pool setting is changed with this index.
+Validation uses `node scripts/verify-migrations.js` on disposable schemas, including index rollback/reapplication around an existing flight record. k6 uses unchanged Redis settings, request mix and thresholds, with fresh booking inventory. No cache timeout, concurrency cap, service count or database pool setting is changed with this index.
 
 All 19 migration checks and all 13 Redis integration checks passed after applying the index. The latter include booking/cancellation invalidation and route/price changes. See [migration results](migration-check-results.json) and [cache results](redis-test-results.json).

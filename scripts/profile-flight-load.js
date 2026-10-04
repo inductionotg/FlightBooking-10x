@@ -4,7 +4,7 @@ const fs=require('node:fs'),path=require('node:path');
 const {spawn}=require('node:child_process');
 const root=path.resolve(__dirname,'..');
 const run=process.argv[2];
-if(!/^profile-200-[a-z0-9-]+$/.test(run||''))throw new Error('Usage: node scripts/profile-flight-load.cjs profile-200-...');
+if(!/^profile-200-[a-z0-9-]+$/.test(run||''))throw new Error('Usage: node scripts/profile-flight-load.js profile-200-...');
 const folder=path.join(root,'.local/profiles');
 fs.mkdirSync(folder,{recursive:true});
 const destination=path.join(folder,`${run}.cpuprofile`);
@@ -31,7 +31,7 @@ async function main(){
   let started=false;
   try{
     await send('Profiler.enable');await send('Profiler.start');started=true;
-    const child=spawn(process.execPath,['load-tests/run.cjs','10x',run,'20s'],{cwd:root,stdio:['ignore','pipe','pipe']});
+    const child=spawn(process.execPath,['load-tests/run.js','10x',run,'20s'],{cwd:root,stdio:['ignore','pipe','pipe']});
     child.stdout.on('data',chunk=>process.stdout.write(chunk));
     child.stderr.on('data',chunk=>process.stderr.write(chunk));
     const exitCode=await new Promise((resolve,reject)=>{child.once('error',reject);child.once('close',resolve);});

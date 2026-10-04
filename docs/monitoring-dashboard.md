@@ -43,10 +43,10 @@ The two Docker UI ports bind only to `127.0.0.1`. Grafana anonymous access is Vi
 The existing local stack is already configured and running. For another checkout, first complete local service setup and install their locked dependencies. Then:
 
 ```powershell
-node scripts/configure-observability.cjs
-node scripts/sync-observability.cjs
-node scripts/configure-monitoring.cjs
-node scripts/build-dashboard.cjs
+node scripts/configure-observability.js
+node scripts/sync-observability.js
+node scripts/configure-monitoring.js
+node scripts/build-dashboard.js
 # Start/restart the host service processes to load METRICS_PORT.
 # start-local.ps1 starts stopped services; it refuses to replace running processes.
 docker compose -f compose.local.yml --profile observability up -d --wait prometheus grafana
@@ -63,7 +63,7 @@ docker compose -f compose.local.yml --profile observability stop prometheus graf
 docker compose -f compose.local.yml --profile observability up -d --wait prometheus grafana
 ```
 
-Provisioned files under `observability/grafana/` create the data source and dashboard automatically. Edit `scripts/build-dashboard.cjs` and regenerate the JSON to change panels; UI edits are disabled. Grafana polls provisioning files every ten seconds; reload the browser to see dashboard-definition edits.
+Provisioned files under `observability/grafana/` create the data source and dashboard automatically. Edit `scripts/build-dashboard.js` and regenerate the JSON to change panels; UI edits are disabled. Grafana polls provisioning files every ten seconds; reload the browser to see dashboard-definition edits.
 
 ## Validation and limits
 
@@ -76,7 +76,7 @@ All six checks in [monitoring-test-results.json](monitoring-test-results.json) p
 5. Grafana provisions the expected panels, and every PromQL expression executes successfully.
 6. Grafana's data source returns all five UP targets through its query API.
 
-Repeat with `node scripts/verify-monitoring.cjs`; the live-read check uses the existing synthetic Redis-test flight fixture. `promtool check config` also passed, and the dashboard was visually checked in the browser. All nine existing observability checks passed after introducing the dedicated listeners. No k6 stress test, payment or email delivery was performed for this monitoring step.
+Repeat with `node scripts/verify-monitoring.js`; the live-read check uses the existing synthetic Redis-test flight fixture. `promtool check config` also passed, and the dashboard was visually checked in the browser. All nine existing observability checks passed after introducing the dedicated listeners. No k6 stress test, payment or email delivery was performed for this monitoring step.
 
 This adds collection and a dashboard. Alerts, a log aggregator, distributed trace storage and database replication remain future work. [RabbitMQ was added subsequently](rabbitmq.md); its application counters are scraped, while queue depth is currently available through the status script rather than a dashboard panel. Data begins when Prometheus first scrapes; process counters reset on service restart, and `rate()` handles counter resets. First-ever counter samples do not reveal when the preceding events occurred.
 

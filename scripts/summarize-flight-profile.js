@@ -6,7 +6,7 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const run = process.argv[2];
 if (!/^profile-200-[a-z0-9-]+$/.test(run || '')) {
-  throw new Error('Usage: node scripts/summarize-flight-profile.cjs profile-200-...');
+  throw new Error('Usage: node scripts/summarize-flight-profile.js profile-200-...');
 }
 const input = path.join(root, '.local', 'profiles', `${run}.cpuprofile`);
 const profile = JSON.parse(fs.readFileSync(input, 'utf8'));

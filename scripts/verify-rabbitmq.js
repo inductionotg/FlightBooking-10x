@@ -1,5 +1,5 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
-const support=require('./rabbitmq-test-support.cjs');
+const support=require('./rabbitmq-test-support.js');
 const {root,bookings,notifications,flights,fixture,request,until}=support;
 const rabbit=require(path.join(root,'Booking_Service/src/rabbitmq'));
 const {handle,persist}=require(path.join(root,'ReminderService/src/services/booking-consumer'));

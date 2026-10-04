@@ -18,7 +18,7 @@ async function request(name, port, route, options = {}) {
 const post = body => ({method:'POST', body:JSON.stringify(body)});
 async function main() {
   const suffix = Date.now();
-  // Use only the dedicated local database created by setup-local.cjs.
+  // Use only the dedicated local database created by setup-local.js.
   const config = require(path.join(root, 'FlightandSearchService/src/config/config.json')).development;
   assert.equal(config.database, 'baseline_flights');
   assert.equal(config.host, '127.0.0.1');

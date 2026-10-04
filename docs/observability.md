@@ -73,26 +73,26 @@ Metrics use bounded method/route/outcome labels. They do not label by user ID, b
 
 The booking counter measures **responses**, including idempotent retries, not unique completed bookings. Pending responses are not confirmed successes. For a response confirmation rate, divide the rate of `outcome="Booked"` by the rate of all booking outcomes. Durable inventory reconciliation remains the authority for booking correctness. Dependency success describes the HTTP client call; semantic receipt validation can still fail afterward. Notification poll completion is distinct from individual delivery success.
 
-Payment latency is not emitted because there is no payment service. RabbitMQ queue depth is available through `node scripts/rabbitmq-status.cjs`, but is not yet scraped by Prometheus. The existing flight cache metrics endpoint remains available separately; Redis timings, event-loop profiling and the load-test investigation are deferred as requested.
+Payment latency is not emitted because there is no payment service. RabbitMQ queue depth is available through `node scripts/rabbitmq-status.js`, but is not yet scraped by Prometheus. The existing flight cache metrics endpoint remains available separately; Redis timings, event-loop profiling and the load-test investigation are deferred as requested.
 
 ## Run and inspect
 
 Fresh setup now writes an observability key. For an existing local checkout:
 
 ```powershell
-node scripts/configure-observability.cjs
+node scripts/configure-observability.js
 # Restart the local service processes after configuring their environment.
-node scripts/read-metrics.cjs booking
-node scripts/read-metrics.cjs flights
+node scripts/read-metrics.js booking
+node scripts/read-metrics.js flights
 ```
 
 The read helper loads the key internally without printing it. The subsequent [Docker monitoring setup](monitoring-dashboard.md) now collects these metrics in Prometheus and displays them in Grafana. The optional dedicated `METRICS_PORT` listener exposes only the authenticated metrics route for Docker-to-host scraping; application routes are unchanged.
 
-The runtime uses Node's built-in APIs and adds no package dependencies. Its canonical source is `observability/runtime.js`. Each service has an identical `src/observability.js` copy so it can still run as a standalone repository. After editing the canonical source, run `node scripts/sync-observability.cjs`; verification checks for drift.
+The runtime uses Node's built-in APIs and adds no package dependencies. Its canonical source is `observability/runtime.js`. Each service has an identical `src/observability.js` copy so it can still run as a standalone repository. After editing the canonical source, run `node scripts/sync-observability.js`; verification checks for drift.
 
 ## Verification
 
-Run `node scripts/verify-observability.cjs` with local services, Redis/MySQL and the existing synthetic test fixtures available. It verifies protected metrics on all services, concurrent context isolation, malformed trace handling, cross-service parent links, JSON logs, credential exclusion and metric labels. It reserves one synthetic seat and releases it afterward; no payment or email is sent. It uses one gateway request; allow the existing two-minute gateway rate-limit window to reset after the five-request smoke test.
+Run `node scripts/verify-observability.js` with local services, Redis/MySQL and the existing synthetic test fixtures available. It verifies protected metrics on all services, concurrent context isolation, malformed trace handling, cross-service parent links, JSON logs, credential exclusion and metric labels. It reserves one synthetic seat and releases it afterward; no payment or email is sent. It uses one gateway request; allow the existing two-minute gateway rate-limit window to reset after the five-request smoke test.
 
 Results are saved in [observability-test-results.json](observability-test-results.json), including trace IDs that can be looked up in current local logs. Existing smoke and reservation checks validate that instrumentation preserves the current application behavior. The full 200 requests/second tests were intentionally not rerun in this step.
 

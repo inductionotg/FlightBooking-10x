@@ -50,8 +50,8 @@ These controls address the audit's timeouts and backlog. They cannot create unli
 
 `GET /api/v1/internal/cache-metrics` requires the existing internal `x-reservation-key`. It reports hits, misses, fallback loads, coalesced reads, rejected loads, errors, invalidations and connection readiness. Do not expose the service key to browser clients. The k6 runner records snapshots without saving the key.
 
-- `node scripts/verify-redis.cjs`: real-Redis and HTTP integration checks, including expiration, invalidation, late fills and bounded fallback.
-- `scripts/verify-redis-outage.cjs`: run while Redis is deliberately stopped, then always restore Redis with Compose. Verifies reads, booking and cancellation against MySQL. Do this separately from performance tests.
+- `node scripts/verify-redis.js`: real-Redis and HTTP integration checks, including expiration, invalidation, late fills and bounded fallback.
+- `scripts/verify-redis-outage.js`: run while Redis is deliberately stopped, then always restore Redis with Compose. Verifies reads, booking and cancellation against MySQL. Do this separately from performance tests.
 - Results: [cache checks](redis-test-results.json), [outage checks](redis-outage-results.json), [measured comparison](before-after-metrics.md).
 
 No index, database engine, pool size, gateway policy or message broker change is bundled with this cache addition.

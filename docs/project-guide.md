@@ -85,19 +85,21 @@ foreach ($service in $services) {
     Pop-Location
 }
 docker compose -f compose.local.yml up -d --wait
-node scripts/setup-local.cjs
-node scripts/configure-rabbitmq.cjs
-node scripts/configure-local-smtp.cjs
-node scripts/configure-observability.cjs
-node scripts/configure-monitoring.cjs
-node scripts/build-dashboard.cjs
+node scripts/setup-local.js
+node scripts/configure-rabbitmq.js
+node scripts/configure-local-smtp.js
+node scripts/configure-observability.js
+node scripts/configure-monitoring.js
+node scripts/build-dashboard.js
 docker compose -f compose.local.yml --profile messaging --profile observability up -d --wait
 ./scripts/start-local.ps1
-node scripts/smoke-local.cjs
-node scripts/verify-monitoring.cjs
+node scripts/smoke-local.js
+node scripts/verify-monitoring.js
 ```
 
-`setup-local.cjs` creates four **new** baseline schemas, runs migrations, and writes generated local `.env`/database config. It refuses existing configuration or schemas: **run it once per fresh environment**. Configuration generators keep local secrets in ignored files. The startup script starts the five host Node processes and records PIDs/logs in ignored `.local/`; it refuses occupied IPv6 service ports. On later starts, run Docker Compose and `./scripts/start-local.ps1` only after confirming these processes are stopped; do not rerun the database bootstrap. Check `.local/*.stderr.log` and [local setup notes](../README.md) when startup or smoke verification fails.
+`setup-local.js` creates four **new** baseline schemas, runs migrations, and writes generated local `.env`/database config. It refuses existing configuration or schemas: **run it once per fresh environment**. Configuration generators keep local secrets in ignored files. The startup script starts the five host Node processes and records PIDs/logs in ignored `.local/`; it refuses occupied IPv6 service ports. On later starts, run Docker Compose and `./scripts/start-local.ps1` only after confirming these processes are stopped; do not rerun the database bootstrap. Check `.local/*.stderr.log` and [local setup notes](../README.md) when startup or smoke verification fails.
+
+The `scripts/*.js` files and the Node helpers in `load-tests/` still use CommonJS (`require`) because this repository does not set `"type": "module"`; the extension change does not change what they do. The separate k6 workload files use k6's module syntax and run under k6, not Node. Setup/configuration scripts are needed for a fresh checkout, while `verify-*.js` and the k6 scripts are checks and measurements.
 
 The basic smoke test creates test records and makes several gateway calls. The gateway's five-request/IP/two-minute limiter can reject a repeated smoke run; allow its window to expire before repeating. Use [the k6 guide](../load-tests/README.md) for the separate 20 and 200 requests/second workloads. The current measured 200 requests/second workload **still fails**; see [the diagnosis](200rps-diagnosis.md) and [scaling plan](scaling-plan.md).
 
@@ -112,7 +114,7 @@ Open these **on the machine running Docker** after the optional Compose profiles
 | RabbitMQ management | [RabbitMQ UI](http://127.0.0.1:35673) | Exchanges, queues and consumers; credentials are in ignored `.local/rabbitmq.env` |
 | Mailpit inbox | [Mailpit](http://127.0.0.1:38025) | View locally captured booking email; no external delivery |
 
-Grafana allows anonymous **Viewer** access on local loopback. Its history comes from Prometheus, not from saved k6 runs. It does **not** display structured logs or a trace waterfall. Application JSON logs are in `.local/*.stdout.log`; correlate records with `traceId`. `node scripts/read-metrics.cjs booking` reads protected application metrics, and `node scripts/rabbitmq-status.cjs` reports queue depth. See [dashboard setup](monitoring-dashboard.md) for ports and verification.
+Grafana allows anonymous **Viewer** access on local loopback. Its history comes from Prometheus, not from saved k6 runs. It does **not** display structured logs or a trace waterfall. Application JSON logs are in `.local/*.stdout.log`; correlate records with `traceId`. `node scripts/read-metrics.js booking` reads protected application metrics, and `node scripts/rabbitmq-status.js` reports queue depth. See [dashboard setup](monitoring-dashboard.md) for ports and verification.
 
 ## API reference
 

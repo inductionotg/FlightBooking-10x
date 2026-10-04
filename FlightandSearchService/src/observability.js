@@ -1,5 +1,5 @@
 'use strict';
-// Canonical source. scripts/sync-observability.cjs copies this into each standalone service.
+// Canonical source. scripts/sync-observability.js copies this into each standalone service.
 const {AsyncLocalStorage} = require('node:async_hooks');
 const {randomBytes, timingSafeEqual} = require('node:crypto');
 const context = new AsyncLocalStorage();

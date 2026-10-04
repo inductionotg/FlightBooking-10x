@@ -48,7 +48,7 @@ At 200/s, the ten-load fallback cap rejects many reads, while Redis errors and c
 | Notifications | Increase RabbitMQ consumers and delivery workers if queue depth or delivery delay grows. | Manual acknowledgements, unique inbox IDs and leased delivery support parallel workers. Respect SMTP provider rate limits; `Sent` means SMTP acceptance, not guaranteed mailbox arrival. |
 | Redis/RabbitMQ/MySQL | Keep one instance of each for local demonstration. | Production availability may require managed/replicated services or a RabbitMQ quorum cluster. This is an uptime design choice, not an observed throughput fix. Test failover and capacity separately. |
 
-Current Prometheus/Grafana covers five existing services: gateway, auth, flights, booking and notifications. RabbitMQ application counters are scraped; queue depth is available through `node scripts/rabbitmq-status.cjs` but has no dashboard panel. There is no payment service by user decision, and the gateway has no booking route; therefore a single booking does not traverse all five named assignment services. See [observability](observability.md), [dashboard](monitoring-dashboard.md) and [messaging](rabbitmq.md).
+Current Prometheus/Grafana covers five existing services: gateway, auth, flights, booking and notifications. RabbitMQ application counters are scraped; queue depth is available through `node scripts/rabbitmq-status.js` but has no dashboard panel. There is no payment service by user decision, and the gateway has no booking route; therefore a single booking does not traverse all five named assignment services. See [observability](observability.md), [dashboard](monitoring-dashboard.md) and [messaging](rabbitmq.md).
 
 ## Sequence to reach a credible 10x result
 

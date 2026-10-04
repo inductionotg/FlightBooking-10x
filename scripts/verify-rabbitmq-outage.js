@@ -1,5 +1,5 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
-const support=require('./rabbitmq-test-support.cjs');
+const support=require('./rabbitmq-test-support.js');
 const {root,bookings,notifications,flights,fixture,request,until}=support;
 const rabbit=require(path.join(root,'Booking_Service/src/rabbitmq'));
 const stateFile=path.join(root,'.local/rabbitmq-outage.json');
@@ -28,6 +28,6 @@ async function main(){
     Object.assign(report,{restoredAt:new Date().toISOString(),eventDeliveredAfterRecovery:true,notificationCount:1,seatsRestored:true,passed:true});
     fs.writeFileSync(reportFile,JSON.stringify(report,null,2)+'\n');
     console.log('PASS: broker recovery publishes the pending event once logically; cancellation restores inventory');
-  }else throw new Error('Usage: verify-rabbitmq-outage.cjs down|restored');
+  }else throw new Error('Usage: verify-rabbitmq-outage.js down|restored');
 }
 main().catch(error=>{console.error(error.message);process.exitCode=1;}).finally(support.close);

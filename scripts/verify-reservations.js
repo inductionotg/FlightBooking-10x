@@ -85,7 +85,7 @@ async function main(){
 
   flight=await newFlight(2);key=crypto.randomUUID();
   const exitCode=await new Promise((resolve,reject)=>{
-    const child=spawn(process.execPath,[path.join(__dirname,'booking-crash-fixture.cjs'),JSON.stringify({data:{flightId:flight.id,userId,noOfSeats:1},key})],{stdio:'ignore'});
+    const child=spawn(process.execPath,[path.join(__dirname,'booking-crash-fixture.js'),JSON.stringify({data:{flightId:flight.id,userId,noOfSeats:1},key})],{stdio:'ignore'});
     child.once('error',reject);child.once('close',resolve);
   });
   assert.equal(exitCode,86);
