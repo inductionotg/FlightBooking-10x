@@ -5,6 +5,7 @@ const { create,destroy,update,getCity, getAllCity,addAllCity } = require('../../
 const AirportController = require('../../controllers/airport-controllers')
 const FlightController  = require('../../controllers/flight-controllers')
 const ReservationController = require('../../controllers/reservation-controller')
+const CatalogController = require('../../controllers/catalog-controller')
 router.post('/reservations', ReservationController.internalOnly, ReservationController.reserve)
 router.post('/reservations/release', ReservationController.internalOnly, ReservationController.release)
 router.get('/internal/cache-metrics', ReservationController.internalOnly, (req, res) => {
@@ -18,6 +19,8 @@ router.get('/city',getAllCity)
 router.patch('/city/:id',update)
 
 router.post('/airports',AirportController.create)
+router.get('/catalog',CatalogController.list)
+router.post('/airplanes',CatalogController.createAirplane)
 
 
 router.post('/flights',

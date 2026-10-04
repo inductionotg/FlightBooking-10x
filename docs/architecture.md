@@ -1,12 +1,13 @@
 # Flight Booking architecture and request flows
 
-This document describes the **implemented local system**. Five Node.js services run on the host. Docker Compose runs MySQL, Redis, RabbitMQ, Mailpit, Prometheus, and Grafana. There is no payment service, MongoDB, read replica, or deployed AWS topology in this checkout. The 200 requests/second target has not passed; see the [measured diagnosis](200rps-diagnosis.md).
+This document describes the **implemented local system**. The Aeris React web UI and five Node.js services run on the host. Docker Compose runs MySQL, Redis, RabbitMQ, Mailpit, Prometheus, and Grafana. There is no payment service, MongoDB, read replica, or deployed AWS topology in this checkout. The 200 requests/second target has not passed; see the [measured diagnosis](200rps-diagnosis.md).
 
 ## Whole-system diagram
 
 ```mermaid
 flowchart LR
   Client["Client or API caller"]
+  UI["Aeris React UI :5173<br/>Vite development proxy"]
 
   subgraph HostServices["Host: five Node.js services"]
     Gateway["API Gateway :3010"]
@@ -31,6 +32,10 @@ flowchart LR
   end
 
   Client -->|"Sign up or sign in"| Auth
+  Client -->|"Customer or admin screens"| UI
+  UI -->|"Sign-in and token check"| Auth
+  UI -->|"Catalog, search and flight writes"| Flights
+  UI -->|"Booking and cancellation"| Booking
   Client -->|"Authenticated flight route"| Gateway
   Gateway -->|"Validate x-access-token"| Auth
   Gateway -->|"Proxy /flightService/api/v1/*"| Flights
@@ -55,10 +60,11 @@ flowchart LR
   Grafana -->|"Queries metrics"| Prometheus
 ```
 
-Solid arrows are request, data, or event paths. Dotted arrows are Prometheus pulling metrics from services. The four database schemas share one MySQL container; the diagram does not imply four database servers. Service HTTP ports use `http://[::1]:PORT` in the local setup, while Docker UI ports bind to `127.0.0.1`. The gateway currently proxies **flight routes only**. Booking and legacy reminder APIs are called directly and must not be treated as protected by the gateway's token check. The [API reference](project-guide.md#api-reference) lists the exact routes.
+Solid arrows are request, data, or event paths. Dotted arrows are Prometheus pulling metrics from services. The UI's `/backend/*` calls are forwarded by Vite directly to auth, flights and booking; they do not pass through the existing gateway. The admin screen has no backend role enforcement, so it is for trusted local development only. The four database schemas share one MySQL container; the diagram does not imply four database servers. Service HTTP ports use `http://[::1]:PORT` in the local setup, while Docker UI ports bind to `127.0.0.1`. The gateway currently proxies **flight routes only**. Booking and legacy reminder APIs are called directly and must not be treated as protected by the gateway's token check. The [API reference](project-guide.md#api-reference) lists the exact routes.
 
 | Component | What it owns |
 | --- | --- |
+| Aeris React UI | Customer search/booking and local catalog management; Vite proxies API calls to host services |
 | Gateway | Five-request/IP/two-minute rate limit, synchronous token check through Auth, and `/flightService` route proxy |
 | Auth | Users, roles, sign-in, and token verification |
 | Flight management | Cities, airports, flights, indexed route search, Redis cache, and transactional seat reservation/release |

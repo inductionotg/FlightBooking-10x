@@ -2,7 +2,7 @@
 
 This guide describes the **current implementation** in this workspace: five Node.js processes (gateway, auth, flights, booking, notifications) and local Docker infrastructure. MySQL is the transactional system of record. Redis caches flight reads; RabbitMQ carries confirmed-booking events; Prometheus and Grafana show service metrics. There is **no payments service** by project decision. The gateway exposes flight routes only; booking currently uses its direct service API. The local stack is a demonstration, not a deployed AWS environment or a proven 200 requests/second system.
 
-The combined repository keeps the five service folders, `compose.local.yml`, `scripts/`, `load-tests/`, `observability/`, `messaging/`, and `docs/` together so the local setup works from one checkout. It is a source snapshot of the original independent [gateway](https://github.com/inductionotg/AIRLINE-MANAGEMENT_API_GATEWAY), [auth](https://github.com/inductionotg/Auth_Service), [flights](https://github.com/inductionotg/FlightandSearchService), [booking](https://github.com/inductionotg/Booking_Service), and [notifications](https://github.com/inductionotg/ReminderService) repositories plus this assignment's changes. The original repository histories remain in those projects; the combined repository begins with one snapshot commit.
+The combined repository keeps the five service folders, `frontend/`, `compose.local.yml`, `scripts/`, `load-tests/`, `observability/`, `messaging/`, and `docs/` together so the local setup works from one checkout. It is a source snapshot of the original independent [gateway](https://github.com/inductionotg/AIRLINE-MANAGEMENT_API_GATEWAY), [auth](https://github.com/inductionotg/Auth_Service), [flights](https://github.com/inductionotg/FlightandSearchService), [booking](https://github.com/inductionotg/Booking_Service), and [notifications](https://github.com/inductionotg/ReminderService) repositories plus this assignment's changes. The original repository histories remain in those projects; the combined repository begins with one snapshot commit.
 
 ## Architecture
 
@@ -115,6 +115,7 @@ Open these **on the machine running Docker** after the optional Compose profiles
 | Prometheus targets | [Prometheus targets](http://127.0.0.1:39090/targets) | Check that all five service metric endpoints are UP |
 | RabbitMQ management | [RabbitMQ UI](http://127.0.0.1:35673) | Exchanges, queues and consumers; credentials are in ignored `.local/rabbitmq.env` |
 | Mailpit inbox | [Mailpit](http://127.0.0.1:38025) | View locally captured booking email; no external delivery |
+| Aeris web UI | [Aeris](http://127.0.0.1:5173) | Customer booking and local admin tools; start separately with `cd frontend; npm ci; npm run dev` |
 
 Grafana allows anonymous **Viewer** access on local loopback. Its history comes from Prometheus, not from saved k6 runs. It does **not** display structured logs or a trace waterfall. Application JSON logs are in `.local/*.stdout.log`; correlate records with `traceId`. `node scripts/read-metrics.js booking` reads protected application metrics, and `node scripts/rabbitmq-status.js` reports queue depth. See [dashboard setup](monitoring-dashboard.md) for ports and verification.
 
@@ -132,6 +133,7 @@ All service routes below start with `/api/v1`. Replace `{id}` with an integer. T
 | Auth | `DELETE /api/v1/signup/{id}` | Delete user |
 | Gateway `:3010` | `* /flightService/api/v1/...` | Authenticates `x-access-token`, strips `/flightService`, forwards to flight service; rate limited |
 | Flights `:3002` | `GET /api/v1/flights` | Search; filters: `departureAirportId`, `arrivalAirportId`, `minPrice`, `maxPrice` |
+| Flights | `GET /api/v1/catalog` | List cities, airports and aircraft for the UI |
 | Flights | `GET /api/v1/flights/{id}` | Flight details / displayed availability |
 | Flights | `POST /api/v1/flights` | Create flight: `flightNumber`, `airplaneId`, airport IDs, departure/arrival times, `price` |
 | Flights | `POST /api/v1/flights/{id}` | Update flight fields (this existing API uses POST) |
@@ -139,6 +141,7 @@ All service routes below start with `/api/v1`. Replace `{id}` with an integer. T
 | Flights | `POST /api/v1/city`, `POST /api/v1/cityAll` | Create one/many cities |
 | Flights | `PATCH /api/v1/city/{id}`, `DELETE /api/v1/city/{id}` | Update/delete city |
 | Flights | `POST /api/v1/airports` | Create airport |
+| Flights | `POST /api/v1/airplanes` | Create aircraft: `modelNumber`, `capacity` |
 | Booking `:3003` | `POST /api/v1/booking` | Create/retry: `flightId`, `userId`, `noOfSeats`; optional `notificationEmail`; send stable `Idempotency-Key` |
 | Booking | `POST /api/v1/booking/{id}/cancel` | Cancel: `userId` body and original `Idempotency-Key` |
 | Notifications `:3004` | `POST /api/v1/createticket` | Legacy reminder: `subject`, `content`, `recepientEmail`, `notificationTime` (spelling is in the existing API) |

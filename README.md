@@ -6,6 +6,10 @@ This project combines five Node.js services with Docker-based MySQL, Redis, Rabb
 
 Quick links: [whole-system diagram](docs/architecture.md#whole-system-diagram) · [booking sequence](docs/architecture.md#booking-recovery-and-notification) · [API reference](docs/project-guide.md#api-reference) · [Grafana dashboard](http://127.0.0.1:33000/d/flight-booking-overview) · [RabbitMQ UI](http://127.0.0.1:35673) · [Mailpit inbox](http://127.0.0.1:38025) · [k6 commands](load-tests/README.md).
 
+## React web UI
+
+The [Aeris UI](frontend/README.md) adds customer flight search/booking and local admin catalog tools using React, JavaScript, and Tailwind CSS. After starting the backend below, run `cd frontend`, `npm ci`, and `npm run dev`; open [http://127.0.0.1:5173](http://127.0.0.1:5173). The UI is for local development: backend write routes still need role-based authorization before public deployment.
+
 ## First-time setup (PowerShell)
 
 Start Docker Desktop. From the root of your `FlightBooking-10x` checkout, install the locked dependencies:
