@@ -10,6 +10,8 @@ Quick links: [whole-system diagram](docs/architecture.md#whole-system-diagram) Â
 
 The [Aeris UI](frontend/README.md) adds customer flight search/booking and local admin catalog tools using React, JavaScript, and Tailwind CSS. After starting the backend below, run `cd frontend`, `npm ci`, and `npm run dev`; open [http://127.0.0.1:5173](http://127.0.0.1:5173). The UI is for local development: backend write routes still need role-based authorization before public deployment.
 
+Run `node scripts/seed-demo-catalog.js` once the flight service is up to add real Indian city/airport names and recognizable airline labels. [Demo-data details and sources](docs/demo-data.md) distinguish those real names from the fictional schedules and fares.
+
 ## First-time setup (PowerShell)
 
 Start Docker Desktop. From the root of your `FlightBooking-10x` checkout, install the locked dependencies:
@@ -46,6 +48,7 @@ The earlier local baseline used model sync and has no migration history. Do not 
 
 ```powershell
 ./scripts/start-local.ps1
+node scripts/seed-demo-catalog.js
 node scripts/smoke-local.js
 ```
 

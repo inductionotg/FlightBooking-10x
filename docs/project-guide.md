@@ -95,6 +95,7 @@ node scripts/configure-monitoring.js
 node scripts/build-dashboard.js
 docker compose -f compose.local.yml --profile messaging --profile observability up -d --wait
 ./scripts/start-local.ps1
+node scripts/seed-demo-catalog.js
 node scripts/smoke-local.js
 node scripts/verify-monitoring.js
 ```

@@ -14,6 +14,8 @@ npm run dev
 
 Open [http://127.0.0.1:5173](http://127.0.0.1:5173). `npm ci` is needed only on first install or after dependency changes. For a build check, run `npm run build`.
 
+To populate realistic-looking destinations in a fresh local database, run `node scripts/seed-demo-catalog.js` from the repository root after starting the flight service. The [demo-data guide](../docs/demo-data.md) lists the airport and airline sources and explains which flight details are fictional. This seed has already been applied to the current local database.
+
 Vite proxies `/backend/auth` to auth on port 3001, `/backend/flights` to flights on port 3002, and `/backend/booking` to booking on port 3003. The five backend services run on the host; Docker Compose runs MySQL, Redis, RabbitMQ and the optional monitoring/messaging containers. The UI calls services directly through this development proxy because the existing gateway forwards flight routes only and has a five-request/two-minute limit. Keep this development server local.
 
 ## Use
