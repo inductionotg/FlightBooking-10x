@@ -6,6 +6,8 @@ The combined repository keeps the five service folders, `compose.local.yml`, `sc
 
 ## Architecture
 
+For the annotated Mermaid diagrams and step-by-step request flows, see [Flight Booking architecture and request flows](architecture.md).
+
 ![Original architecture and bottlenecks](architecture-diagram-before.png)
 
 ![Current implementation and proposed scaling path](architecture-diagram-after.png)
@@ -28,12 +30,12 @@ flowchart LR
   C -->|Legacy ticket API| N
   N --> NM[(MySQL notifications schema)]
   N -->|SMTP| E[Mailpit :38025]
-  G -.->|Metrics| P[(Prometheus :39090)]
-  A -.->|Metrics| P
-  F -.->|Metrics| P
-  B -.->|Metrics| P
-  N -.->|Metrics| P
-  P --> D[Grafana :33000]
+  P[(Prometheus :39090)] -.->|Scrapes| G
+  P -.->|Scrapes| A
+  P -.->|Scrapes| F
+  P -.->|Scrapes| B
+  P -.->|Scrapes| N
+  D[Grafana :33000] -->|Queries| P
 ```
 
 The four MySQL schemas are in **one** local MySQL container. Redis, RabbitMQ, Prometheus, Grafana and Mailpit are Docker services; the five Node services run on the host. Docker ports bind to loopback. The Node HTTP services are reached in this setup through IPv6 loopback (`http://[::1]:PORT`).

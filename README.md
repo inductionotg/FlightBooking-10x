@@ -1,10 +1,10 @@
 # Flight Booking: measured scaling improvements
 
-This project combines five Node.js services with Docker-based MySQL, Redis, RabbitMQ, Prometheus, Grafana and Mailpit for the Flight Booking 10x assignment. The [complete project guide](docs/project-guide.md) has the current architecture diagrams, booking flow, every service's API routes, first-time startup, and dashboard links. See the [current-system inventory](docs/step-1-current-system.md) for the original architecture and baseline revisions.
+This project combines five Node.js services with Docker-based MySQL, Redis, RabbitMQ, Prometheus, Grafana and Mailpit for the Flight Booking 10x assignment. The [Mermaid architecture document](docs/architecture.md) explains the complete local system and request flows. The [project guide](docs/project-guide.md) has every service's API routes, first-time startup, and dashboard links. See the [current-system inventory](docs/step-1-current-system.md) for the original architecture and baseline revisions.
 
 **Current result:** transactional reservations prevent overselling and Redis caches flight reads, but the measured 200 requests/second workload still fails. The [diagnosis](docs/200rps-diagnosis.md) identifies flight event-loop delay, Redis client deadlines, bounded fallback 503s and synchronous local log writes. The [scaling plan](docs/scaling-plan.md) separates completed changes from proposed capacity work. No payments service was added, as agreed for this project.
 
-Quick links: [API reference](docs/project-guide.md#api-reference) · [booking sequence](docs/project-guide.md#what-happens-during-a-booking) · [Grafana dashboard](http://127.0.0.1:33000/d/flight-booking-overview) · [RabbitMQ UI](http://127.0.0.1:35673) · [Mailpit inbox](http://127.0.0.1:38025) · [k6 commands](load-tests/README.md).
+Quick links: [whole-system diagram](docs/architecture.md#whole-system-diagram) · [booking sequence](docs/architecture.md#booking-recovery-and-notification) · [API reference](docs/project-guide.md#api-reference) · [Grafana dashboard](http://127.0.0.1:33000/d/flight-booking-overview) · [RabbitMQ UI](http://127.0.0.1:35673) · [Mailpit inbox](http://127.0.0.1:38025) · [k6 commands](load-tests/README.md).
 
 ## First-time setup (PowerShell)
 
