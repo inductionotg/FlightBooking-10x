@@ -1,0 +1,68 @@
+{
+  "timestamp": "2026-10-01T09:28:23.176Z",
+  "checks": [
+    {
+      "name": "20 concurrent requests for one seat: 1 booked, 19 rejected, zero seats left",
+      "passed": true
+    },
+    {
+      "name": "20 simultaneous retries with one key create one booking and deduct seats once",
+      "passed": true
+    },
+    {
+      "name": "Reusing a key with a different payload returns conflict",
+      "passed": true
+    },
+    {
+      "name": "Legacy inventory overwrite cannot bypass active reservations",
+      "passed": true
+    },
+    {
+      "name": "Retry preserves the original price snapshot",
+      "passed": true
+    },
+    {
+      "name": "Cancellation requires the original key; repeated releases restore seats exactly once",
+      "passed": true
+    },
+    {
+      "name": "Reservation insert failure rolls back the seat deduction",
+      "passed": true
+    },
+    {
+      "name": "Lost reservation reply leaves pending state; retry confirms without another deduction",
+      "passed": true
+    },
+    {
+      "name": "Process exit after reservation commit is recovered by the running background worker",
+      "passed": true
+    },
+    {
+      "name": "Temporary flight-service failure is recovered automatically",
+      "passed": true
+    },
+    {
+      "name": "Failed cancellation release is durably retried by the worker",
+      "passed": true
+    },
+    {
+      "name": "Cancellation before a delayed reserve prevents later deduction",
+      "passed": true
+    },
+    {
+      "name": "Invalid seat counts and unauthenticated internal reservation calls are rejected",
+      "passed": true
+    }
+  ],
+  "flights": [
+    10379,
+    10380,
+    10381,
+    10382,
+    10383,
+    10384,
+    10385,
+    10386
+  ],
+  "passed": true
+}

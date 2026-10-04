@@ -1,0 +1,51 @@
+--Update Migration
+We have missed something few cols in booking table, and now we want add to those cols in 
+the booking model.So we will create a new migration and below is the command
+"npx sequelize migration:create --name modify_bookings_add_new_fields"==>It will create a
+new migration file
+->How can we do it?
+In the new migration file we will get some fun 
+`await queryInterface.addColumn(
+    'Bookings' -->In which Table we want to add the cols
+    'noOfSeats'--> The columns_name which will be added to the Table(Bookings)
+    {
+        type:Sequelize.INTEGER,
+        allowNull:false
+    }
+)
+//Another col we are adding
+await queryInterface.addColumn(
+    'Bookings' -->In which Table we want to add the cols
+    'totalCost'--> The columns_name which will be added to the Table(Bookings)
+    {
+        type:Sequelize.INTEGER,
+        allowNull:false
+    }
+)
+'
+
+==In down functions also we have to write the function , if we remove the migrations then
+columns can also be removed
+'
+await queryInterface.removeColumn('Bookings','noOfSeats');
+    await queryInterface.removeColumn('Bookings','totalCost')
+'
+
+
+
+--We Should also add the down function because if we remove this migration then
+these col also removed
+
+--Without migration also I can do it , i will go to the models folder and I can add
+the values and I can do 'force or alter' DB_SYNC
+
+--But why we chose migrations? Because migrations have there own advantages and disadvantages
+-- New migrations shows the incremental changes we have made it in the db and It will Help
+others to understand how db has been evolved
+
+
+--AFTER ADDING functions in the new migrations then we have to again run the migrations
+`npx sequelize db:migrate`
+
+After updation migrations then we need to add those columns in the old migrations and Booking model
+and do the DB_SYNC

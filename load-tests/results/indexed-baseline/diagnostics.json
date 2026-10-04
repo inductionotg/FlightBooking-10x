@@ -1,0 +1,2096 @@
+{
+  "run": "indexed-baseline",
+  "kind": "baseline",
+  "duration": "60s",
+  "started": "2026-09-30T13:17:51.907Z",
+  "assumedNormalRps": 20,
+  "targetRps": 20,
+  "host": {
+    "platform": "win32",
+    "cpu": "Intel(R) Core(TM) Ultra 7 155U",
+    "logicalCpus": 14,
+    "memoryGiB": 15.478008270263672,
+    "node": "v22.14.0"
+  },
+  "k6": "k6.exe v2.3.0 (commit/e088784614, go1.26.8, windows/amd64)",
+  "samples": [
+    {
+      "time": "2026-09-30T13:17:54.303Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 126850,
+      "Slow_queries": 0,
+      "Threads_connected": 5,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:17:55.307Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 126891,
+      "Slow_queries": 0,
+      "Threads_connected": 5,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:17:56.311Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 126932,
+      "Slow_queries": 0,
+      "Threads_connected": 5,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:17:57.320Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 126974,
+      "Slow_queries": 0,
+      "Threads_connected": 5,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:17:58.337Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 127015,
+      "Slow_queries": 0,
+      "Threads_connected": 5,
+      "Threads_running": 3
+    },
+    {
+      "time": "2026-09-30T13:17:59.350Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 127058,
+      "Slow_queries": 0,
+      "Threads_connected": 5,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:00.371Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 127100,
+      "Slow_queries": 0,
+      "Threads_connected": 5,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:01.368Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 127142,
+      "Slow_queries": 0,
+      "Threads_connected": 6,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:02.383Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 127184,
+      "Slow_queries": 0,
+      "Threads_connected": 6,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:03.386Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 127226,
+      "Slow_queries": 0,
+      "Threads_connected": 6,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:04.389Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 127271,
+      "Slow_queries": 0,
+      "Threads_connected": 7,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:05.402Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 127312,
+      "Slow_queries": 0,
+      "Threads_connected": 7,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:06.406Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 127351,
+      "Slow_queries": 0,
+      "Threads_connected": 7,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:07.410Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 127394,
+      "Slow_queries": 0,
+      "Threads_connected": 7,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:08.414Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 127436,
+      "Slow_queries": 0,
+      "Threads_connected": 7,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:09.421Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 127479,
+      "Slow_queries": 0,
+      "Threads_connected": 7,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:10.432Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 127520,
+      "Slow_queries": 0,
+      "Threads_connected": 7,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:11.436Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 127562,
+      "Slow_queries": 0,
+      "Threads_connected": 6,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:12.441Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 127603,
+      "Slow_queries": 0,
+      "Threads_connected": 6,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:13.445Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 127644,
+      "Slow_queries": 0,
+      "Threads_connected": 6,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:14.452Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 127688,
+      "Slow_queries": 0,
+      "Threads_connected": 5,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:15.453Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 127730,
+      "Slow_queries": 0,
+      "Threads_connected": 4,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:16.456Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 127771,
+      "Slow_queries": 0,
+      "Threads_connected": 4,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:17.459Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 127813,
+      "Slow_queries": 0,
+      "Threads_connected": 5,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:18.457Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 127854,
+      "Slow_queries": 0,
+      "Threads_connected": 5,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:19.462Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 127898,
+      "Slow_queries": 0,
+      "Threads_connected": 6,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:20.467Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 127939,
+      "Slow_queries": 0,
+      "Threads_connected": 6,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:21.467Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 127980,
+      "Slow_queries": 0,
+      "Threads_connected": 6,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:22.470Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 128021,
+      "Slow_queries": 0,
+      "Threads_connected": 6,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:23.474Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 128062,
+      "Slow_queries": 0,
+      "Threads_connected": 6,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:24.480Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 128105,
+      "Slow_queries": 0,
+      "Threads_connected": 6,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:25.484Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 128147,
+      "Slow_queries": 0,
+      "Threads_connected": 6,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:26.488Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 128188,
+      "Slow_queries": 0,
+      "Threads_connected": 6,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:27.496Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 128229,
+      "Slow_queries": 0,
+      "Threads_connected": 6,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:28.500Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 128271,
+      "Slow_queries": 0,
+      "Threads_connected": 5,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:29.507Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 128313,
+      "Slow_queries": 0,
+      "Threads_connected": 5,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:30.517Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 128354,
+      "Slow_queries": 0,
+      "Threads_connected": 5,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:31.526Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 128396,
+      "Slow_queries": 0,
+      "Threads_connected": 5,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:32.528Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 128437,
+      "Slow_queries": 0,
+      "Threads_connected": 5,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:33.541Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 128479,
+      "Slow_queries": 0,
+      "Threads_connected": 6,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:34.541Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 128521,
+      "Slow_queries": 0,
+      "Threads_connected": 6,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:35.550Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 128562,
+      "Slow_queries": 0,
+      "Threads_connected": 6,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:36.559Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 128603,
+      "Slow_queries": 0,
+      "Threads_connected": 6,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:37.560Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 128647,
+      "Slow_queries": 0,
+      "Threads_connected": 8,
+      "Threads_running": 3
+    },
+    {
+      "time": "2026-09-30T13:18:38.565Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 128689,
+      "Slow_queries": 0,
+      "Threads_connected": 8,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:39.573Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 128731,
+      "Slow_queries": 0,
+      "Threads_connected": 8,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:40.579Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 128772,
+      "Slow_queries": 0,
+      "Threads_connected": 8,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:41.580Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 128813,
+      "Slow_queries": 0,
+      "Threads_connected": 8,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:42.583Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 128855,
+      "Slow_queries": 0,
+      "Threads_connected": 8,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:43.584Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 128896,
+      "Slow_queries": 0,
+      "Threads_connected": 8,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:44.587Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 128939,
+      "Slow_queries": 0,
+      "Threads_connected": 7,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:45.589Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 128980,
+      "Slow_queries": 0,
+      "Threads_connected": 7,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:46.600Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 129021,
+      "Slow_queries": 0,
+      "Threads_connected": 7,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:47.600Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 129062,
+      "Slow_queries": 0,
+      "Threads_connected": 7,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:48.604Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 129107,
+      "Slow_queries": 0,
+      "Threads_connected": 4,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:49.609Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 129149,
+      "Slow_queries": 0,
+      "Threads_connected": 4,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:50.610Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 129190,
+      "Slow_queries": 0,
+      "Threads_connected": 4,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:51.622Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 129232,
+      "Slow_queries": 0,
+      "Threads_connected": 4,
+      "Threads_running": 2
+    },
+    {
+      "time": "2026-09-30T13:18:52.659Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 129272,
+      "Slow_queries": 0,
+      "Threads_connected": 5,
+      "Threads_running": 3
+    },
+    {
+      "time": "2026-09-30T13:18:53.632Z",
+      "Connection_errors_max_connections": 0,
+      "Innodb_row_lock_waits": 3468,
+      "Questions": 129322,
+      "Slow_queries": 0,
+      "Threads_connected": 8,
+      "Threads_running": 2
+    }
+  ],
+  "processesBefore": [
+    {
+      "Id": 23672,
+      "ProcessName": "node",
+      "CPU": 121.296875,
+      "WorkingSet64": 113258496
+    },
+    {
+      "Id": 28876,
+      "ProcessName": "node",
+      "CPU": 1.171875,
+      "WorkingSet64": 50659328
+    },
+    {
+      "Id": 33716,
+      "ProcessName": "node",
+      "CPU": 3.125,
+      "WorkingSet64": 50331648
+    },
+    {
+      "Id": 36212,
+      "ProcessName": "node",
+      "CPU": 7.6875,
+      "WorkingSet64": 63459328
+    },
+    {
+      "Id": 39448,
+      "ProcessName": "node",
+      "CPU": 68.90625,
+      "WorkingSet64": 76120064
+    }
+  ],
+  "cacheBefore": {
+    "hits": 4567,
+    "misses": 3114,
+    "bypasses": 3143,
+    "sourceLoads": 2164,
+    "coalesced": 0,
+    "errors": 204,
+    "connectionErrors": 0,
+    "invalidations": 1372,
+    "invalidationFailures": 140,
+    "rejectedLoads": 4093,
+    "enabled": true,
+    "ready": true,
+    "ttlMs": 5000,
+    "activeLoads": 0
+  },
+  "before": {
+    "time": "2026-09-30T13:17:53.232Z",
+    "Connection_errors_max_connections": 0,
+    "Innodb_row_lock_waits": 3468,
+    "Questions": 126805,
+    "Slow_queries": 0,
+    "Threads_connected": 2,
+    "Threads_running": 2
+  },
+  "digestsBefore": [
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "704ccdc429d4deb2cf37ec8708e8faae1c46acf5683817670906ba621a14bb85",
+      "DIGEST_TEXT": "SET `time_zone` = ?",
+      "COUNT_STAR": 80,
+      "SUM_TIMER_WAIT": 57537003000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "3c1d56036b2da4105df5fead8c9da99398a13e66426a428337d38029c565b271",
+      "DIGEST_TEXT": "SELECT `VERSION` ( ) AS `version`",
+      "COUNT_STAR": 8,
+      "SUM_TIMER_WAIT": 3906254000,
+      "SUM_ROWS_EXAMINED": 8,
+      "SUM_ROWS_SENT": 8
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "2c6404b12997e9e65287d161c868f5b09143a452b73a5cbbce3347eb7c555f18",
+      "DIGEST_TEXT": "SELECT TABLE_NAME FROM `INFORMATION_SCHEMA` . `TABLES` WHERE `TABLE_TYPE` = ? AND TABLE_NAME = ? AND `TABLE_SCHEMA` = ?",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 1141739000,
+      "SUM_ROWS_EXAMINED": 2,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "2091951d8b19f0f0c381fb3fb10682ecfad238518e85c879f152e03a0cf597a5",
+      "DIGEST_TEXT": "CREATE TABLE IF NOT EXISTS `Bookings` ( `id` INTEGER NOT NULL AUTO_INCREMENT , `flightId` INTEGER NOT NULL , `userId` INTEGER NOT NULL , `status` ENUM (...) NOT NULL DEFAULT ? , `noOfSeats` INTEGER NOT NULL DEFAULT ? , `totalCost` INTEGER NOT NULL DEFAULT ? , `createdAt` DATETIME NOT NULL , `updatedAt` DATETIME NOT NULL , PRIMARY KEY ( `id` ) ) ENGINE = `InnoDB`",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 27548667000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "c3791cbcbe841219d19b90e666cdb47c18962d462c55eee3866291c7f39b5aa2",
+      "DIGEST_TEXT": "SHOW INDEX FROM `Bookings` FROM `baseline_booking`",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 4163069000,
+      "SUM_ROWS_EXAMINED": 17,
+      "SUM_ROWS_SENT": 1
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "b16d0edf1d6a92c26a444ef9386ead273d726e5ec36f04b831847b6d2c270c4c",
+      "DIGEST_TEXT": "SELECT `id` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `id` = ?",
+      "COUNT_STAR": 1539,
+      "SUM_TIMER_WAIT": 834682156000,
+      "SUM_ROWS_EXAMINED": 1539,
+      "SUM_ROWS_SENT": 1539
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "d4412023cb0ebb97d0a1f8f52974442ee5ebe36eb1053ecdfddb6924f67bc339",
+      "DIGEST_TEXT": "CREATE TABLE IF NOT EXISTS `LocalSchemaChanges` ( NAME VARCHARACTER (?) PRIMARY KEY , `appliedAt` DATETIME NOT NULL )",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 22940075000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "39d92582840679850734d0fe1936b370d8a45d0352d15887c35f8906f3945814",
+      "DIGEST_TEXT": "SELECT NAME FROM `LocalSchemaChanges` WHERE NAME = ?",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 975001000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "72d803e6315645a94cd25c71b96fbe044f7e35058112c1f0c5db431cb71c835d",
+      "DIGEST_TEXT": "ALTER TABLE `Bookings` ADD `requestKey` VARCHARACTER (?)",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 16232755000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "3f530f1c166db5cd0a66893e85f5aed0ca14f515175bce9dd155690e285c531c",
+      "DIGEST_TEXT": "ALTER TABLE `Bookings` ADD UNIQUE INDEX `bookings_request_key_unique` ( `requestKey` )",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 33004280000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "34323f80ff99ae82732468ea7c454ca0ae98ac206ec0f42e2546b6fbe717e17d",
+      "DIGEST_TEXT": "ALTER TABLE `Bookings` ADD `cancelRequested` TINYINT (?) NOT NULL DEFAULT FALSE",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 16089059000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "a0e5b42cc29aafa7dfbdf41ecbf08b17eaf0363cffa437da877d90725981451a",
+      "DIGEST_TEXT": "ALTER TABLE `Bookings` ADD `reservationReleased` TINYINT (?) NOT NULL DEFAULT FALSE",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 15124764000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "4c4d0e0bcf02d5c5b6435670b0b4f1c2e9c2bc42144f96756a52b1e064339274",
+      "DIGEST_TEXT": "ALTER TABLE `Bookings` ADD `failureCode` VARCHARACTER (?)",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 14572300000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "5604b8e93a4abc24045375c51a9f6b1d4036476faaed40b2a056bb30322458df",
+      "DIGEST_TEXT": "ALTER TABLE `Bookings` ADD `nextAttemptAt` DATETIME",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 14578079000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "7b87e648fa9cdda353a24db0b7f97f20f7344ca68f4b85fa39db087319502d49",
+      "DIGEST_TEXT": "ALTER TABLE `Bookings` ADD INDEX `bookings_recovery_due` ( `nextAttemptAt` , `id` )",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 24424478000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "9d9fe76c6876d4f81f8ab34315cb091529834da9484753330e8f4dfdcc84574a",
+      "DIGEST_TEXT": "INSERT INTO `LocalSchemaChanges` ( NAME , `appliedAt` ) VALUES ( ? , NOW ( ) )",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 3195641000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "57d747f0b5abc929019cd367428e7969f70299d21b92d1370cf95bd3ff3d3cd0",
+      "DIGEST_TEXT": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE ( `Booking` . `status` = ? OR ( `Booking` . `cancelRequested` = TRUE AND `Booking` . `reservationReleased` = FALSE ) ) AND `Booking` . `requestKey` IS NOT NULL AND `Booking` . `nextAttemptAt` <= ? ORDER BY `Booking` . `nextAttemptAt` ASC , `Booking` . `id` ASC LIMIT ?",
+      "COUNT_STAR": 1329,
+      "SUM_TIMER_WAIT": 3638195174000,
+      "SUM_ROWS_EXAMINED": 3181,
+      "SUM_ROWS_SENT": 3181
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "46b807878835ff2d16de91450a45032d8aae217e362c27034f8512fd49aed0cc",
+      "DIGEST_TEXT": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `requestKey` = ?",
+      "COUNT_STAR": 5158,
+      "SUM_TIMER_WAIT": 3141422199000,
+      "SUM_ROWS_EXAMINED": 48,
+      "SUM_ROWS_SENT": 48
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "a65c05c52829e1174230357cc103a109c5e9ad44a5233d092f3e0fcc5c54dc5d",
+      "DIGEST_TEXT": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `id` = ?",
+      "COUNT_STAR": 16760,
+      "SUM_TIMER_WAIT": 13574270071000,
+      "SUM_ROWS_EXAMINED": 16761,
+      "SUM_ROWS_SENT": 16761
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "b28cdb34eff6af5d3da1383b654dc554a55a315ca76acc94b4a630ae6afd4545",
+      "DIGEST_TEXT": "SELECT COUNT ( * ) AS `count` FROM `Bookings` AS `Booking` WHERE `Booking` . `flightId` = ? AND `Booking` . `status` = ?",
+      "COUNT_STAR": 2,
+      "SUM_TIMER_WAIT": 8702268000,
+      "SUM_ROWS_EXAMINED": 5763,
+      "SUM_ROWS_SENT": 2
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "a0938284c5120d1c3d76648046135196799e5e93bcf54c664e852c56bff70a59",
+      "DIGEST_TEXT": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `id` = ? AND `Booking` . `userId` = ? AND `Booking` . `requestKey` = ?",
+      "COUNT_STAR": 21,
+      "SUM_TIMER_WAIT": 52851835000,
+      "SUM_ROWS_EXAMINED": 19,
+      "SUM_ROWS_SENT": 19
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "704ccdc429d4deb2cf37ec8708e8faae1c46acf5683817670906ba621a14bb85",
+      "DIGEST_TEXT": "SET `time_zone` = ?",
+      "COUNT_STAR": 138,
+      "SUM_TIMER_WAIT": 81893977000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "3c1d56036b2da4105df5fead8c9da99398a13e66426a428337d38029c565b271",
+      "DIGEST_TEXT": "SELECT `VERSION` ( ) AS `version`",
+      "COUNT_STAR": 34,
+      "SUM_TIMER_WAIT": 16814839000,
+      "SUM_ROWS_EXAMINED": 34,
+      "SUM_ROWS_SENT": 34
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "2c6404b12997e9e65287d161c868f5b09143a452b73a5cbbce3347eb7c555f18",
+      "DIGEST_TEXT": "SELECT TABLE_NAME FROM `INFORMATION_SCHEMA` . `TABLES` WHERE `TABLE_TYPE` = ? AND TABLE_NAME = ? AND `TABLE_SCHEMA` = ?",
+      "COUNT_STAR": 4,
+      "SUM_TIMER_WAIT": 5558701000,
+      "SUM_ROWS_EXAMINED": 8,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "1fff5b20be9b7eabdb9495426dc26e79b2d016cd7151e7bfbd10921d1d81d558",
+      "DIGEST_TEXT": "CREATE TABLE IF NOT EXISTS `Airplanes` ( `id` INTEGER NOT NULL AUTO_INCREMENT , `modelNumber` VARCHARACTER (?) NOT NULL , `capacity` INTEGER NOT NULL DEFAULT ? , `createdAt` DATETIME NOT NULL , `updatedAt` DATETIME NOT NULL , PRIMARY KEY ( `id` ) ) ENGINE = `InnoDB`",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 25159411000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "e5c3c6a1ef45e7af52335184a4912b999460780d5a10b653a768ed82e571ac0c",
+      "DIGEST_TEXT": "SHOW INDEX FROM `Airplanes` FROM `baseline_flights`",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 3746505000,
+      "SUM_ROWS_EXAMINED": 14,
+      "SUM_ROWS_SENT": 1
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "fcd2550f40e2c4972485ceeabccf00e33b107e8d7ed4c169458b0433fd8c6e79",
+      "DIGEST_TEXT": "CREATE TABLE IF NOT EXISTS `Cities` ( `id` INTEGER NOT NULL AUTO_INCREMENT , `name` VARCHARACTER (?) NOT NULL UNIQUE , `createdAt` DATETIME NOT NULL , `updatedAt` DATETIME NOT NULL , PRIMARY KEY ( `id` ) ) ENGINE = `InnoDB`",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 54936669000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "7c5c20de9ad80d6e46ad758aa25ac9ab1b828b520cf760048c4f759a20a58919",
+      "DIGEST_TEXT": "SHOW INDEX FROM `Cities` FROM `baseline_flights`",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 6445178000,
+      "SUM_ROWS_EXAMINED": 18,
+      "SUM_ROWS_SENT": 2
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "4e6bfd5b3f476513203ca65532eb6de1def1644ea39a85ef860ca51203cb4ebf",
+      "DIGEST_TEXT": "CREATE TABLE IF NOT EXISTS `Airports` ( `id` INTEGER NOT NULL AUTO_INCREMENT , `name` VARCHARACTER (?) NOT NULL , `address` VARCHARACTER (?) , `cityId` INTEGER NOT NULL , `createdAt` DATETIME NOT NULL , `updatedAt` DATETIME NOT NULL , PRIMARY KEY ( `id` ) , FOREIGN KEY ( `cityId` ) REFERENCES `Cities` ( `id` ) ON DELETE CASCADE ON UPDATE CASCADE ) ENGINE = `InnoDB`",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 67800375000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "b51f4318d1bf9606b6285b119164e5cd5f4aaa2a2ef01beb7c4427ff864ad557",
+      "DIGEST_TEXT": "SHOW INDEX FROM `Airports` FROM `baseline_flights`",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 11202859000,
+      "SUM_ROWS_EXAMINED": 20,
+      "SUM_ROWS_SENT": 2
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "dbd4829a89c470022833c53039e4396c352bc901f596ec9f591f2c2cc80abe43",
+      "DIGEST_TEXT": "CREATE TABLE IF NOT EXISTS `Flights` ( `id` INTEGER NOT NULL AUTO_INCREMENT , `flightNumber` VARCHARACTER (?) NOT NULL UNIQUE , `airplaneId` INTEGER NOT NULL , `departureAirportId` INTEGER NOT NULL , `arrivalAirportId` INTEGER NOT NULL , `arrivalTime` DATETIME NOT NULL , `departureTime` DATETIME NOT NULL , `price` INTEGER NOT NULL , `boardingGate` VARCHARACTER (?) , `totalSeats` INTEGER NOT NULL , `createdAt` DATETIME NOT NULL , `updatedAt` DATETIME NOT NULL , PRIMARY KEY ( `id` ) ) ENGINE = `InnoDB`",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 69063383000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "65d182b6356aad17647a3b669f2be8d9beffa4c809a7cfbdbc78be6291c0ae4a",
+      "DIGEST_TEXT": "SHOW INDEX FROM `Flights` FROM `baseline_flights`",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 16849352000,
+      "SUM_ROWS_EXAMINED": 26,
+      "SUM_ROWS_SENT": 2
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "c8b74e155952f3345801f29fbd991fb0316dda789e3cb12ecfe4335b2e2ea79b",
+      "DIGEST_TEXT": "SELECT `id` , `modelNumber` , `capacity` , `createdAt` , `updatedAt` FROM `Airplanes` AS `Airplane` WHERE `Airplane` . `id` = ?",
+      "COUNT_STAR": 9,
+      "SUM_TIMER_WAIT": 8607565000,
+      "SUM_ROWS_EXAMINED": 9,
+      "SUM_ROWS_SENT": 9
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "261068e5709447bb0eac459c0a42a25ab68b26d72ed514be193ebca11c4d616e",
+      "DIGEST_TEXT": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `arrivalAirportId` = ? AND `Flight` . `departureAirportId` = ?",
+      "COUNT_STAR": 30,
+      "SUM_TIMER_WAIT": 296615383000,
+      "SUM_ROWS_EXAMINED": 215138,
+      "SUM_ROWS_SENT": 22
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "70504037787e449a25e1689f1d8a39232e117536cbbb757f4700ba977c9e4e70",
+      "DIGEST_TEXT": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ?",
+      "COUNT_STAR": 8834,
+      "SUM_TIMER_WAIT": 5072182454000,
+      "SUM_ROWS_EXAMINED": 8832,
+      "SUM_ROWS_SENT": 8832
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "f42dfc90ac6630b80b22cf7b29719663aeaa06fef0d995aa582a5150d333b34c",
+      "DIGEST_TEXT": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE ( `Flight` . `price` >= ? AND `Flight` . `price` <= ? ) AND `Flight` . `arrivalAirportId` = ? AND `Flight` . `departureAirportId` = ?",
+      "COUNT_STAR": 21805,
+      "SUM_TIMER_WAIT": 278501972558000,
+      "SUM_ROWS_EXAMINED": 221433118,
+      "SUM_ROWS_SENT": 2180003
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "7e13e530093a5b3ee36100d83d9187fcd8ac52ac34ad587af664f4bb6729e10f",
+      "DIGEST_TEXT": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE ( `Flight` . `price` >= ? ) AND `Flight` . `departureAirportId` = ?",
+      "COUNT_STAR": 3,
+      "SUM_TIMER_WAIT": 17695659000,
+      "SUM_ROWS_EXAMINED": 20415,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "3fed522ef3322a4703120e23de0a38f8da21189cda2b7a8738baf1fd7668f2eb",
+      "DIGEST_TEXT": "INSERT INTO `Flights` ( `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `totalSeats` , `createdAt` , `updatedAt` ) VALUES (...) /* , ... */",
+      "COUNT_STAR": 10,
+      "SUM_TIMER_WAIT": 635548133000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "482a7a93869f1babd648facb3ef5cd57a9323bc3b2607d393d2698418b785e66",
+      "DIGEST_TEXT": "SELECT `id` FROM `Flights` AS `Flight` WHERE `Flight` . `airplaneId` = ? ORDER BY `Flight` . `id` ASC",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 5779988000,
+      "SUM_ROWS_EXAMINED": 10003,
+      "SUM_ROWS_SENT": 10000
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "d4412023cb0ebb97d0a1f8f52974442ee5ebe36eb1053ecdfddb6924f67bc339",
+      "DIGEST_TEXT": "CREATE TABLE IF NOT EXISTS `LocalSchemaChanges` ( NAME VARCHARACTER (?) PRIMARY KEY , `appliedAt` DATETIME NOT NULL )",
+      "COUNT_STAR": 2,
+      "SUM_TIMER_WAIT": 35424784000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "39d92582840679850734d0fe1936b370d8a45d0352d15887c35f8906f3945814",
+      "DIGEST_TEXT": "SELECT NAME FROM `LocalSchemaChanges` WHERE NAME = ?",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 1058051000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "526eebaea69ce9d2b1a5c0226532edcd1423777facd9ee7dcbde0e36feb099fb",
+      "DIGEST_TEXT": "CREATE TABLE IF NOT EXISTS `Reservations` ( `bookingId` INTEGER NOT NULL , `flightId` INTEGER NOT NULL , `noOfSeats` INTEGER NOT NULL , `totalCost` INTEGER NOT NULL DEFAULT ? , `status` ENUM (...) NOT NULL , `createdAt` DATETIME NOT NULL , `updatedAt` DATETIME NOT NULL , PRIMARY KEY ( `bookingId` ) , FOREIGN KEY ( `flightId` ) REFERENCES `Flights` ( `id` ) ON DELETE RESTRICT ON UPDATE CASCADE ) ENGINE = `InnoDB`",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 34648184000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "9d9fe76c6876d4f81f8ab34315cb091529834da9484753330e8f4dfdcc84574a",
+      "DIGEST_TEXT": "INSERT INTO `LocalSchemaChanges` ( NAME , `appliedAt` ) VALUES ( ? , NOW ( ) )",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 2680754000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "b57cf422fbfb5629759554d7a60a31947a2333a6e1b55d7dce60a94aa1eed044",
+      "DIGEST_TEXT": "START TRANSACTION",
+      "COUNT_STAR": 8066,
+      "SUM_TIMER_WAIT": 1975397419000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "ca5645eabb3faa3a168cd6cda28259f8fa5161f0458e2d488c358e0112d4f8fb",
+      "DIGEST_TEXT": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ? FOR UPDATE",
+      "COUNT_STAR": 8065,
+      "SUM_TIMER_WAIT": 15132384955000,
+      "SUM_ROWS_EXAMINED": 8066,
+      "SUM_ROWS_SENT": 8066
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "99aa377484de2f139c5dda31f6ddfd0842ec74e9f4865a18b258624620dece06",
+      "DIGEST_TEXT": "SELECT `bookingId` , `flightId` , `noOfSeats` , `totalCost` , `status` , `createdAt` , `updatedAt` FROM `Reservations` AS `Reservation` WHERE `Reservation` . `bookingId` = ? FOR UPDATE",
+      "COUNT_STAR": 8060,
+      "SUM_TIMER_WAIT": 4533254766000,
+      "SUM_ROWS_EXAMINED": 835,
+      "SUM_ROWS_SENT": 835
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "f2b9be5f0f32ca7507e4ddf133cd2fad0993a1c26fde9caa6f067b1af2b7603c",
+      "DIGEST_TEXT": "COMMIT",
+      "COUNT_STAR": 5911,
+      "SUM_TIMER_WAIT": 52601606745000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "2b38ed9783baaae7445f9528c4b50c9cce7ab9dc08ed93b454c6e6b1d5593dc9",
+      "DIGEST_TEXT": "SELECT COUNT ( * ) AS `count` FROM `Reservations` AS `Reservation` WHERE `Reservation` . `bookingId` = ?",
+      "COUNT_STAR": 2,
+      "SUM_TIMER_WAIT": 2846443000,
+      "SUM_ROWS_EXAMINED": 2,
+      "SUM_ROWS_SENT": 2
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "8bb0a279ecbb723d1ff22728f3127fe1b8701d03fedd24541f5f8875f96a21aa",
+      "DIGEST_TEXT": "SELECT COUNT ( * ) AS `count` FROM `Reservations` AS `Reservation` WHERE `Reservation` . `flightId` = ? AND `Reservation` . `status` = ?",
+      "COUNT_STAR": 2,
+      "SUM_TIMER_WAIT": 1951645000,
+      "SUM_ROWS_EXAMINED": 2,
+      "SUM_ROWS_SENT": 2
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "3e67fa9d38d82054e7fc01fe3ee8844dc76faaaefbd74d213a2af42e60e95520",
+      "DIGEST_TEXT": "ROLLBACK",
+      "COUNT_STAR": 2153,
+      "SUM_TIMER_WAIT": 525654072000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "1f07bfc6e8838be9e1d3af1978ad5efd40d4198931c02cd1e994cc9e4ad1f3ad",
+      "DIGEST_TEXT": "SELECT `bookingId` , `flightId` , `noOfSeats` , `totalCost` , `status` , `createdAt` , `updatedAt` FROM `Reservations` AS `Reservation` WHERE `Reservation` . `bookingId` = ?",
+      "COUNT_STAR": 4,
+      "SUM_TIMER_WAIT": 2352094000,
+      "SUM_ROWS_EXAMINED": 2,
+      "SUM_ROWS_SENT": 2
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "1b168f1a4936bf2a8fb81f4fbfefb3a347267a018e1e83f9627df422183bd84c",
+      "DIGEST_TEXT": "EXPLAIN SELECT * FROM `Flights` WHERE `departureAirportId` = ? AND `arrivalAirportId` = ? AND `price` >= ? AND `price` <= ?",
+      "COUNT_STAR": 2,
+      "SUM_TIMER_WAIT": 4336851000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 2
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "41c452229f4e6f92779cd84871cceafefb3cf73cee7e410612cee456700b8bac",
+      "DIGEST_TEXT": "EXPLAIN ANALYZE SELECT * FROM `Flights` WHERE `departureAirportId` = ? AND `arrivalAirportId` = ? AND `price` >= ? AND `price` <= ?",
+      "COUNT_STAR": 2,
+      "SUM_TIMER_WAIT": 33571424000,
+      "SUM_ROWS_EXAMINED": 10404,
+      "SUM_ROWS_SENT": 2
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "320da4ffc1624cb51b1161f678a3c92c95debb9af2316f63bec0661d02a38494",
+      "DIGEST_TEXT": "SELECT * FROM `Flights` WHERE `departureAirportId` = ? AND `arrivalAirportId` = ? AND `price` >= ? AND `price` <= ?",
+      "COUNT_STAR": 2,
+      "SUM_TIMER_WAIT": 9368636000,
+      "SUM_ROWS_EXAMINED": 10404,
+      "SUM_ROWS_SENT": 200
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "3bad7031f1beeb61f998f86102212123950a1b117b986803b2b1a4553501089a",
+      "DIGEST_TEXT": "SHOW INDEX FROM `Flights`",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 3793927000,
+      "SUM_ROWS_EXAMINED": 28,
+      "SUM_ROWS_SENT": 2
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "82c5efd79d651c1829e440af863438dc8baf838f0b315788180d7238588dc8c6",
+      "DIGEST_TEXT": "ALTER TABLE `Flights` ADD INDEX `flights_route_price_idx` ( `departureAirportId` , `arrivalAirportId` , `price` )",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 334159719000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "d917b22d824588884bc5f756122c140c6402157dfe5c5dc8640a76b73df5eb11",
+      "DIGEST_TEXT": "INSERT IGNORE INTO `LocalSchemaChanges` ( NAME , `appliedAt` ) VALUES ( ? , NOW ( ) )",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 17012365000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "fa02bb4a3d4c0f70f3c954eb8ab16f12b669e88b5e620db6e0d8cb1e5a01080b",
+      "DIGEST_TEXT": "ANALYZE TABLE `Flights`",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 45428437000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    }
+  ],
+  "mysql": {
+    "maxConnections": 151,
+    "mysqlVersion": "8.0.46"
+  },
+  "searchPlan": [
+    {
+      "id": 1,
+      "select_type": "SIMPLE",
+      "table": "Flights",
+      "partitions": null,
+      "type": "range",
+      "possible_keys": "flights_route_price_idx",
+      "key": "flights_route_price_idx",
+      "key_len": "12",
+      "ref": null,
+      "rows": 100,
+      "filtered": 100,
+      "Extra": "Using index condition"
+    }
+  ],
+  "flightIndexes": [
+    {
+      "Table": "Flights",
+      "Non_unique": 0,
+      "Key_name": "PRIMARY",
+      "Seq_in_index": 1,
+      "Column_name": "id",
+      "Collation": "A",
+      "Cardinality": 10463,
+      "Sub_part": null,
+      "Packed": null,
+      "Null": "",
+      "Index_type": "BTREE",
+      "Comment": "",
+      "Index_comment": "",
+      "Visible": "YES",
+      "Expression": null
+    },
+    {
+      "Table": "Flights",
+      "Non_unique": 0,
+      "Key_name": "flightNumber",
+      "Seq_in_index": 1,
+      "Column_name": "flightNumber",
+      "Collation": "A",
+      "Cardinality": 9797,
+      "Sub_part": null,
+      "Packed": null,
+      "Null": "",
+      "Index_type": "BTREE",
+      "Comment": "",
+      "Index_comment": "",
+      "Visible": "YES",
+      "Expression": null
+    },
+    {
+      "Table": "Flights",
+      "Non_unique": 1,
+      "Key_name": "flights_route_price_idx",
+      "Seq_in_index": 1,
+      "Column_name": "departureAirportId",
+      "Collation": "A",
+      "Cardinality": 19,
+      "Sub_part": null,
+      "Packed": null,
+      "Null": "",
+      "Index_type": "BTREE",
+      "Comment": "",
+      "Index_comment": "",
+      "Visible": "YES",
+      "Expression": null
+    },
+    {
+      "Table": "Flights",
+      "Non_unique": 1,
+      "Key_name": "flights_route_price_idx",
+      "Seq_in_index": 2,
+      "Column_name": "arrivalAirportId",
+      "Collation": "A",
+      "Cardinality": 109,
+      "Sub_part": null,
+      "Packed": null,
+      "Null": "",
+      "Index_type": "BTREE",
+      "Comment": "",
+      "Index_comment": "",
+      "Visible": "YES",
+      "Expression": null
+    },
+    {
+      "Table": "Flights",
+      "Non_unique": 1,
+      "Key_name": "flights_route_price_idx",
+      "Seq_in_index": 3,
+      "Column_name": "price",
+      "Collation": "A",
+      "Cardinality": 110,
+      "Sub_part": null,
+      "Packed": null,
+      "Null": "",
+      "Index_type": "BTREE",
+      "Comment": "",
+      "Index_comment": "",
+      "Visible": "YES",
+      "Expression": null
+    }
+  ],
+  "catalog": {
+    "flights": 10325
+  },
+  "exitCode": 0,
+  "after": {
+    "time": "2026-09-30T13:18:53.772Z",
+    "Connection_errors_max_connections": 0,
+    "Innodb_row_lock_waits": 3468,
+    "Questions": 129331,
+    "Slow_queries": 0,
+    "Threads_connected": 8,
+    "Threads_running": 2
+  },
+  "digestsAfter": [
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "704ccdc429d4deb2cf37ec8708e8faae1c46acf5683817670906ba621a14bb85",
+      "DIGEST_TEXT": "SET `time_zone` = ?",
+      "COUNT_STAR": 83,
+      "SUM_TIMER_WAIT": 73326254000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "3c1d56036b2da4105df5fead8c9da99398a13e66426a428337d38029c565b271",
+      "DIGEST_TEXT": "SELECT `VERSION` ( ) AS `version`",
+      "COUNT_STAR": 8,
+      "SUM_TIMER_WAIT": 3906254000,
+      "SUM_ROWS_EXAMINED": 8,
+      "SUM_ROWS_SENT": 8
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "2c6404b12997e9e65287d161c868f5b09143a452b73a5cbbce3347eb7c555f18",
+      "DIGEST_TEXT": "SELECT TABLE_NAME FROM `INFORMATION_SCHEMA` . `TABLES` WHERE `TABLE_TYPE` = ? AND TABLE_NAME = ? AND `TABLE_SCHEMA` = ?",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 1141739000,
+      "SUM_ROWS_EXAMINED": 2,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "2091951d8b19f0f0c381fb3fb10682ecfad238518e85c879f152e03a0cf597a5",
+      "DIGEST_TEXT": "CREATE TABLE IF NOT EXISTS `Bookings` ( `id` INTEGER NOT NULL AUTO_INCREMENT , `flightId` INTEGER NOT NULL , `userId` INTEGER NOT NULL , `status` ENUM (...) NOT NULL DEFAULT ? , `noOfSeats` INTEGER NOT NULL DEFAULT ? , `totalCost` INTEGER NOT NULL DEFAULT ? , `createdAt` DATETIME NOT NULL , `updatedAt` DATETIME NOT NULL , PRIMARY KEY ( `id` ) ) ENGINE = `InnoDB`",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 27548667000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "c3791cbcbe841219d19b90e666cdb47c18962d462c55eee3866291c7f39b5aa2",
+      "DIGEST_TEXT": "SHOW INDEX FROM `Bookings` FROM `baseline_booking`",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 4163069000,
+      "SUM_ROWS_EXAMINED": 17,
+      "SUM_ROWS_SENT": 1
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "b16d0edf1d6a92c26a444ef9386ead273d726e5ec36f04b831847b6d2c270c4c",
+      "DIGEST_TEXT": "SELECT `id` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `id` = ?",
+      "COUNT_STAR": 1539,
+      "SUM_TIMER_WAIT": 834682156000,
+      "SUM_ROWS_EXAMINED": 1539,
+      "SUM_ROWS_SENT": 1539
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "d4412023cb0ebb97d0a1f8f52974442ee5ebe36eb1053ecdfddb6924f67bc339",
+      "DIGEST_TEXT": "CREATE TABLE IF NOT EXISTS `LocalSchemaChanges` ( NAME VARCHARACTER (?) PRIMARY KEY , `appliedAt` DATETIME NOT NULL )",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 22940075000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "39d92582840679850734d0fe1936b370d8a45d0352d15887c35f8906f3945814",
+      "DIGEST_TEXT": "SELECT NAME FROM `LocalSchemaChanges` WHERE NAME = ?",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 975001000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "72d803e6315645a94cd25c71b96fbe044f7e35058112c1f0c5db431cb71c835d",
+      "DIGEST_TEXT": "ALTER TABLE `Bookings` ADD `requestKey` VARCHARACTER (?)",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 16232755000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "3f530f1c166db5cd0a66893e85f5aed0ca14f515175bce9dd155690e285c531c",
+      "DIGEST_TEXT": "ALTER TABLE `Bookings` ADD UNIQUE INDEX `bookings_request_key_unique` ( `requestKey` )",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 33004280000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "34323f80ff99ae82732468ea7c454ca0ae98ac206ec0f42e2546b6fbe717e17d",
+      "DIGEST_TEXT": "ALTER TABLE `Bookings` ADD `cancelRequested` TINYINT (?) NOT NULL DEFAULT FALSE",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 16089059000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "a0e5b42cc29aafa7dfbdf41ecbf08b17eaf0363cffa437da877d90725981451a",
+      "DIGEST_TEXT": "ALTER TABLE `Bookings` ADD `reservationReleased` TINYINT (?) NOT NULL DEFAULT FALSE",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 15124764000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "4c4d0e0bcf02d5c5b6435670b0b4f1c2e9c2bc42144f96756a52b1e064339274",
+      "DIGEST_TEXT": "ALTER TABLE `Bookings` ADD `failureCode` VARCHARACTER (?)",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 14572300000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "5604b8e93a4abc24045375c51a9f6b1d4036476faaed40b2a056bb30322458df",
+      "DIGEST_TEXT": "ALTER TABLE `Bookings` ADD `nextAttemptAt` DATETIME",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 14578079000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "7b87e648fa9cdda353a24db0b7f97f20f7344ca68f4b85fa39db087319502d49",
+      "DIGEST_TEXT": "ALTER TABLE `Bookings` ADD INDEX `bookings_recovery_due` ( `nextAttemptAt` , `id` )",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 24424478000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "9d9fe76c6876d4f81f8ab34315cb091529834da9484753330e8f4dfdcc84574a",
+      "DIGEST_TEXT": "INSERT INTO `LocalSchemaChanges` ( NAME , `appliedAt` ) VALUES ( ? , NOW ( ) )",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 3195641000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "57d747f0b5abc929019cd367428e7969f70299d21b92d1370cf95bd3ff3d3cd0",
+      "DIGEST_TEXT": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE ( `Booking` . `status` = ? OR ( `Booking` . `cancelRequested` = TRUE AND `Booking` . `reservationReleased` = FALSE ) ) AND `Booking` . `requestKey` IS NOT NULL AND `Booking` . `nextAttemptAt` <= ? ORDER BY `Booking` . `nextAttemptAt` ASC , `Booking` . `id` ASC LIMIT ?",
+      "COUNT_STAR": 1341,
+      "SUM_TIMER_WAIT": 3649383501000,
+      "SUM_ROWS_EXAMINED": 3181,
+      "SUM_ROWS_SENT": 3181
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "46b807878835ff2d16de91450a45032d8aae217e362c27034f8512fd49aed0cc",
+      "DIGEST_TEXT": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `requestKey` = ?",
+      "COUNT_STAR": 5279,
+      "SUM_TIMER_WAIT": 3237231682000,
+      "SUM_ROWS_EXAMINED": 48,
+      "SUM_ROWS_SENT": 48
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "a65c05c52829e1174230357cc103a109c5e9ad44a5233d092f3e0fcc5c54dc5d",
+      "DIGEST_TEXT": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `id` = ?",
+      "COUNT_STAR": 17002,
+      "SUM_TIMER_WAIT": 13727263144000,
+      "SUM_ROWS_EXAMINED": 17003,
+      "SUM_ROWS_SENT": 17003
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "b28cdb34eff6af5d3da1383b654dc554a55a315ca76acc94b4a630ae6afd4545",
+      "DIGEST_TEXT": "SELECT COUNT ( * ) AS `count` FROM `Bookings` AS `Booking` WHERE `Booking` . `flightId` = ? AND `Booking` . `status` = ?",
+      "COUNT_STAR": 2,
+      "SUM_TIMER_WAIT": 8702268000,
+      "SUM_ROWS_EXAMINED": 5763,
+      "SUM_ROWS_SENT": 2
+    },
+    {
+      "SCHEMA_NAME": "baseline_booking",
+      "DIGEST": "a0938284c5120d1c3d76648046135196799e5e93bcf54c664e852c56bff70a59",
+      "DIGEST_TEXT": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `id` = ? AND `Booking` . `userId` = ? AND `Booking` . `requestKey` = ?",
+      "COUNT_STAR": 21,
+      "SUM_TIMER_WAIT": 52851835000,
+      "SUM_ROWS_EXAMINED": 19,
+      "SUM_ROWS_SENT": 19
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "704ccdc429d4deb2cf37ec8708e8faae1c46acf5683817670906ba621a14bb85",
+      "DIGEST_TEXT": "SET `time_zone` = ?",
+      "COUNT_STAR": 149,
+      "SUM_TIMER_WAIT": 93779575000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "3c1d56036b2da4105df5fead8c9da99398a13e66426a428337d38029c565b271",
+      "DIGEST_TEXT": "SELECT `VERSION` ( ) AS `version`",
+      "COUNT_STAR": 34,
+      "SUM_TIMER_WAIT": 16814839000,
+      "SUM_ROWS_EXAMINED": 34,
+      "SUM_ROWS_SENT": 34
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "2c6404b12997e9e65287d161c868f5b09143a452b73a5cbbce3347eb7c555f18",
+      "DIGEST_TEXT": "SELECT TABLE_NAME FROM `INFORMATION_SCHEMA` . `TABLES` WHERE `TABLE_TYPE` = ? AND TABLE_NAME = ? AND `TABLE_SCHEMA` = ?",
+      "COUNT_STAR": 4,
+      "SUM_TIMER_WAIT": 5558701000,
+      "SUM_ROWS_EXAMINED": 8,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "1fff5b20be9b7eabdb9495426dc26e79b2d016cd7151e7bfbd10921d1d81d558",
+      "DIGEST_TEXT": "CREATE TABLE IF NOT EXISTS `Airplanes` ( `id` INTEGER NOT NULL AUTO_INCREMENT , `modelNumber` VARCHARACTER (?) NOT NULL , `capacity` INTEGER NOT NULL DEFAULT ? , `createdAt` DATETIME NOT NULL , `updatedAt` DATETIME NOT NULL , PRIMARY KEY ( `id` ) ) ENGINE = `InnoDB`",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 25159411000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "e5c3c6a1ef45e7af52335184a4912b999460780d5a10b653a768ed82e571ac0c",
+      "DIGEST_TEXT": "SHOW INDEX FROM `Airplanes` FROM `baseline_flights`",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 3746505000,
+      "SUM_ROWS_EXAMINED": 14,
+      "SUM_ROWS_SENT": 1
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "fcd2550f40e2c4972485ceeabccf00e33b107e8d7ed4c169458b0433fd8c6e79",
+      "DIGEST_TEXT": "CREATE TABLE IF NOT EXISTS `Cities` ( `id` INTEGER NOT NULL AUTO_INCREMENT , `name` VARCHARACTER (?) NOT NULL UNIQUE , `createdAt` DATETIME NOT NULL , `updatedAt` DATETIME NOT NULL , PRIMARY KEY ( `id` ) ) ENGINE = `InnoDB`",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 54936669000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "7c5c20de9ad80d6e46ad758aa25ac9ab1b828b520cf760048c4f759a20a58919",
+      "DIGEST_TEXT": "SHOW INDEX FROM `Cities` FROM `baseline_flights`",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 6445178000,
+      "SUM_ROWS_EXAMINED": 18,
+      "SUM_ROWS_SENT": 2
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "4e6bfd5b3f476513203ca65532eb6de1def1644ea39a85ef860ca51203cb4ebf",
+      "DIGEST_TEXT": "CREATE TABLE IF NOT EXISTS `Airports` ( `id` INTEGER NOT NULL AUTO_INCREMENT , `name` VARCHARACTER (?) NOT NULL , `address` VARCHARACTER (?) , `cityId` INTEGER NOT NULL , `createdAt` DATETIME NOT NULL , `updatedAt` DATETIME NOT NULL , PRIMARY KEY ( `id` ) , FOREIGN KEY ( `cityId` ) REFERENCES `Cities` ( `id` ) ON DELETE CASCADE ON UPDATE CASCADE ) ENGINE = `InnoDB`",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 67800375000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "b51f4318d1bf9606b6285b119164e5cd5f4aaa2a2ef01beb7c4427ff864ad557",
+      "DIGEST_TEXT": "SHOW INDEX FROM `Airports` FROM `baseline_flights`",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 11202859000,
+      "SUM_ROWS_EXAMINED": 20,
+      "SUM_ROWS_SENT": 2
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "dbd4829a89c470022833c53039e4396c352bc901f596ec9f591f2c2cc80abe43",
+      "DIGEST_TEXT": "CREATE TABLE IF NOT EXISTS `Flights` ( `id` INTEGER NOT NULL AUTO_INCREMENT , `flightNumber` VARCHARACTER (?) NOT NULL UNIQUE , `airplaneId` INTEGER NOT NULL , `departureAirportId` INTEGER NOT NULL , `arrivalAirportId` INTEGER NOT NULL , `arrivalTime` DATETIME NOT NULL , `departureTime` DATETIME NOT NULL , `price` INTEGER NOT NULL , `boardingGate` VARCHARACTER (?) , `totalSeats` INTEGER NOT NULL , `createdAt` DATETIME NOT NULL , `updatedAt` DATETIME NOT NULL , PRIMARY KEY ( `id` ) ) ENGINE = `InnoDB`",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 69063383000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "65d182b6356aad17647a3b669f2be8d9beffa4c809a7cfbdbc78be6291c0ae4a",
+      "DIGEST_TEXT": "SHOW INDEX FROM `Flights` FROM `baseline_flights`",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 16849352000,
+      "SUM_ROWS_EXAMINED": 26,
+      "SUM_ROWS_SENT": 2
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "c8b74e155952f3345801f29fbd991fb0316dda789e3cb12ecfe4335b2e2ea79b",
+      "DIGEST_TEXT": "SELECT `id` , `modelNumber` , `capacity` , `createdAt` , `updatedAt` FROM `Airplanes` AS `Airplane` WHERE `Airplane` . `id` = ?",
+      "COUNT_STAR": 9,
+      "SUM_TIMER_WAIT": 8607565000,
+      "SUM_ROWS_EXAMINED": 9,
+      "SUM_ROWS_SENT": 9
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "261068e5709447bb0eac459c0a42a25ab68b26d72ed514be193ebca11c4d616e",
+      "DIGEST_TEXT": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `arrivalAirportId` = ? AND `Flight` . `departureAirportId` = ?",
+      "COUNT_STAR": 30,
+      "SUM_TIMER_WAIT": 296615383000,
+      "SUM_ROWS_EXAMINED": 215138,
+      "SUM_ROWS_SENT": 22
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "70504037787e449a25e1689f1d8a39232e117536cbbb757f4700ba977c9e4e70",
+      "DIGEST_TEXT": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ?",
+      "COUNT_STAR": 9075,
+      "SUM_TIMER_WAIT": 5226826240000,
+      "SUM_ROWS_EXAMINED": 9073,
+      "SUM_ROWS_SENT": 9073
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "f42dfc90ac6630b80b22cf7b29719663aeaa06fef0d995aa582a5150d333b34c",
+      "DIGEST_TEXT": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE ( `Flight` . `price` >= ? AND `Flight` . `price` <= ? ) AND `Flight` . `arrivalAirportId` = ? AND `Flight` . `departureAirportId` = ?",
+      "COUNT_STAR": 22646,
+      "SUM_TIMER_WAIT": 279572930698000,
+      "SUM_ROWS_EXAMINED": 221517218,
+      "SUM_ROWS_SENT": 2264103
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "7e13e530093a5b3ee36100d83d9187fcd8ac52ac34ad587af664f4bb6729e10f",
+      "DIGEST_TEXT": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE ( `Flight` . `price` >= ? ) AND `Flight` . `departureAirportId` = ?",
+      "COUNT_STAR": 3,
+      "SUM_TIMER_WAIT": 17695659000,
+      "SUM_ROWS_EXAMINED": 20415,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "3fed522ef3322a4703120e23de0a38f8da21189cda2b7a8738baf1fd7668f2eb",
+      "DIGEST_TEXT": "INSERT INTO `Flights` ( `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `totalSeats` , `createdAt` , `updatedAt` ) VALUES (...) /* , ... */",
+      "COUNT_STAR": 10,
+      "SUM_TIMER_WAIT": 635548133000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "482a7a93869f1babd648facb3ef5cd57a9323bc3b2607d393d2698418b785e66",
+      "DIGEST_TEXT": "SELECT `id` FROM `Flights` AS `Flight` WHERE `Flight` . `airplaneId` = ? ORDER BY `Flight` . `id` ASC",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 5779988000,
+      "SUM_ROWS_EXAMINED": 10003,
+      "SUM_ROWS_SENT": 10000
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "d4412023cb0ebb97d0a1f8f52974442ee5ebe36eb1053ecdfddb6924f67bc339",
+      "DIGEST_TEXT": "CREATE TABLE IF NOT EXISTS `LocalSchemaChanges` ( NAME VARCHARACTER (?) PRIMARY KEY , `appliedAt` DATETIME NOT NULL )",
+      "COUNT_STAR": 2,
+      "SUM_TIMER_WAIT": 35424784000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "39d92582840679850734d0fe1936b370d8a45d0352d15887c35f8906f3945814",
+      "DIGEST_TEXT": "SELECT NAME FROM `LocalSchemaChanges` WHERE NAME = ?",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 1058051000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "526eebaea69ce9d2b1a5c0226532edcd1423777facd9ee7dcbde0e36feb099fb",
+      "DIGEST_TEXT": "CREATE TABLE IF NOT EXISTS `Reservations` ( `bookingId` INTEGER NOT NULL , `flightId` INTEGER NOT NULL , `noOfSeats` INTEGER NOT NULL , `totalCost` INTEGER NOT NULL DEFAULT ? , `status` ENUM (...) NOT NULL , `createdAt` DATETIME NOT NULL , `updatedAt` DATETIME NOT NULL , PRIMARY KEY ( `bookingId` ) , FOREIGN KEY ( `flightId` ) REFERENCES `Flights` ( `id` ) ON DELETE RESTRICT ON UPDATE CASCADE ) ENGINE = `InnoDB`",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 34648184000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "9d9fe76c6876d4f81f8ab34315cb091529834da9484753330e8f4dfdcc84574a",
+      "DIGEST_TEXT": "INSERT INTO `LocalSchemaChanges` ( NAME , `appliedAt` ) VALUES ( ? , NOW ( ) )",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 2680754000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "b57cf422fbfb5629759554d7a60a31947a2333a6e1b55d7dce60a94aa1eed044",
+      "DIGEST_TEXT": "START TRANSACTION",
+      "COUNT_STAR": 8187,
+      "SUM_TIMER_WAIT": 2006520012000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "ca5645eabb3faa3a168cd6cda28259f8fa5161f0458e2d488c358e0112d4f8fb",
+      "DIGEST_TEXT": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ? FOR UPDATE",
+      "COUNT_STAR": 8186,
+      "SUM_TIMER_WAIT": 15209969904000,
+      "SUM_ROWS_EXAMINED": 8187,
+      "SUM_ROWS_SENT": 8187
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "99aa377484de2f139c5dda31f6ddfd0842ec74e9f4865a18b258624620dece06",
+      "DIGEST_TEXT": "SELECT `bookingId` , `flightId` , `noOfSeats` , `totalCost` , `status` , `createdAt` , `updatedAt` FROM `Reservations` AS `Reservation` WHERE `Reservation` . `bookingId` = ? FOR UPDATE",
+      "COUNT_STAR": 8181,
+      "SUM_TIMER_WAIT": 4598411093000,
+      "SUM_ROWS_EXAMINED": 835,
+      "SUM_ROWS_SENT": 835
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "f2b9be5f0f32ca7507e4ddf133cd2fad0993a1c26fde9caa6f067b1af2b7603c",
+      "DIGEST_TEXT": "COMMIT",
+      "COUNT_STAR": 6032,
+      "SUM_TIMER_WAIT": 53893941146000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "2b38ed9783baaae7445f9528c4b50c9cce7ab9dc08ed93b454c6e6b1d5593dc9",
+      "DIGEST_TEXT": "SELECT COUNT ( * ) AS `count` FROM `Reservations` AS `Reservation` WHERE `Reservation` . `bookingId` = ?",
+      "COUNT_STAR": 2,
+      "SUM_TIMER_WAIT": 2846443000,
+      "SUM_ROWS_EXAMINED": 2,
+      "SUM_ROWS_SENT": 2
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "8bb0a279ecbb723d1ff22728f3127fe1b8701d03fedd24541f5f8875f96a21aa",
+      "DIGEST_TEXT": "SELECT COUNT ( * ) AS `count` FROM `Reservations` AS `Reservation` WHERE `Reservation` . `flightId` = ? AND `Reservation` . `status` = ?",
+      "COUNT_STAR": 2,
+      "SUM_TIMER_WAIT": 1951645000,
+      "SUM_ROWS_EXAMINED": 2,
+      "SUM_ROWS_SENT": 2
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "3e67fa9d38d82054e7fc01fe3ee8844dc76faaaefbd74d213a2af42e60e95520",
+      "DIGEST_TEXT": "ROLLBACK",
+      "COUNT_STAR": 2153,
+      "SUM_TIMER_WAIT": 525654072000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "1f07bfc6e8838be9e1d3af1978ad5efd40d4198931c02cd1e994cc9e4ad1f3ad",
+      "DIGEST_TEXT": "SELECT `bookingId` , `flightId` , `noOfSeats` , `totalCost` , `status` , `createdAt` , `updatedAt` FROM `Reservations` AS `Reservation` WHERE `Reservation` . `bookingId` = ?",
+      "COUNT_STAR": 4,
+      "SUM_TIMER_WAIT": 2352094000,
+      "SUM_ROWS_EXAMINED": 2,
+      "SUM_ROWS_SENT": 2
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "1b168f1a4936bf2a8fb81f4fbfefb3a347267a018e1e83f9627df422183bd84c",
+      "DIGEST_TEXT": "EXPLAIN SELECT * FROM `Flights` WHERE `departureAirportId` = ? AND `arrivalAirportId` = ? AND `price` >= ? AND `price` <= ?",
+      "COUNT_STAR": 2,
+      "SUM_TIMER_WAIT": 4336851000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 2
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "41c452229f4e6f92779cd84871cceafefb3cf73cee7e410612cee456700b8bac",
+      "DIGEST_TEXT": "EXPLAIN ANALYZE SELECT * FROM `Flights` WHERE `departureAirportId` = ? AND `arrivalAirportId` = ? AND `price` >= ? AND `price` <= ?",
+      "COUNT_STAR": 2,
+      "SUM_TIMER_WAIT": 33571424000,
+      "SUM_ROWS_EXAMINED": 10404,
+      "SUM_ROWS_SENT": 2
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "320da4ffc1624cb51b1161f678a3c92c95debb9af2316f63bec0661d02a38494",
+      "DIGEST_TEXT": "SELECT * FROM `Flights` WHERE `departureAirportId` = ? AND `arrivalAirportId` = ? AND `price` >= ? AND `price` <= ?",
+      "COUNT_STAR": 2,
+      "SUM_TIMER_WAIT": 9368636000,
+      "SUM_ROWS_EXAMINED": 10404,
+      "SUM_ROWS_SENT": 200
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "3bad7031f1beeb61f998f86102212123950a1b117b986803b2b1a4553501089a",
+      "DIGEST_TEXT": "SHOW INDEX FROM `Flights`",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 3793927000,
+      "SUM_ROWS_EXAMINED": 28,
+      "SUM_ROWS_SENT": 2
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "82c5efd79d651c1829e440af863438dc8baf838f0b315788180d7238588dc8c6",
+      "DIGEST_TEXT": "ALTER TABLE `Flights` ADD INDEX `flights_route_price_idx` ( `departureAirportId` , `arrivalAirportId` , `price` )",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 334159719000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "d917b22d824588884bc5f756122c140c6402157dfe5c5dc8640a76b73df5eb11",
+      "DIGEST_TEXT": "INSERT IGNORE INTO `LocalSchemaChanges` ( NAME , `appliedAt` ) VALUES ( ? , NOW ( ) )",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 17012365000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    },
+    {
+      "SCHEMA_NAME": "baseline_flights",
+      "DIGEST": "fa02bb4a3d4c0f70f3c954eb8ab16f12b669e88b5e620db6e0d8cb1e5a01080b",
+      "DIGEST_TEXT": "ANALYZE TABLE `Flights`",
+      "COUNT_STAR": 1,
+      "SUM_TIMER_WAIT": 45428437000,
+      "SUM_ROWS_EXAMINED": 0,
+      "SUM_ROWS_SENT": 0
+    }
+  ],
+  "processesAfter": [
+    {
+      "Id": 23672,
+      "ProcessName": "node",
+      "CPU": 123,
+      "WorkingSet64": 113262592
+    },
+    {
+      "Id": 28876,
+      "ProcessName": "node",
+      "CPU": 1.1875,
+      "WorkingSet64": 50663424
+    },
+    {
+      "Id": 33716,
+      "ProcessName": "node",
+      "CPU": 3.125,
+      "WorkingSet64": 50331648
+    },
+    {
+      "Id": 36212,
+      "ProcessName": "node",
+      "CPU": 7.71875,
+      "WorkingSet64": 63283200
+    },
+    {
+      "Id": 39448,
+      "ProcessName": "node",
+      "CPU": 87.78125,
+      "WorkingSet64": 106631168
+    }
+  ],
+  "cacheAfter": {
+    "hits": 4567,
+    "misses": 4153,
+    "bypasses": 3186,
+    "sourceLoads": 3246,
+    "coalesced": 0,
+    "errors": 211,
+    "connectionErrors": 0,
+    "invalidations": 1487,
+    "invalidationFailures": 146,
+    "rejectedLoads": 4093,
+    "enabled": true,
+    "ready": true,
+    "ttlMs": 5000,
+    "activeLoads": 0
+  },
+  "inventory": [
+    {
+      "flightId": 10306,
+      "initial": 300,
+      "remaining": 293,
+      "booked": 7,
+      "drift": 0
+    },
+    {
+      "flightId": 10307,
+      "initial": 300,
+      "remaining": 294,
+      "booked": 6,
+      "drift": 0
+    },
+    {
+      "flightId": 10308,
+      "initial": 300,
+      "remaining": 294,
+      "booked": 6,
+      "drift": 0
+    },
+    {
+      "flightId": 10309,
+      "initial": 300,
+      "remaining": 294,
+      "booked": 6,
+      "drift": 0
+    },
+    {
+      "flightId": 10310,
+      "initial": 300,
+      "remaining": 294,
+      "booked": 6,
+      "drift": 0
+    },
+    {
+      "flightId": 10311,
+      "initial": 300,
+      "remaining": 294,
+      "booked": 6,
+      "drift": 0
+    },
+    {
+      "flightId": 10312,
+      "initial": 300,
+      "remaining": 294,
+      "booked": 6,
+      "drift": 0
+    },
+    {
+      "flightId": 10313,
+      "initial": 300,
+      "remaining": 294,
+      "booked": 6,
+      "drift": 0
+    },
+    {
+      "flightId": 10314,
+      "initial": 300,
+      "remaining": 294,
+      "booked": 6,
+      "drift": 0
+    },
+    {
+      "flightId": 10315,
+      "initial": 300,
+      "remaining": 294,
+      "booked": 6,
+      "drift": 0
+    },
+    {
+      "flightId": 10316,
+      "initial": 300,
+      "remaining": 294,
+      "booked": 6,
+      "drift": 0
+    },
+    {
+      "flightId": 10317,
+      "initial": 300,
+      "remaining": 294,
+      "booked": 6,
+      "drift": 0
+    },
+    {
+      "flightId": 10318,
+      "initial": 300,
+      "remaining": 294,
+      "booked": 6,
+      "drift": 0
+    },
+    {
+      "flightId": 10319,
+      "initial": 300,
+      "remaining": 294,
+      "booked": 6,
+      "drift": 0
+    },
+    {
+      "flightId": 10320,
+      "initial": 300,
+      "remaining": 294,
+      "booked": 6,
+      "drift": 0
+    },
+    {
+      "flightId": 10321,
+      "initial": 300,
+      "remaining": 294,
+      "booked": 6,
+      "drift": 0
+    },
+    {
+      "flightId": 10322,
+      "initial": 300,
+      "remaining": 294,
+      "booked": 6,
+      "drift": 0
+    },
+    {
+      "flightId": 10323,
+      "initial": 300,
+      "remaining": 294,
+      "booked": 6,
+      "drift": 0
+    },
+    {
+      "flightId": 10324,
+      "initial": 300,
+      "remaining": 294,
+      "booked": 6,
+      "drift": 0
+    },
+    {
+      "flightId": 10325,
+      "initial": 300,
+      "remaining": 294,
+      "booked": 6,
+      "drift": 0
+    }
+  ],
+  "bookingStates": [
+    {
+      "flightId": 10306,
+      "status": "Booked",
+      "seats": "7",
+      "bookings": 7
+    },
+    {
+      "flightId": 10307,
+      "status": "Booked",
+      "seats": "6",
+      "bookings": 6
+    },
+    {
+      "flightId": 10308,
+      "status": "Booked",
+      "seats": "6",
+      "bookings": 6
+    },
+    {
+      "flightId": 10309,
+      "status": "Booked",
+      "seats": "6",
+      "bookings": 6
+    },
+    {
+      "flightId": 10310,
+      "status": "Booked",
+      "seats": "6",
+      "bookings": 6
+    },
+    {
+      "flightId": 10311,
+      "status": "Booked",
+      "seats": "6",
+      "bookings": 6
+    },
+    {
+      "flightId": 10312,
+      "status": "Booked",
+      "seats": "6",
+      "bookings": 6
+    },
+    {
+      "flightId": 10313,
+      "status": "Booked",
+      "seats": "6",
+      "bookings": 6
+    },
+    {
+      "flightId": 10314,
+      "status": "Booked",
+      "seats": "6",
+      "bookings": 6
+    },
+    {
+      "flightId": 10315,
+      "status": "Booked",
+      "seats": "6",
+      "bookings": 6
+    },
+    {
+      "flightId": 10316,
+      "status": "Booked",
+      "seats": "6",
+      "bookings": 6
+    },
+    {
+      "flightId": 10317,
+      "status": "Booked",
+      "seats": "6",
+      "bookings": 6
+    },
+    {
+      "flightId": 10318,
+      "status": "Booked",
+      "seats": "6",
+      "bookings": 6
+    },
+    {
+      "flightId": 10319,
+      "status": "Booked",
+      "seats": "6",
+      "bookings": 6
+    },
+    {
+      "flightId": 10320,
+      "status": "Booked",
+      "seats": "6",
+      "bookings": 6
+    },
+    {
+      "flightId": 10321,
+      "status": "Booked",
+      "seats": "6",
+      "bookings": 6
+    },
+    {
+      "flightId": 10322,
+      "status": "Booked",
+      "seats": "6",
+      "bookings": 6
+    },
+    {
+      "flightId": 10323,
+      "status": "Booked",
+      "seats": "6",
+      "bookings": 6
+    },
+    {
+      "flightId": 10324,
+      "status": "Booked",
+      "seats": "6",
+      "bookings": 6
+    },
+    {
+      "flightId": 10325,
+      "status": "Booked",
+      "seats": "6",
+      "bookings": 6
+    }
+  ],
+  "finished": "2026-09-30T13:18:54.860Z"
+}

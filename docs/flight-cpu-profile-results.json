@@ -1,0 +1,34 @@
+{
+  "run": "profile-200-20261004-a",
+  "profilingSeconds": 33.32,
+  "samples": 20542,
+  "idleSamples": 6142,
+  "activeSamples": 14400,
+  "activeStackSamples": {
+    "observabilityLog": {
+      "count": 4094,
+      "percent": 28.4
+    },
+    "synchronousLogWrite": {
+      "count": 3644,
+      "percent": 25.3
+    },
+    "expressJson": {
+      "count": 609,
+      "percent": 4.2
+    },
+    "flightCache": {
+      "count": 571,
+      "percent": 4
+    },
+    "mysql2": {
+      "count": 773,
+      "percent": 5.4
+    },
+    "garbageCollector": {
+      "count": 137,
+      "percent": 1
+    }
+  },
+  "notes": "Inclusive stack categories overlap. Percentages use non-idle samples as denominator and are not end-to-end latency shares."
+}

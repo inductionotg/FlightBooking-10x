@@ -1,0 +1,52 @@
+{
+  "timestamp": "2026-09-30T13:16:00.460Z",
+  "migration": "20260930140000-add-flight-search-index.js",
+  "route": {
+    "departureAirportId": 7,
+    "arrivalAirportId": 17
+  },
+  "beforePlan": [
+    {
+      "id": 1,
+      "select_type": "SIMPLE",
+      "table": "Flights",
+      "partitions": null,
+      "type": "ALL",
+      "possible_keys": null,
+      "key": null,
+      "key_len": null,
+      "ref": null,
+      "rows": 9882,
+      "filtered": 0.11,
+      "Extra": "Using where"
+    }
+  ],
+  "beforeAnalyze": [
+    {
+      "EXPLAIN": "-> Filter: ((Flights.arrivalAirportId = 17) and (Flights.departureAirportId = 7) and (Flights.price >= 2000) and (Flights.price <= 10000))  (cost=1012 rows=11) (actual time=0.0961..7.82 rows=100 loops=1)\n    -> Table scan on Flights  (cost=1012 rows=9882) (actual time=0.0859..6.71 rows=10304 loops=1)\n"
+    }
+  ],
+  "afterPlan": [
+    {
+      "id": 1,
+      "select_type": "SIMPLE",
+      "table": "Flights",
+      "partitions": null,
+      "type": "range",
+      "possible_keys": "flights_route_price_idx",
+      "key": "flights_route_price_idx",
+      "key_len": "12",
+      "ref": null,
+      "rows": 100,
+      "filtered": 100,
+      "Extra": "Using index condition"
+    }
+  ],
+  "afterAnalyze": [
+    {
+      "EXPLAIN": "-> Index range scan on Flights using flights_route_price_idx over (departureAirportId = 7 AND arrivalAirportId = 17 AND 2000 <= price <= 10000), with index condition: ((Flights.arrivalAirportId = 17) and (Flights.departureAirportId = 7) and (Flights.price >= 2000) and (Flights.price <= 10000))  (cost=45.3 rows=100) (actual time=0.149..0.656 rows=100 loops=1)\n"
+    }
+  ],
+  "matchingRows": 100,
+  "sameResults": true
+}

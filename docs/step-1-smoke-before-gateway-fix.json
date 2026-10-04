@@ -1,0 +1,57 @@
+{
+  "timestamp": "2026-09-29T11:16:11.052Z",
+  "checks": [
+    {
+      "name": "signup",
+      "status": 200
+    },
+    {
+      "name": "sign-in",
+      "status": 201
+    },
+    {
+      "name": "authentication",
+      "status": 201
+    },
+    {
+      "name": "create-flight",
+      "status": 201
+    },
+    {
+      "name": "search-flight",
+      "status": 200
+    },
+    {
+      "name": "create-booking",
+      "status": 200
+    },
+    {
+      "name": "verify-remaining-seats",
+      "status": 200
+    },
+    {
+      "name": "create-notification-ticket",
+      "status": 201
+    },
+    {
+      "name": "delete-notification-ticket",
+      "status": 200
+    },
+    {
+      "name": "gateway-flight-route",
+      "status": 404,
+      "passed": false
+    }
+  ],
+  "scope": "Local functional smoke test; not a load test or payment/email delivery test.",
+  "booking": {
+    "id": 1,
+    "flightId": 2,
+    "status": "Booked",
+    "totalCost": 5000,
+    "seatsBefore": 10,
+    "seatsAfter": 8
+  },
+  "directServiceFlowPassed": true,
+  "gatewayPassed": false
+}

@@ -1,0 +1,52 @@
+{
+  "timestamp": "2026-10-01T16:14:29.586Z",
+  "checks": [
+    {
+      "name": "Booking confirmation durably creates its outbox event",
+      "passed": true
+    },
+    {
+      "name": "Confirmed publish reaches notifications, preserves the trace and completes as Sent",
+      "passed": true
+    },
+    {
+      "name": "Local SMTP inbox contains the booking confirmation addressed to the requested recipient",
+      "passed": true
+    },
+    {
+      "name": "Concurrent idempotent booking retries create one outbox event",
+      "passed": true
+    },
+    {
+      "name": "Broker redelivery and repeat processing do not duplicate durable notifications",
+      "passed": true
+    },
+    {
+      "name": "Malformed events are routed to the durable dead-letter queue",
+      "passed": true
+    },
+    {
+      "name": "Transient consumer failure uses a confirmed delayed retry",
+      "passed": true
+    },
+    {
+      "name": "Exhausted consumer retries reach the dead-letter queue",
+      "passed": true
+    },
+    {
+      "name": "Outbox insert failure rolls back confirmation; retry reuses the reservation without another seat deduction",
+      "passed": true
+    },
+    {
+      "name": "Existing booking requests without email remain compatible and require a recipient",
+      "passed": true
+    }
+  ],
+  "bookingIds": [
+    9222,
+    9223,
+    9224
+  ],
+  "traceId": "54517f22632ff45e35904062be8e1660",
+  "passed": true
+}

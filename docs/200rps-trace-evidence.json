@@ -1,0 +1,155 @@
+{
+  "run": "diagnose-200-20261001-b",
+  "started": "2026-10-01T17:59:02.399Z",
+  "finished": "2026-10-01T17:59:47.277Z",
+  "examples": [
+    {
+      "case": "search-503",
+      "traceId": "2f7dfd3cab77f5bf7956252852d2d574",
+      "events": [
+        {
+          "timestamp": "2026-10-01T17:59:06.470Z",
+          "service": "flights",
+          "source": "flights",
+          "event": "operation.failed",
+          "traceId": "2f7dfd3cab77f5bf7956252852d2d574",
+          "spanId": "3fae2f11bdeae472"
+        },
+        {
+          "timestamp": "2026-10-01T17:59:06.478Z",
+          "service": "flights",
+          "source": "flights",
+          "event": "http.completed",
+          "traceId": "2f7dfd3cab77f5bf7956252852d2d574",
+          "spanId": "3fae2f11bdeae472",
+          "method": "GET",
+          "route": "/flights",
+          "status": 503,
+          "durationMs": 80.35759999999573
+        }
+      ]
+    },
+    {
+      "case": "details-503",
+      "traceId": "cd952314a4c9dd2bafa092b4c9533cb5",
+      "events": [
+        {
+          "timestamp": "2026-10-01T17:59:06.467Z",
+          "service": "flights",
+          "source": "flights",
+          "event": "operation.failed",
+          "traceId": "cd952314a4c9dd2bafa092b4c9533cb5",
+          "spanId": "fdd99413d76adcde"
+        },
+        {
+          "timestamp": "2026-10-01T17:59:06.476Z",
+          "service": "flights",
+          "source": "flights",
+          "event": "http.completed",
+          "traceId": "cd952314a4c9dd2bafa092b4c9533cb5",
+          "spanId": "fdd99413d76adcde",
+          "method": "GET",
+          "route": "/flights/:id",
+          "status": 503,
+          "durationMs": 80.09889999999723
+        }
+      ]
+    },
+    {
+      "case": "booking-202",
+      "traceId": "c75f579384ee6a48d5665bbbfd7b50cd",
+      "events": [
+        {
+          "timestamp": "2026-10-01T17:59:09.429Z",
+          "service": "booking",
+          "source": "booking",
+          "event": "dependency.completed",
+          "traceId": "c75f579384ee6a48d5665bbbfd7b50cd",
+          "spanId": "7e2d44f9d1df18f3",
+          "parentSpanId": "733021c83dac8a18",
+          "durationMs": 3003.508500000462,
+          "dependency": "flights",
+          "operation": "reserve",
+          "outcome": "error"
+        },
+        {
+          "timestamp": "2026-10-01T17:59:09.475Z",
+          "service": "booking",
+          "source": "booking",
+          "event": "booking.response",
+          "traceId": "c75f579384ee6a48d5665bbbfd7b50cd",
+          "spanId": "733021c83dac8a18",
+          "outcome": "InProcess",
+          "bookingId": 10363
+        },
+        {
+          "timestamp": "2026-10-01T17:59:09.478Z",
+          "service": "booking",
+          "source": "booking",
+          "event": "http.completed",
+          "traceId": "c75f579384ee6a48d5665bbbfd7b50cd",
+          "spanId": "733021c83dac8a18",
+          "method": "POST",
+          "route": "/booking",
+          "status": 202,
+          "durationMs": 3125.3877999996766
+        },
+        {
+          "timestamp": "2026-10-01T17:59:09.809Z",
+          "service": "flights",
+          "source": "flights",
+          "event": "http.completed",
+          "traceId": "c75f579384ee6a48d5665bbbfd7b50cd",
+          "spanId": "5bec5e569ed25f4c",
+          "parentSpanId": "7e2d44f9d1df18f3",
+          "method": "POST",
+          "route": "/reservations",
+          "status": 499,
+          "durationMs": 3347.8456000000006
+        },
+        {
+          "timestamp": "2026-10-01T17:59:10.733Z",
+          "service": "flights",
+          "source": "flights",
+          "event": "operation.failed",
+          "traceId": "c75f579384ee6a48d5665bbbfd7b50cd",
+          "spanId": "5bec5e569ed25f4c",
+          "parentSpanId": "7e2d44f9d1df18f3"
+        },
+        {
+          "timestamp": "2026-10-01T18:00:17.297Z",
+          "service": "booking",
+          "source": "booking",
+          "event": "booking.event_published",
+          "traceId": "c75f579384ee6a48d5665bbbfd7b50cd",
+          "spanId": "f547e81997d0fec2",
+          "parentSpanId": "609e6d14e6ee9d11",
+          "bookingId": 10363
+        },
+        {
+          "timestamp": "2026-10-01T18:00:17.298Z",
+          "service": "booking",
+          "source": "booking",
+          "event": "dependency.completed",
+          "traceId": "c75f579384ee6a48d5665bbbfd7b50cd",
+          "spanId": "f547e81997d0fec2",
+          "parentSpanId": "609e6d14e6ee9d11",
+          "durationMs": 43.8675000006333,
+          "dependency": "rabbitmq",
+          "operation": "publish",
+          "outcome": "success"
+        },
+        {
+          "timestamp": "2026-10-01T18:00:17.355Z",
+          "service": "notifications",
+          "source": "notifications",
+          "event": "notification.event_received",
+          "traceId": "c75f579384ee6a48d5665bbbfd7b50cd",
+          "spanId": "0dd610789fe557fa",
+          "parentSpanId": "f547e81997d0fec2",
+          "bookingId": 10363
+        }
+      ]
+    }
+  ]
+}

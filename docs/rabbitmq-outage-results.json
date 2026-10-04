@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-10-01T09:28:13.898Z",
+  "bookingId": 9163,
+  "bookedWhileBrokerDown": true,
+  "eventPending": true,
+  "passed": true,
+  "restoredAt": "2026-10-01T09:28:31.636Z",
+  "eventDeliveredAfterRecovery": true,
+  "notificationCount": 1,
+  "seatsRestored": true
+}

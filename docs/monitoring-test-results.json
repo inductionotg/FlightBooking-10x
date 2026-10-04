@@ -1,0 +1,57 @@
+{
+  "timestamp": "2026-10-01T16:06:36.140Z",
+  "checks": [
+    {
+      "name": "All five services are being scraped successfully",
+      "passed": true
+    },
+    {
+      "name": "Prometheus stores live process metrics from every service",
+      "passed": true
+    },
+    {
+      "name": "A real read-only flight request appears in collected HTTP metrics",
+      "passed": true
+    },
+    {
+      "name": "Dedicated metrics listeners require credentials and expose no business API routes",
+      "passed": true
+    },
+    {
+      "name": "Grafana provisioned the dashboard and every panel query is valid",
+      "passed": true
+    },
+    {
+      "name": "Grafana can query Prometheus through its provisioned data source",
+      "passed": true
+    }
+  ],
+  "targets": [
+    {
+      "service": "auth",
+      "health": "up",
+      "lastScrape": "2026-10-01T16:06:31.954508923Z"
+    },
+    {
+      "service": "booking",
+      "health": "up",
+      "lastScrape": "2026-10-01T16:06:31.754386288Z"
+    },
+    {
+      "service": "flights",
+      "health": "up",
+      "lastScrape": "2026-10-01T16:06:31.301094674Z"
+    },
+    {
+      "service": "gateway",
+      "health": "up",
+      "lastScrape": "2026-10-01T16:06:35.248507884Z"
+    },
+    {
+      "service": "notifications",
+      "health": "up",
+      "lastScrape": "2026-10-01T16:06:31.736542754Z"
+    }
+  ],
+  "passed": true
+}

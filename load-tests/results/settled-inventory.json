@@ -1,0 +1,1650 @@
+[
+  {
+    "run": "after-transactions-contention",
+    "checked": "2026-10-04T09:34:15.680Z",
+    "booked": 1,
+    "inProcess": 0,
+    "deducted": 1,
+    "drift": 0,
+    "flights": [
+      {
+        "id": 10153,
+        "totalSeats": 0
+      }
+    ]
+  },
+  {
+    "run": "before-10x-1",
+    "checked": "2026-10-04T09:34:15.707Z",
+    "booked": 629,
+    "inProcess": 0,
+    "deducted": 167,
+    "drift": 462,
+    "flights": [
+      {
+        "id": 10044,
+        "totalSeats": 291
+      },
+      {
+        "id": 10045,
+        "totalSeats": 291
+      },
+      {
+        "id": 10046,
+        "totalSeats": 291
+      },
+      {
+        "id": 10047,
+        "totalSeats": 291
+      },
+      {
+        "id": 10048,
+        "totalSeats": 291
+      },
+      {
+        "id": 10049,
+        "totalSeats": 291
+      },
+      {
+        "id": 10050,
+        "totalSeats": 291
+      },
+      {
+        "id": 10051,
+        "totalSeats": 292
+      },
+      {
+        "id": 10052,
+        "totalSeats": 292
+      },
+      {
+        "id": 10053,
+        "totalSeats": 292
+      },
+      {
+        "id": 10054,
+        "totalSeats": 292
+      },
+      {
+        "id": 10055,
+        "totalSeats": 292
+      },
+      {
+        "id": 10056,
+        "totalSeats": 292
+      },
+      {
+        "id": 10057,
+        "totalSeats": 292
+      },
+      {
+        "id": 10058,
+        "totalSeats": 292
+      },
+      {
+        "id": 10059,
+        "totalSeats": 292
+      },
+      {
+        "id": 10060,
+        "totalSeats": 292
+      },
+      {
+        "id": 10061,
+        "totalSeats": 292
+      },
+      {
+        "id": 10062,
+        "totalSeats": 292
+      },
+      {
+        "id": 10063,
+        "totalSeats": 292
+      }
+    ]
+  },
+  {
+    "run": "before-10x-2",
+    "checked": "2026-10-04T09:34:15.731Z",
+    "booked": 625,
+    "inProcess": 0,
+    "deducted": 166,
+    "drift": 459,
+    "flights": [
+      {
+        "id": 10084,
+        "totalSeats": 291
+      },
+      {
+        "id": 10085,
+        "totalSeats": 291
+      },
+      {
+        "id": 10086,
+        "totalSeats": 291
+      },
+      {
+        "id": 10087,
+        "totalSeats": 291
+      },
+      {
+        "id": 10088,
+        "totalSeats": 291
+      },
+      {
+        "id": 10089,
+        "totalSeats": 291
+      },
+      {
+        "id": 10090,
+        "totalSeats": 292
+      },
+      {
+        "id": 10091,
+        "totalSeats": 292
+      },
+      {
+        "id": 10092,
+        "totalSeats": 292
+      },
+      {
+        "id": 10093,
+        "totalSeats": 292
+      },
+      {
+        "id": 10094,
+        "totalSeats": 292
+      },
+      {
+        "id": 10095,
+        "totalSeats": 292
+      },
+      {
+        "id": 10096,
+        "totalSeats": 292
+      },
+      {
+        "id": 10097,
+        "totalSeats": 292
+      },
+      {
+        "id": 10098,
+        "totalSeats": 292
+      },
+      {
+        "id": 10099,
+        "totalSeats": 292
+      },
+      {
+        "id": 10100,
+        "totalSeats": 292
+      },
+      {
+        "id": 10101,
+        "totalSeats": 292
+      },
+      {
+        "id": 10102,
+        "totalSeats": 292
+      },
+      {
+        "id": 10103,
+        "totalSeats": 292
+      }
+    ]
+  },
+  {
+    "run": "before-baseline-1",
+    "checked": "2026-10-04T09:34:15.753Z",
+    "booked": 121,
+    "inProcess": 0,
+    "deducted": 121,
+    "drift": 0,
+    "flights": [
+      {
+        "id": 10024,
+        "totalSeats": 293
+      },
+      {
+        "id": 10025,
+        "totalSeats": 294
+      },
+      {
+        "id": 10026,
+        "totalSeats": 294
+      },
+      {
+        "id": 10027,
+        "totalSeats": 294
+      },
+      {
+        "id": 10028,
+        "totalSeats": 294
+      },
+      {
+        "id": 10029,
+        "totalSeats": 294
+      },
+      {
+        "id": 10030,
+        "totalSeats": 294
+      },
+      {
+        "id": 10031,
+        "totalSeats": 294
+      },
+      {
+        "id": 10032,
+        "totalSeats": 294
+      },
+      {
+        "id": 10033,
+        "totalSeats": 294
+      },
+      {
+        "id": 10034,
+        "totalSeats": 294
+      },
+      {
+        "id": 10035,
+        "totalSeats": 294
+      },
+      {
+        "id": 10036,
+        "totalSeats": 294
+      },
+      {
+        "id": 10037,
+        "totalSeats": 294
+      },
+      {
+        "id": 10038,
+        "totalSeats": 294
+      },
+      {
+        "id": 10039,
+        "totalSeats": 294
+      },
+      {
+        "id": 10040,
+        "totalSeats": 294
+      },
+      {
+        "id": 10041,
+        "totalSeats": 294
+      },
+      {
+        "id": 10042,
+        "totalSeats": 294
+      },
+      {
+        "id": 10043,
+        "totalSeats": 294
+      }
+    ]
+  },
+  {
+    "run": "before-baseline-2",
+    "checked": "2026-10-04T09:34:15.772Z",
+    "booked": 121,
+    "inProcess": 0,
+    "deducted": 121,
+    "drift": 0,
+    "flights": [
+      {
+        "id": 10064,
+        "totalSeats": 293
+      },
+      {
+        "id": 10065,
+        "totalSeats": 294
+      },
+      {
+        "id": 10066,
+        "totalSeats": 294
+      },
+      {
+        "id": 10067,
+        "totalSeats": 294
+      },
+      {
+        "id": 10068,
+        "totalSeats": 294
+      },
+      {
+        "id": 10069,
+        "totalSeats": 294
+      },
+      {
+        "id": 10070,
+        "totalSeats": 294
+      },
+      {
+        "id": 10071,
+        "totalSeats": 294
+      },
+      {
+        "id": 10072,
+        "totalSeats": 294
+      },
+      {
+        "id": 10073,
+        "totalSeats": 294
+      },
+      {
+        "id": 10074,
+        "totalSeats": 294
+      },
+      {
+        "id": 10075,
+        "totalSeats": 294
+      },
+      {
+        "id": 10076,
+        "totalSeats": 294
+      },
+      {
+        "id": 10077,
+        "totalSeats": 294
+      },
+      {
+        "id": 10078,
+        "totalSeats": 294
+      },
+      {
+        "id": 10079,
+        "totalSeats": 294
+      },
+      {
+        "id": 10080,
+        "totalSeats": 294
+      },
+      {
+        "id": 10081,
+        "totalSeats": 294
+      },
+      {
+        "id": 10082,
+        "totalSeats": 294
+      },
+      {
+        "id": 10083,
+        "totalSeats": 294
+      }
+    ]
+  },
+  {
+    "run": "before-contention",
+    "checked": "2026-10-04T09:34:15.792Z",
+    "booked": 20,
+    "inProcess": 0,
+    "deducted": 1,
+    "drift": 19,
+    "flights": [
+      {
+        "id": 10124,
+        "totalSeats": 0
+      }
+    ]
+  },
+  {
+    "run": "before-gateway",
+    "checked": "2026-10-04T09:34:15.810Z",
+    "booked": 0,
+    "inProcess": 0,
+    "deducted": 0,
+    "drift": 0,
+    "flights": [
+      {
+        "id": 10104,
+        "totalSeats": 300
+      },
+      {
+        "id": 10105,
+        "totalSeats": 300
+      },
+      {
+        "id": 10106,
+        "totalSeats": 300
+      },
+      {
+        "id": 10107,
+        "totalSeats": 300
+      },
+      {
+        "id": 10108,
+        "totalSeats": 300
+      },
+      {
+        "id": 10109,
+        "totalSeats": 300
+      },
+      {
+        "id": 10110,
+        "totalSeats": 300
+      },
+      {
+        "id": 10111,
+        "totalSeats": 300
+      },
+      {
+        "id": 10112,
+        "totalSeats": 300
+      },
+      {
+        "id": 10113,
+        "totalSeats": 300
+      },
+      {
+        "id": 10114,
+        "totalSeats": 300
+      },
+      {
+        "id": 10115,
+        "totalSeats": 300
+      },
+      {
+        "id": 10116,
+        "totalSeats": 300
+      },
+      {
+        "id": 10117,
+        "totalSeats": 300
+      },
+      {
+        "id": 10118,
+        "totalSeats": 300
+      },
+      {
+        "id": 10119,
+        "totalSeats": 300
+      },
+      {
+        "id": 10120,
+        "totalSeats": 300
+      },
+      {
+        "id": 10121,
+        "totalSeats": 300
+      },
+      {
+        "id": 10122,
+        "totalSeats": 300
+      },
+      {
+        "id": 10123,
+        "totalSeats": 300
+      }
+    ]
+  },
+  {
+    "run": "before-warmup",
+    "checked": "2026-10-04T09:34:15.826Z",
+    "booked": 21,
+    "inProcess": 0,
+    "deducted": 21,
+    "drift": 0,
+    "flights": [
+      {
+        "id": 10004,
+        "totalSeats": 298
+      },
+      {
+        "id": 10005,
+        "totalSeats": 299
+      },
+      {
+        "id": 10006,
+        "totalSeats": 299
+      },
+      {
+        "id": 10007,
+        "totalSeats": 299
+      },
+      {
+        "id": 10008,
+        "totalSeats": 299
+      },
+      {
+        "id": 10009,
+        "totalSeats": 299
+      },
+      {
+        "id": 10010,
+        "totalSeats": 299
+      },
+      {
+        "id": 10011,
+        "totalSeats": 299
+      },
+      {
+        "id": 10012,
+        "totalSeats": 299
+      },
+      {
+        "id": 10013,
+        "totalSeats": 299
+      },
+      {
+        "id": 10014,
+        "totalSeats": 299
+      },
+      {
+        "id": 10015,
+        "totalSeats": 299
+      },
+      {
+        "id": 10016,
+        "totalSeats": 299
+      },
+      {
+        "id": 10017,
+        "totalSeats": 299
+      },
+      {
+        "id": 10018,
+        "totalSeats": 299
+      },
+      {
+        "id": 10019,
+        "totalSeats": 299
+      },
+      {
+        "id": 10020,
+        "totalSeats": 299
+      },
+      {
+        "id": 10021,
+        "totalSeats": 299
+      },
+      {
+        "id": 10022,
+        "totalSeats": 299
+      },
+      {
+        "id": 10023,
+        "totalSeats": 299
+      }
+    ]
+  },
+  {
+    "run": "diagnose-200-20261001-a",
+    "checked": "2026-10-04T09:34:15.844Z",
+    "booked": 1136,
+    "inProcess": 0,
+    "deducted": 1136,
+    "drift": 0,
+    "flights": [
+      {
+        "id": 10402,
+        "totalSeats": 243
+      },
+      {
+        "id": 10403,
+        "totalSeats": 243
+      },
+      {
+        "id": 10404,
+        "totalSeats": 243
+      },
+      {
+        "id": 10405,
+        "totalSeats": 243
+      },
+      {
+        "id": 10406,
+        "totalSeats": 243
+      },
+      {
+        "id": 10407,
+        "totalSeats": 243
+      },
+      {
+        "id": 10408,
+        "totalSeats": 243
+      },
+      {
+        "id": 10409,
+        "totalSeats": 243
+      },
+      {
+        "id": 10410,
+        "totalSeats": 243
+      },
+      {
+        "id": 10411,
+        "totalSeats": 243
+      },
+      {
+        "id": 10412,
+        "totalSeats": 243
+      },
+      {
+        "id": 10413,
+        "totalSeats": 243
+      },
+      {
+        "id": 10414,
+        "totalSeats": 243
+      },
+      {
+        "id": 10415,
+        "totalSeats": 243
+      },
+      {
+        "id": 10416,
+        "totalSeats": 243
+      },
+      {
+        "id": 10417,
+        "totalSeats": 243
+      },
+      {
+        "id": 10418,
+        "totalSeats": 244
+      },
+      {
+        "id": 10419,
+        "totalSeats": 244
+      },
+      {
+        "id": 10420,
+        "totalSeats": 244
+      },
+      {
+        "id": 10421,
+        "totalSeats": 244
+      }
+    ]
+  },
+  {
+    "run": "diagnose-200-20261001-b",
+    "checked": "2026-10-04T09:34:15.862Z",
+    "booked": 552,
+    "inProcess": 0,
+    "deducted": 552,
+    "drift": 0,
+    "flights": [
+      {
+        "id": 10423,
+        "totalSeats": 272
+      },
+      {
+        "id": 10424,
+        "totalSeats": 272
+      },
+      {
+        "id": 10425,
+        "totalSeats": 272
+      },
+      {
+        "id": 10426,
+        "totalSeats": 272
+      },
+      {
+        "id": 10427,
+        "totalSeats": 272
+      },
+      {
+        "id": 10428,
+        "totalSeats": 272
+      },
+      {
+        "id": 10429,
+        "totalSeats": 272
+      },
+      {
+        "id": 10430,
+        "totalSeats": 272
+      },
+      {
+        "id": 10431,
+        "totalSeats": 272
+      },
+      {
+        "id": 10432,
+        "totalSeats": 272
+      },
+      {
+        "id": 10433,
+        "totalSeats": 272
+      },
+      {
+        "id": 10434,
+        "totalSeats": 272
+      },
+      {
+        "id": 10435,
+        "totalSeats": 273
+      },
+      {
+        "id": 10436,
+        "totalSeats": 273
+      },
+      {
+        "id": 10437,
+        "totalSeats": 273
+      },
+      {
+        "id": 10438,
+        "totalSeats": 273
+      },
+      {
+        "id": 10439,
+        "totalSeats": 273
+      },
+      {
+        "id": 10440,
+        "totalSeats": 273
+      },
+      {
+        "id": 10441,
+        "totalSeats": 273
+      },
+      {
+        "id": 10442,
+        "totalSeats": 273
+      }
+    ]
+  },
+  {
+    "run": "indexed-10x-1",
+    "checked": "2026-10-04T09:34:15.879Z",
+    "booked": 1159,
+    "inProcess": 0,
+    "deducted": 1159,
+    "drift": 0,
+    "flights": [
+      {
+        "id": 10326,
+        "totalSeats": 242
+      },
+      {
+        "id": 10327,
+        "totalSeats": 242
+      },
+      {
+        "id": 10328,
+        "totalSeats": 242
+      },
+      {
+        "id": 10329,
+        "totalSeats": 242
+      },
+      {
+        "id": 10330,
+        "totalSeats": 242
+      },
+      {
+        "id": 10331,
+        "totalSeats": 242
+      },
+      {
+        "id": 10332,
+        "totalSeats": 242
+      },
+      {
+        "id": 10333,
+        "totalSeats": 242
+      },
+      {
+        "id": 10334,
+        "totalSeats": 242
+      },
+      {
+        "id": 10335,
+        "totalSeats": 242
+      },
+      {
+        "id": 10336,
+        "totalSeats": 242
+      },
+      {
+        "id": 10337,
+        "totalSeats": 242
+      },
+      {
+        "id": 10338,
+        "totalSeats": 242
+      },
+      {
+        "id": 10339,
+        "totalSeats": 242
+      },
+      {
+        "id": 10340,
+        "totalSeats": 242
+      },
+      {
+        "id": 10341,
+        "totalSeats": 242
+      },
+      {
+        "id": 10342,
+        "totalSeats": 242
+      },
+      {
+        "id": 10343,
+        "totalSeats": 242
+      },
+      {
+        "id": 10344,
+        "totalSeats": 242
+      },
+      {
+        "id": 10345,
+        "totalSeats": 243
+      }
+    ]
+  },
+  {
+    "run": "indexed-10x-2",
+    "checked": "2026-10-04T09:34:15.900Z",
+    "booked": 1178,
+    "inProcess": 0,
+    "deducted": 1178,
+    "drift": 0,
+    "flights": [
+      {
+        "id": 10346,
+        "totalSeats": 241
+      },
+      {
+        "id": 10347,
+        "totalSeats": 241
+      },
+      {
+        "id": 10348,
+        "totalSeats": 241
+      },
+      {
+        "id": 10349,
+        "totalSeats": 241
+      },
+      {
+        "id": 10350,
+        "totalSeats": 241
+      },
+      {
+        "id": 10351,
+        "totalSeats": 241
+      },
+      {
+        "id": 10352,
+        "totalSeats": 241
+      },
+      {
+        "id": 10353,
+        "totalSeats": 241
+      },
+      {
+        "id": 10354,
+        "totalSeats": 241
+      },
+      {
+        "id": 10355,
+        "totalSeats": 241
+      },
+      {
+        "id": 10356,
+        "totalSeats": 241
+      },
+      {
+        "id": 10357,
+        "totalSeats": 241
+      },
+      {
+        "id": 10358,
+        "totalSeats": 241
+      },
+      {
+        "id": 10359,
+        "totalSeats": 241
+      },
+      {
+        "id": 10360,
+        "totalSeats": 241
+      },
+      {
+        "id": 10361,
+        "totalSeats": 241
+      },
+      {
+        "id": 10362,
+        "totalSeats": 241
+      },
+      {
+        "id": 10363,
+        "totalSeats": 241
+      },
+      {
+        "id": 10364,
+        "totalSeats": 242
+      },
+      {
+        "id": 10365,
+        "totalSeats": 242
+      }
+    ]
+  },
+  {
+    "run": "indexed-baseline",
+    "checked": "2026-10-04T09:34:15.922Z",
+    "booked": 121,
+    "inProcess": 0,
+    "deducted": 121,
+    "drift": 0,
+    "flights": [
+      {
+        "id": 10306,
+        "totalSeats": 293
+      },
+      {
+        "id": 10307,
+        "totalSeats": 294
+      },
+      {
+        "id": 10308,
+        "totalSeats": 294
+      },
+      {
+        "id": 10309,
+        "totalSeats": 294
+      },
+      {
+        "id": 10310,
+        "totalSeats": 294
+      },
+      {
+        "id": 10311,
+        "totalSeats": 294
+      },
+      {
+        "id": 10312,
+        "totalSeats": 294
+      },
+      {
+        "id": 10313,
+        "totalSeats": 294
+      },
+      {
+        "id": 10314,
+        "totalSeats": 294
+      },
+      {
+        "id": 10315,
+        "totalSeats": 294
+      },
+      {
+        "id": 10316,
+        "totalSeats": 294
+      },
+      {
+        "id": 10317,
+        "totalSeats": 294
+      },
+      {
+        "id": 10318,
+        "totalSeats": 294
+      },
+      {
+        "id": 10319,
+        "totalSeats": 294
+      },
+      {
+        "id": 10320,
+        "totalSeats": 294
+      },
+      {
+        "id": 10321,
+        "totalSeats": 294
+      },
+      {
+        "id": 10322,
+        "totalSeats": 294
+      },
+      {
+        "id": 10323,
+        "totalSeats": 294
+      },
+      {
+        "id": 10324,
+        "totalSeats": 294
+      },
+      {
+        "id": 10325,
+        "totalSeats": 294
+      }
+    ]
+  },
+  {
+    "run": "pre-index-10x",
+    "checked": "2026-10-04T09:34:15.944Z",
+    "booked": 1200,
+    "inProcess": 0,
+    "deducted": 1200,
+    "drift": 0,
+    "flights": [
+      {
+        "id": 10285,
+        "totalSeats": 240
+      },
+      {
+        "id": 10286,
+        "totalSeats": 240
+      },
+      {
+        "id": 10287,
+        "totalSeats": 240
+      },
+      {
+        "id": 10288,
+        "totalSeats": 240
+      },
+      {
+        "id": 10289,
+        "totalSeats": 240
+      },
+      {
+        "id": 10290,
+        "totalSeats": 240
+      },
+      {
+        "id": 10291,
+        "totalSeats": 240
+      },
+      {
+        "id": 10292,
+        "totalSeats": 240
+      },
+      {
+        "id": 10293,
+        "totalSeats": 240
+      },
+      {
+        "id": 10294,
+        "totalSeats": 240
+      },
+      {
+        "id": 10295,
+        "totalSeats": 240
+      },
+      {
+        "id": 10296,
+        "totalSeats": 240
+      },
+      {
+        "id": 10297,
+        "totalSeats": 240
+      },
+      {
+        "id": 10298,
+        "totalSeats": 240
+      },
+      {
+        "id": 10299,
+        "totalSeats": 240
+      },
+      {
+        "id": 10300,
+        "totalSeats": 240
+      },
+      {
+        "id": 10301,
+        "totalSeats": 240
+      },
+      {
+        "id": 10302,
+        "totalSeats": 240
+      },
+      {
+        "id": 10303,
+        "totalSeats": 240
+      },
+      {
+        "id": 10304,
+        "totalSeats": 240
+      }
+    ]
+  },
+  {
+    "run": "profile-200-20261004-a",
+    "checked": "2026-10-04T09:34:15.960Z",
+    "booked": 328,
+    "inProcess": 0,
+    "deducted": 328,
+    "drift": 0,
+    "flights": [
+      {
+        "id": 10443,
+        "totalSeats": 283
+      },
+      {
+        "id": 10444,
+        "totalSeats": 283
+      },
+      {
+        "id": 10445,
+        "totalSeats": 283
+      },
+      {
+        "id": 10446,
+        "totalSeats": 283
+      },
+      {
+        "id": 10447,
+        "totalSeats": 283
+      },
+      {
+        "id": 10448,
+        "totalSeats": 283
+      },
+      {
+        "id": 10449,
+        "totalSeats": 283
+      },
+      {
+        "id": 10450,
+        "totalSeats": 283
+      },
+      {
+        "id": 10451,
+        "totalSeats": 284
+      },
+      {
+        "id": 10452,
+        "totalSeats": 284
+      },
+      {
+        "id": 10453,
+        "totalSeats": 284
+      },
+      {
+        "id": 10454,
+        "totalSeats": 284
+      },
+      {
+        "id": 10455,
+        "totalSeats": 284
+      },
+      {
+        "id": 10456,
+        "totalSeats": 284
+      },
+      {
+        "id": 10457,
+        "totalSeats": 284
+      },
+      {
+        "id": 10458,
+        "totalSeats": 284
+      },
+      {
+        "id": 10459,
+        "totalSeats": 284
+      },
+      {
+        "id": 10460,
+        "totalSeats": 284
+      },
+      {
+        "id": 10461,
+        "totalSeats": 284
+      },
+      {
+        "id": 10462,
+        "totalSeats": 284
+      }
+    ]
+  },
+  {
+    "run": "redis-10x-1",
+    "checked": "2026-10-04T09:34:15.982Z",
+    "booked": 1199,
+    "inProcess": 0,
+    "deducted": 1199,
+    "drift": 0,
+    "flights": [
+      {
+        "id": 10234,
+        "totalSeats": 240
+      },
+      {
+        "id": 10235,
+        "totalSeats": 240
+      },
+      {
+        "id": 10236,
+        "totalSeats": 240
+      },
+      {
+        "id": 10237,
+        "totalSeats": 240
+      },
+      {
+        "id": 10238,
+        "totalSeats": 240
+      },
+      {
+        "id": 10239,
+        "totalSeats": 240
+      },
+      {
+        "id": 10240,
+        "totalSeats": 240
+      },
+      {
+        "id": 10241,
+        "totalSeats": 240
+      },
+      {
+        "id": 10242,
+        "totalSeats": 240
+      },
+      {
+        "id": 10243,
+        "totalSeats": 240
+      },
+      {
+        "id": 10244,
+        "totalSeats": 240
+      },
+      {
+        "id": 10245,
+        "totalSeats": 240
+      },
+      {
+        "id": 10246,
+        "totalSeats": 240
+      },
+      {
+        "id": 10247,
+        "totalSeats": 240
+      },
+      {
+        "id": 10248,
+        "totalSeats": 240
+      },
+      {
+        "id": 10249,
+        "totalSeats": 240
+      },
+      {
+        "id": 10250,
+        "totalSeats": 240
+      },
+      {
+        "id": 10251,
+        "totalSeats": 240
+      },
+      {
+        "id": 10252,
+        "totalSeats": 240
+      },
+      {
+        "id": 10253,
+        "totalSeats": 241
+      }
+    ]
+  },
+  {
+    "run": "redis-10x-2",
+    "checked": "2026-10-04T09:34:16.001Z",
+    "booked": 1199,
+    "inProcess": 0,
+    "deducted": 1199,
+    "drift": 0,
+    "flights": [
+      {
+        "id": 10264,
+        "totalSeats": 240
+      },
+      {
+        "id": 10265,
+        "totalSeats": 240
+      },
+      {
+        "id": 10266,
+        "totalSeats": 240
+      },
+      {
+        "id": 10267,
+        "totalSeats": 240
+      },
+      {
+        "id": 10268,
+        "totalSeats": 240
+      },
+      {
+        "id": 10269,
+        "totalSeats": 240
+      },
+      {
+        "id": 10270,
+        "totalSeats": 240
+      },
+      {
+        "id": 10271,
+        "totalSeats": 240
+      },
+      {
+        "id": 10272,
+        "totalSeats": 240
+      },
+      {
+        "id": 10273,
+        "totalSeats": 240
+      },
+      {
+        "id": 10274,
+        "totalSeats": 240
+      },
+      {
+        "id": 10275,
+        "totalSeats": 240
+      },
+      {
+        "id": 10276,
+        "totalSeats": 240
+      },
+      {
+        "id": 10277,
+        "totalSeats": 240
+      },
+      {
+        "id": 10278,
+        "totalSeats": 240
+      },
+      {
+        "id": 10279,
+        "totalSeats": 240
+      },
+      {
+        "id": 10280,
+        "totalSeats": 240
+      },
+      {
+        "id": 10281,
+        "totalSeats": 240
+      },
+      {
+        "id": 10282,
+        "totalSeats": 240
+      },
+      {
+        "id": 10283,
+        "totalSeats": 241
+      }
+    ]
+  },
+  {
+    "run": "redis-baseline-1",
+    "checked": "2026-10-04T09:34:16.019Z",
+    "booked": 121,
+    "inProcess": 0,
+    "deducted": 121,
+    "drift": 0,
+    "flights": [
+      {
+        "id": 10214,
+        "totalSeats": 293
+      },
+      {
+        "id": 10215,
+        "totalSeats": 294
+      },
+      {
+        "id": 10216,
+        "totalSeats": 294
+      },
+      {
+        "id": 10217,
+        "totalSeats": 294
+      },
+      {
+        "id": 10218,
+        "totalSeats": 294
+      },
+      {
+        "id": 10219,
+        "totalSeats": 294
+      },
+      {
+        "id": 10220,
+        "totalSeats": 294
+      },
+      {
+        "id": 10221,
+        "totalSeats": 294
+      },
+      {
+        "id": 10222,
+        "totalSeats": 294
+      },
+      {
+        "id": 10223,
+        "totalSeats": 294
+      },
+      {
+        "id": 10224,
+        "totalSeats": 294
+      },
+      {
+        "id": 10225,
+        "totalSeats": 294
+      },
+      {
+        "id": 10226,
+        "totalSeats": 294
+      },
+      {
+        "id": 10227,
+        "totalSeats": 294
+      },
+      {
+        "id": 10228,
+        "totalSeats": 294
+      },
+      {
+        "id": 10229,
+        "totalSeats": 294
+      },
+      {
+        "id": 10230,
+        "totalSeats": 294
+      },
+      {
+        "id": 10231,
+        "totalSeats": 294
+      },
+      {
+        "id": 10232,
+        "totalSeats": 294
+      },
+      {
+        "id": 10233,
+        "totalSeats": 294
+      }
+    ]
+  },
+  {
+    "run": "transactions-10x",
+    "checked": "2026-10-04T09:34:16.041Z",
+    "booked": 1153,
+    "inProcess": 0,
+    "deducted": 1153,
+    "drift": 0,
+    "flights": [
+      {
+        "id": 10193,
+        "totalSeats": 242
+      },
+      {
+        "id": 10194,
+        "totalSeats": 242
+      },
+      {
+        "id": 10195,
+        "totalSeats": 242
+      },
+      {
+        "id": 10196,
+        "totalSeats": 242
+      },
+      {
+        "id": 10197,
+        "totalSeats": 242
+      },
+      {
+        "id": 10198,
+        "totalSeats": 242
+      },
+      {
+        "id": 10199,
+        "totalSeats": 242
+      },
+      {
+        "id": 10200,
+        "totalSeats": 242
+      },
+      {
+        "id": 10201,
+        "totalSeats": 242
+      },
+      {
+        "id": 10202,
+        "totalSeats": 242
+      },
+      {
+        "id": 10203,
+        "totalSeats": 242
+      },
+      {
+        "id": 10204,
+        "totalSeats": 242
+      },
+      {
+        "id": 10205,
+        "totalSeats": 242
+      },
+      {
+        "id": 10206,
+        "totalSeats": 243
+      },
+      {
+        "id": 10207,
+        "totalSeats": 243
+      },
+      {
+        "id": 10208,
+        "totalSeats": 243
+      },
+      {
+        "id": 10209,
+        "totalSeats": 243
+      },
+      {
+        "id": 10210,
+        "totalSeats": 243
+      },
+      {
+        "id": 10211,
+        "totalSeats": 243
+      },
+      {
+        "id": 10212,
+        "totalSeats": 243
+      }
+    ]
+  },
+  {
+    "run": "transactions-baseline",
+    "checked": "2026-10-04T09:34:16.060Z",
+    "booked": 121,
+    "inProcess": 0,
+    "deducted": 121,
+    "drift": 0,
+    "flights": [
+      {
+        "id": 10173,
+        "totalSeats": 293
+      },
+      {
+        "id": 10174,
+        "totalSeats": 294
+      },
+      {
+        "id": 10175,
+        "totalSeats": 294
+      },
+      {
+        "id": 10176,
+        "totalSeats": 294
+      },
+      {
+        "id": 10177,
+        "totalSeats": 294
+      },
+      {
+        "id": 10178,
+        "totalSeats": 294
+      },
+      {
+        "id": 10179,
+        "totalSeats": 294
+      },
+      {
+        "id": 10180,
+        "totalSeats": 294
+      },
+      {
+        "id": 10181,
+        "totalSeats": 294
+      },
+      {
+        "id": 10182,
+        "totalSeats": 294
+      },
+      {
+        "id": 10183,
+        "totalSeats": 294
+      },
+      {
+        "id": 10184,
+        "totalSeats": 294
+      },
+      {
+        "id": 10185,
+        "totalSeats": 294
+      },
+      {
+        "id": 10186,
+        "totalSeats": 294
+      },
+      {
+        "id": 10187,
+        "totalSeats": 294
+      },
+      {
+        "id": 10188,
+        "totalSeats": 294
+      },
+      {
+        "id": 10189,
+        "totalSeats": 294
+      },
+      {
+        "id": 10190,
+        "totalSeats": 294
+      },
+      {
+        "id": 10191,
+        "totalSeats": 294
+      },
+      {
+        "id": 10192,
+        "totalSeats": 294
+      }
+    ]
+  }
+]

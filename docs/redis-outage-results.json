@@ -1,0 +1,27 @@
+{
+  "timestamp": "2026-09-30T12:55:13.795Z",
+  "passed": true,
+  "elapsedMs": 3563,
+  "checks": [
+    "Redis confirmed offline",
+    "detail and search use MySQL",
+    "booking succeeds despite failed cache invalidation",
+    "cancellation succeeds and inventory is restored"
+  ],
+  "metrics": {
+    "hits": 2,
+    "misses": 9,
+    "bypasses": 3,
+    "sourceLoads": 12,
+    "coalesced": 0,
+    "errors": 0,
+    "connectionErrors": 29,
+    "invalidations": 162,
+    "invalidationFailures": 2,
+    "rejectedLoads": 0,
+    "enabled": true,
+    "ready": false,
+    "ttlMs": 5000,
+    "activeLoads": 0
+  }
+}

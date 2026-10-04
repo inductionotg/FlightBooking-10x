@@ -1,0 +1,4 @@
+node_modules/
+src/config/serverConfig.js
+src/config/config.json
+.env

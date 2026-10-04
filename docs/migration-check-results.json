@@ -1,0 +1,88 @@
+{
+  "timestamp": "2026-10-01T09:25:10.063Z",
+  "checks": [
+    {
+      "name": "Auth_Service: complete migration history on empty schema",
+      "passed": true
+    },
+    {
+      "name": "Auth_Service: repeated migrate succeeds",
+      "passed": true
+    },
+    {
+      "name": "Auth: existing model role assignment and lookup work",
+      "passed": true
+    },
+    {
+      "name": "Auth: duplicate assignments and missing user/role references rejected",
+      "passed": true
+    },
+    {
+      "name": "Auth: deleting either parent removes its role assignments",
+      "passed": true
+    },
+    {
+      "name": "Auth: join-table rollback/reapply preserves parent records",
+      "passed": true
+    },
+    {
+      "name": "Auth_Service: full rollback and fresh reapplication succeed",
+      "passed": true
+    },
+    {
+      "name": "Booking_Service: complete migration history on empty schema",
+      "passed": true
+    },
+    {
+      "name": "Booking_Service: repeated migrate succeeds",
+      "passed": true
+    },
+    {
+      "name": "Booking: column rollback/reapply preserves existing row and backfills defaults",
+      "passed": true
+    },
+    {
+      "name": "Booking: existing model reads/writes migrated schema",
+      "passed": true
+    },
+    {
+      "name": "Booking_Service: full rollback and fresh reapplication succeed",
+      "passed": true
+    },
+    {
+      "name": "FlightandSearchService: complete migration history on empty schema",
+      "passed": true
+    },
+    {
+      "name": "FlightandSearchService: repeated migrate succeeds",
+      "passed": true
+    },
+    {
+      "name": "Flight: route/price index rollback and reapply preserve flight data",
+      "passed": true
+    },
+    {
+      "name": "FlightandSearchService: full rollback and fresh reapplication succeed",
+      "passed": true
+    },
+    {
+      "name": "ReminderService: complete migration history on empty schema",
+      "passed": true
+    },
+    {
+      "name": "ReminderService: repeated migrate succeeds",
+      "passed": true
+    },
+    {
+      "name": "ReminderService: full rollback and fresh reapplication succeed",
+      "passed": true
+    }
+  ],
+  "schemasRemoved": [
+    "migration_check_d1aa53375ba8e456",
+    "migration_check_810a4c863e445ddd",
+    "migration_check_e728be8c3e2b61bf",
+    "migration_check_046df7a522aa6800"
+  ],
+  "passed": true
+}

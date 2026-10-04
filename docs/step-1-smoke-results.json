@@ -1,0 +1,72 @@
+{
+  "timestamp": "2026-10-01T16:14:51.571Z",
+  "checks": [
+    {
+      "name": "signup",
+      "status": 200
+    },
+    {
+      "name": "sign-in",
+      "status": 201
+    },
+    {
+      "name": "authentication",
+      "status": 201
+    },
+    {
+      "name": "create-flight",
+      "status": 201
+    },
+    {
+      "name": "search-flight",
+      "status": 200
+    },
+    {
+      "name": "create-booking",
+      "status": 200
+    },
+    {
+      "name": "verify-remaining-seats",
+      "status": 200
+    },
+    {
+      "name": "create-notification-ticket",
+      "status": 201
+    },
+    {
+      "name": "delete-notification-ticket",
+      "status": 200
+    },
+    {
+      "name": "gateway-flight-route",
+      "status": 200
+    },
+    {
+      "name": "gateway-search-filters",
+      "status": 200
+    },
+    {
+      "name": "gateway-search-excludes-price",
+      "status": 200
+    },
+    {
+      "name": "gateway-missing-token",
+      "status": 401
+    },
+    {
+      "name": "gateway-invalid-token",
+      "status": 401
+    }
+  ],
+  "scope": "Local functional smoke test; not a load test or payment/email delivery test.",
+  "booking": {
+    "id": 9225,
+    "flightId": 10401,
+    "status": "Booked",
+    "totalCost": 5000,
+    "seatsBefore": 10,
+    "seatsAfter": 8
+  },
+  "directServiceFlowPassed": true,
+  "gatewayPassed": true
+}

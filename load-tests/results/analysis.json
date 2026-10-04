@@ -1,0 +1,2137 @@
+[
+  {
+    "run": "after-transactions-contention",
+    "kind": "contention",
+    "requests": 20,
+    "throughput": 27.868050909912764,
+    "failureRate": 0.95,
+    "p95": 693.085645,
+    "dropped": 0,
+    "exitCode": 0,
+    "confirmed": 1,
+    "inventoryDrift": 0,
+    "peakConnections": 13,
+    "peakRunning": 2,
+    "maxConnectionErrors": 0,
+    "questions": 216,
+    "elapsed": 1.298,
+    "processes": [
+      {
+        "pid": 17680,
+        "cpuSeconds": 0.28125,
+        "workingSetMiB": 61.796875
+      },
+      {
+        "pid": 23672,
+        "cpuSeconds": 0.609375,
+        "workingSetMiB": 72.3828125
+      },
+      {
+        "pid": 28876,
+        "cpuSeconds": 0,
+        "workingSetMiB": 48.19921875
+      },
+      {
+        "pid": 33716,
+        "cpuSeconds": 0,
+        "workingSetMiB": 47.6015625
+      },
+      {
+        "pid": 36212,
+        "cpuSeconds": 0,
+        "workingSetMiB": 50.20703125
+      }
+    ],
+    "digestDeltas": [
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ? FOR UPDATE",
+        "count": 20,
+        "rowsExamined": 20,
+        "rowsPerQuery": 1,
+        "totalMs": 1172.47704,
+        "meanMs": 58.623852
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "COMMIT",
+        "count": 20,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 141.147829,
+        "meanMs": 7.05739145
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `id` = ?",
+        "count": 40,
+        "rowsExamined": 40,
+        "rowsPerQuery": 1,
+        "totalMs": 22.197274,
+        "meanMs": 0.55493185
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `requestKey` = ?",
+        "count": 20,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 13.348055,
+        "meanMs": 0.66740275
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `bookingId` , `flightId` , `noOfSeats` , `totalCost` , `status` , `createdAt` , `updatedAt` FROM `Reservations` AS `Reservation` WHERE `Reservation` . `bookingId` = ? FOR UPDATE",
+        "count": 20,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 12.302647,
+        "meanMs": 0.61513235
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "START TRANSACTION",
+        "count": 20,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 4.536433,
+        "meanMs": 0.22682164999999999
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SET `time_zone` = ?",
+        "count": 4,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 1.548466,
+        "meanMs": 0.3871165
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SET `time_zone` = ?",
+        "count": 4,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 1.538857,
+        "meanMs": 0.38471425
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE ( `Booking` . `status` = ? OR ( `Booking` . `cancelRequested` = TRUE AND `Booking` . `reservationReleased` = FALSE ) ) AND `Booking` . `requestKey` IS NOT NULL AND `Booking` . `nextAttemptAt` <= ? ORDER BY `Booking` . `nextAttemptAt` ASC , `Booking` . `id` ASC LIMIT ?",
+        "count": 1,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 0.705953,
+        "meanMs": 0.705953
+      }
+    ]
+  },
+  {
+    "run": "before-10x-1",
+    "kind": "10x",
+    "requests": 6980,
+    "throughput": 99.71070567262046,
+    "failureRate": 0.5018624641833811,
+    "businessSuccess": 0.4981375358166189,
+    "p95": 10002.15017,
+    "p99": 10014.036487000001,
+    "searchP95": 10001.955619999999,
+    "detailsP95": 10002.366899999999,
+    "bookingP95": 10003.27458,
+    "dropped": 5022,
+    "exitCode": 99,
+    "inventoryDrift": 279,
+    "peakConnections": 11,
+    "peakRunning": 5,
+    "maxConnectionErrors": 0,
+    "questions": 8294,
+    "elapsed": 70.922,
+    "processes": [
+      {
+        "pid": 18800,
+        "cpuSeconds": 62.859375,
+        "workingSetMiB": 277.7421875
+      },
+      {
+        "pid": 21000,
+        "cpuSeconds": 11.640625,
+        "workingSetMiB": 91.44921875
+      },
+      {
+        "pid": 28876,
+        "cpuSeconds": 0,
+        "workingSetMiB": 51.56640625
+      },
+      {
+        "pid": 33716,
+        "cpuSeconds": 0,
+        "workingSetMiB": 62.515625
+      },
+      {
+        "pid": 36212,
+        "cpuSeconds": 0.046875,
+        "workingSetMiB": 67.45703125
+      }
+    ],
+    "digestDeltas": [
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE ( `Flight` . `price` >= ? AND `Flight` . `price` <= ? ) AND `Flight` . `arrivalAirportId` = ? AND `Flight` . `departureAirportId` = ?",
+        "count": 4497,
+        "rowsExamined": 45253311,
+        "rowsPerQuery": 10063,
+        "totalMs": 59565.020824,
+        "meanMs": 13.245501628641316
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ?",
+        "count": 1931,
+        "rowsExamined": 1931,
+        "rowsPerQuery": 1,
+        "totalMs": 1112.241154,
+        "meanMs": 0.5759923117555671
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `id` = ?",
+        "count": 396,
+        "rowsExamined": 396,
+        "rowsPerQuery": 1,
+        "totalMs": 227.258491,
+        "meanMs": 0.5738850782828283
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SET `time_zone` = ?",
+        "count": 3,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 1.175594,
+        "meanMs": 0.3918646666666667
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SET `time_zone` = ?",
+        "count": 2,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 0.823247,
+        "meanMs": 0.4116235
+      }
+    ]
+  },
+  {
+    "run": "before-10x-2",
+    "kind": "10x",
+    "requests": 6674,
+    "throughput": 95.34050604597806,
+    "failureRate": 0.3829787234042553,
+    "businessSuccess": 0.6170212765957447,
+    "p95": 10000.767969999999,
+    "p99": 10001.730979,
+    "searchP95": 10000.73336,
+    "detailsP95": 10000.84375,
+    "bookingP95": 10000.79302,
+    "dropped": 5328,
+    "exitCode": 99,
+    "inventoryDrift": 459,
+    "peakConnections": 11,
+    "peakRunning": 8,
+    "maxConnectionErrors": 0,
+    "questions": 9184,
+    "elapsed": 71.151,
+    "processes": [
+      {
+        "pid": 18800,
+        "cpuSeconds": 61.15625,
+        "workingSetMiB": 251.15625
+      },
+      {
+        "pid": 21000,
+        "cpuSeconds": 13.4375,
+        "workingSetMiB": 92.546875
+      },
+      {
+        "pid": 28876,
+        "cpuSeconds": 0,
+        "workingSetMiB": 51.56640625
+      },
+      {
+        "pid": 33716,
+        "cpuSeconds": 0,
+        "workingSetMiB": 62.515625
+      },
+      {
+        "pid": 36212,
+        "cpuSeconds": 0.046875,
+        "workingSetMiB": 67.421875
+      }
+    ],
+    "digestDeltas": [
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE ( `Flight` . `price` >= ? AND `Flight` . `price` <= ? ) AND `Flight` . `arrivalAirportId` = ? AND `Flight` . `departureAirportId` = ?",
+        "count": 4663,
+        "rowsExamined": 47110289,
+        "rowsPerQuery": 10103,
+        "totalMs": 59041.67322,
+        "meanMs": 12.661735625134034
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ?",
+        "count": 2011,
+        "rowsExamined": 2011,
+        "rowsPerQuery": 1,
+        "totalMs": 1090.624638,
+        "meanMs": 0.5423295067130781
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `id` = ?",
+        "count": 604,
+        "rowsExamined": 604,
+        "rowsPerQuery": 1,
+        "totalMs": 327.128523,
+        "meanMs": 0.5416035149006622
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SET `time_zone` = ?",
+        "count": 7,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 2.647405,
+        "meanMs": 0.3782007142857143
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SET `time_zone` = ?",
+        "count": 5,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 1.713975,
+        "meanMs": 0.342795
+      }
+    ]
+  },
+  {
+    "run": "before-baseline-1",
+    "kind": "baseline",
+    "requests": 1203,
+    "throughput": 20.025875762010376,
+    "failureRate": 0,
+    "businessSuccess": 1,
+    "p95": 39.325449999999975,
+    "p99": 84.87242800000008,
+    "searchP95": 30.289,
+    "detailsP95": 15.8847,
+    "bookingP95": 95.7411,
+    "dropped": 0,
+    "exitCode": 0,
+    "inventoryDrift": 0,
+    "peakConnections": 6,
+    "peakRunning": 3,
+    "maxConnectionErrors": 0,
+    "questions": 1770,
+    "elapsed": 60.342,
+    "processes": [
+      {
+        "pid": 18800,
+        "cpuSeconds": 6.6875,
+        "workingSetMiB": 93.46875
+      },
+      {
+        "pid": 21000,
+        "cpuSeconds": 1.0625,
+        "workingSetMiB": 69.26171875
+      },
+      {
+        "pid": 28876,
+        "cpuSeconds": 0,
+        "workingSetMiB": 51.56640625
+      },
+      {
+        "pid": 33716,
+        "cpuSeconds": 0,
+        "workingSetMiB": 62.515625
+      },
+      {
+        "pid": 36212,
+        "cpuSeconds": 0.015625,
+        "workingSetMiB": 67.37890625
+      }
+    ],
+    "digestDeltas": [
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE ( `Flight` . `price` >= ? AND `Flight` . `price` <= ? ) AND `Flight` . `arrivalAirportId` = ? AND `Flight` . `departureAirportId` = ?",
+        "count": 841,
+        "rowsExamined": 8446163,
+        "rowsPerQuery": 10043,
+        "totalMs": 4235.01514,
+        "meanMs": 5.035689821640904
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ?",
+        "count": 362,
+        "rowsExamined": 361,
+        "rowsPerQuery": 0.9972375690607734,
+        "totalMs": 131.107526,
+        "meanMs": 0.36217548618784534
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `id` = ?",
+        "count": 121,
+        "rowsExamined": 121,
+        "rowsPerQuery": 1,
+        "totalMs": 43.844034,
+        "meanMs": 0.36234738842975206
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SET `time_zone` = ?",
+        "count": 3,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 0.599669,
+        "meanMs": 0.19988966666666666
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SET `time_zone` = ?",
+        "count": 1,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 0.334342,
+        "meanMs": 0.334342
+      }
+    ]
+  },
+  {
+    "run": "before-baseline-2",
+    "kind": "baseline",
+    "requests": 1203,
+    "throughput": 20.038177141516886,
+    "failureRate": 0,
+    "businessSuccess": 1,
+    "p95": 232.46026999999987,
+    "p99": 509.4626720000001,
+    "searchP95": 181.5538,
+    "detailsP95": 124.5607,
+    "bookingP95": 408.8602,
+    "dropped": 0,
+    "exitCode": 0,
+    "inventoryDrift": 0,
+    "peakConnections": 9,
+    "peakRunning": 4,
+    "maxConnectionErrors": 0,
+    "questions": 1778,
+    "elapsed": 60.295,
+    "processes": [
+      {
+        "pid": 18800,
+        "cpuSeconds": 12.5625,
+        "workingSetMiB": 96.26953125
+      },
+      {
+        "pid": 21000,
+        "cpuSeconds": 1.5625,
+        "workingSetMiB": 106.56640625
+      },
+      {
+        "pid": 28876,
+        "cpuSeconds": 0,
+        "workingSetMiB": 51.56640625
+      },
+      {
+        "pid": 33716,
+        "cpuSeconds": 0,
+        "workingSetMiB": 62.515625
+      },
+      {
+        "pid": 36212,
+        "cpuSeconds": 0.015625,
+        "workingSetMiB": 67.44921875
+      }
+    ],
+    "digestDeltas": [
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE ( `Flight` . `price` >= ? AND `Flight` . `price` <= ? ) AND `Flight` . `arrivalAirportId` = ? AND `Flight` . `departureAirportId` = ?",
+        "count": 841,
+        "rowsExamined": 8479803,
+        "rowsPerQuery": 10083,
+        "totalMs": 13670.915837,
+        "meanMs": 16.255547963139122
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ?",
+        "count": 362,
+        "rowsExamined": 362,
+        "rowsPerQuery": 1,
+        "totalMs": 212.400519,
+        "meanMs": 0.5867417651933702
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `id` = ?",
+        "count": 121,
+        "rowsExamined": 121,
+        "rowsPerQuery": 1,
+        "totalMs": 61.692312,
+        "meanMs": 0.5098538181818182
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SET `time_zone` = ?",
+        "count": 5,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 1.507498,
+        "meanMs": 0.3014996
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SET `time_zone` = ?",
+        "count": 3,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 1.327476,
+        "meanMs": 0.44249200000000005
+      }
+    ]
+  },
+  {
+    "run": "before-contention",
+    "kind": "contention",
+    "requests": 20,
+    "throughput": 55.13466365925454,
+    "failureRate": 0,
+    "p95": 346.32043,
+    "dropped": 0,
+    "exitCode": 99,
+    "confirmed": 20,
+    "inventoryDrift": 19,
+    "peakConnections": 11,
+    "peakRunning": 2,
+    "maxConnectionErrors": 0,
+    "questions": 116,
+    "elapsed": 0.575,
+    "processes": [
+      {
+        "pid": 18800,
+        "cpuSeconds": 0.203125,
+        "workingSetMiB": 66.22265625
+      },
+      {
+        "pid": 21000,
+        "cpuSeconds": 0.609375,
+        "workingSetMiB": 92.75
+      },
+      {
+        "pid": 28876,
+        "cpuSeconds": 0,
+        "workingSetMiB": 58.609375
+      },
+      {
+        "pid": 33716,
+        "cpuSeconds": 0,
+        "workingSetMiB": 63.1015625
+      },
+      {
+        "pid": 36212,
+        "cpuSeconds": 0,
+        "workingSetMiB": 67.42578125
+      }
+    ],
+    "digestDeltas": [
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ?",
+        "count": 20,
+        "rowsExamined": 20,
+        "rowsPerQuery": 1,
+        "totalMs": 8.899029,
+        "meanMs": 0.44495145
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `id` = ?",
+        "count": 20,
+        "rowsExamined": 20,
+        "rowsPerQuery": 1,
+        "totalMs": 8.73335,
+        "meanMs": 0.4366675
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SET `time_zone` = ?",
+        "count": 5,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 1.708218,
+        "meanMs": 0.3416436
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SET `time_zone` = ?",
+        "count": 5,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 1.310089,
+        "meanMs": 0.2620178
+      }
+    ]
+  },
+  {
+    "run": "before-gateway",
+    "kind": "gateway",
+    "requests": 202,
+    "throughput": 19.928687067808315,
+    "failureRate": 0.9702970297029703,
+    "p95": 3.151649999999998,
+    "dropped": 0,
+    "exitCode": 0,
+    "gateway200": 5,
+    "gateway429": 196,
+    "inventoryDrift": 0,
+    "peakConnections": 4,
+    "peakRunning": 2,
+    "maxConnectionErrors": 0,
+    "questions": 33,
+    "elapsed": 10.339,
+    "processes": [
+      {
+        "pid": 18800,
+        "cpuSeconds": 0.15625,
+        "workingSetMiB": 63.453125
+      },
+      {
+        "pid": 21000,
+        "cpuSeconds": 0,
+        "workingSetMiB": 92.546875
+      },
+      {
+        "pid": 28876,
+        "cpuSeconds": 0.4375,
+        "workingSetMiB": 58.609375
+      },
+      {
+        "pid": 33716,
+        "cpuSeconds": 0.15625,
+        "workingSetMiB": 63.0546875
+      },
+      {
+        "pid": 36212,
+        "cpuSeconds": 0,
+        "workingSetMiB": 67.421875
+      }
+    ],
+    "digestDeltas": [
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ?",
+        "count": 5,
+        "rowsExamined": 5,
+        "rowsPerQuery": 1,
+        "totalMs": 1.577838,
+        "meanMs": 0.3155676
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SET `time_zone` = ?",
+        "count": 1,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 0.151115,
+        "meanMs": 0.151115
+      }
+    ]
+  },
+  {
+    "run": "before-warmup",
+    "kind": "baseline",
+    "requests": 202,
+    "throughput": 20.134587557327258,
+    "failureRate": 0,
+    "businessSuccess": 1,
+    "p95": 40.43618499999999,
+    "p99": 83.97558900000007,
+    "searchP95": 33.1315,
+    "detailsP95": 18.995379999999994,
+    "bookingP95": 84.3528,
+    "dropped": 0,
+    "exitCode": 0,
+    "inventoryDrift": 0,
+    "peakConnections": 5,
+    "peakRunning": 3,
+    "maxConnectionErrors": 0,
+    "questions": 308,
+    "elapsed": 10.261,
+    "processes": [
+      {
+        "pid": 18800,
+        "cpuSeconds": 1.109375,
+        "workingSetMiB": 67.3671875
+      },
+      {
+        "pid": 21000,
+        "cpuSeconds": 0.34375,
+        "workingSetMiB": 67.7734375
+      },
+      {
+        "pid": 28876,
+        "cpuSeconds": 0,
+        "workingSetMiB": 51.56640625
+      },
+      {
+        "pid": 33716,
+        "cpuSeconds": 0,
+        "workingSetMiB": 62.515625
+      },
+      {
+        "pid": 36212,
+        "cpuSeconds": 0,
+        "workingSetMiB": 67.36328125
+      }
+    ],
+    "digestDeltas": [
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE ( `Flight` . `price` >= ? AND `Flight` . `price` <= ? ) AND `Flight` . `arrivalAirportId` = ? AND `Flight` . `departureAirportId` = ?",
+        "count": 141,
+        "rowsExamined": 1413243,
+        "rowsPerQuery": 10023,
+        "totalMs": 706.305089,
+        "meanMs": 5.00925595035461
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ?",
+        "count": 61,
+        "rowsExamined": 61,
+        "rowsPerQuery": 1,
+        "totalMs": 20.809194,
+        "meanMs": 0.3411343278688525
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `id` = ?",
+        "count": 21,
+        "rowsExamined": 21,
+        "rowsPerQuery": 1,
+        "totalMs": 7.790796,
+        "meanMs": 0.3709902857142857
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SET `time_zone` = ?",
+        "count": 3,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 0.767165,
+        "meanMs": 0.2557216666666667
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SET `time_zone` = ?",
+        "count": 1,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 0.185503,
+        "meanMs": 0.185503
+      }
+    ]
+  },
+  {
+    "run": "indexed-10x-1",
+    "kind": "10x",
+    "requests": 11961,
+    "throughput": 198.69444674952447,
+    "failureRate": 0.7124822339269292,
+    "businessSuccess": 0.21595184349134688,
+    "p95": 672.6643,
+    "p99": 2551.1942599999966,
+    "searchP95": 431.3233,
+    "detailsP95": 400.7033,
+    "bookingP95": 3062.42688,
+    "dropped": 41,
+    "exitCode": 99,
+    "inventoryDrift": -12,
+    "peakConnections": 12,
+    "peakRunning": 7,
+    "maxConnectionErrors": 0,
+    "questions": 15193,
+    "elapsed": 61.086,
+    "processes": [
+      {
+        "pid": 23672,
+        "cpuSeconds": 15.8125,
+        "workingSetMiB": 109.8671875
+      },
+      {
+        "pid": 28876,
+        "cpuSeconds": 0,
+        "workingSetMiB": 48.30078125
+      },
+      {
+        "pid": 33716,
+        "cpuSeconds": 0,
+        "workingSetMiB": 47.92578125
+      },
+      {
+        "pid": 36212,
+        "cpuSeconds": 0.015625,
+        "workingSetMiB": 60.21875
+      },
+      {
+        "pid": 39448,
+        "cpuSeconds": 47.84375,
+        "workingSetMiB": 172.88671875
+      }
+    ],
+    "digestDeltas": [
+      {
+        "schema": "baseline_flights",
+        "sql": "COMMIT",
+        "count": 395,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 3590.776477,
+        "meanMs": 9.090573359493671
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ? FOR UPDATE",
+        "count": 1235,
+        "rowsExamined": 1234,
+        "rowsPerQuery": 0.9991902834008097,
+        "totalMs": 1534.586947,
+        "meanMs": 1.2425805238866396
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `id` = ?",
+        "count": 2469,
+        "rowsExamined": 2468,
+        "rowsPerQuery": 0.9995949777237748,
+        "totalMs": 1397.702241,
+        "meanMs": 0.5661005431348723
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE ( `Flight` . `price` >= ? AND `Flight` . `price` <= ? ) AND `Flight` . `arrivalAirportId` = ? AND `Flight` . `departureAirportId` = ?",
+        "count": 1280,
+        "rowsExamined": 128000,
+        "rowsPerQuery": 100,
+        "totalMs": 1346.099585,
+        "meanMs": 1.05164030078125
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `requestKey` = ?",
+        "count": 1159,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 646.193012,
+        "meanMs": 0.5575435823986195
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `bookingId` , `flightId` , `noOfSeats` , `totalCost` , `status` , `createdAt` , `updatedAt` FROM `Reservations` AS `Reservation` WHERE `Reservation` . `bookingId` = ? FOR UPDATE",
+        "count": 1234,
+        "rowsExamined": 1,
+        "rowsPerQuery": 0.0008103727714748784,
+        "totalMs": 636.417022,
+        "meanMs": 0.5157350259319287
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "START TRANSACTION",
+        "count": 1235,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 273.906541,
+        "meanMs": 0.22178667287449394
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ?",
+        "count": 391,
+        "rowsExamined": 391,
+        "rowsPerQuery": 1,
+        "totalMs": 203.444983,
+        "meanMs": 0.5203196496163683
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "ROLLBACK",
+        "count": 840,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 182.653935,
+        "meanMs": 0.2174451607142857
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE ( `Booking` . `status` = ? OR ( `Booking` . `cancelRequested` = TRUE AND `Booking` . `reservationReleased` = FALSE ) ) AND `Booking` . `requestKey` IS NOT NULL AND `Booking` . `nextAttemptAt` <= ? ORDER BY `Booking` . `nextAttemptAt` ASC , `Booking` . `id` ASC LIMIT ?",
+        "count": 4,
+        "rowsExamined": 116,
+        "rowsPerQuery": 29,
+        "totalMs": 17.488244,
+        "meanMs": 4.372061
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SET `time_zone` = ?",
+        "count": 5,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 3.102541,
+        "meanMs": 0.6205082
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SET `time_zone` = ?",
+        "count": 4,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 1.021385,
+        "meanMs": 0.25534625
+      }
+    ]
+  },
+  {
+    "run": "indexed-10x-2",
+    "kind": "10x",
+    "requests": 11979,
+    "throughput": 198.79017583431647,
+    "failureRate": 0.7061524334251607,
+    "businessSuccess": 0.2222222222222222,
+    "p95": 629.05741,
+    "p99": 1075.3368359999986,
+    "searchP95": 468.2355799999997,
+    "detailsP95": 457.3886,
+    "bookingP95": 1210.15797,
+    "dropped": 23,
+    "exitCode": 99,
+    "inventoryDrift": -2,
+    "peakConnections": 12,
+    "peakRunning": 7,
+    "maxConnectionErrors": 0,
+    "questions": 15700,
+    "elapsed": 61.239,
+    "processes": [
+      {
+        "pid": 23672,
+        "cpuSeconds": 18.828125,
+        "workingSetMiB": 102.67578125
+      },
+      {
+        "pid": 28876,
+        "cpuSeconds": 0.015625,
+        "workingSetMiB": 35.5859375
+      },
+      {
+        "pid": 33716,
+        "cpuSeconds": 0,
+        "workingSetMiB": 36.390625
+      },
+      {
+        "pid": 36212,
+        "cpuSeconds": 0,
+        "workingSetMiB": 48.0390625
+      },
+      {
+        "pid": 39448,
+        "cpuSeconds": 48.953125,
+        "workingSetMiB": 138.25390625
+      }
+    ],
+    "digestDeltas": [
+      {
+        "schema": "baseline_flights",
+        "sql": "COMMIT",
+        "count": 409,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 3723.27245,
+        "meanMs": 9.103355623471883
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ? FOR UPDATE",
+        "count": 1266,
+        "rowsExamined": 1265,
+        "rowsPerQuery": 0.9992101105845181,
+        "totalMs": 2037.864437,
+        "meanMs": 1.6096875489731437
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE ( `Flight` . `price` >= ? AND `Flight` . `price` <= ? ) AND `Flight` . `arrivalAirportId` = ? AND `Flight` . `departureAirportId` = ?",
+        "count": 1451,
+        "rowsExamined": 145100,
+        "rowsPerQuery": 100,
+        "totalMs": 1486.390262,
+        "meanMs": 1.0243902563749139
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `id` = ?",
+        "count": 2530,
+        "rowsExamined": 2530,
+        "rowsPerQuery": 1,
+        "totalMs": 1374.659335,
+        "meanMs": 0.5433436106719368
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `requestKey` = ?",
+        "count": 1178,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 666.640192,
+        "meanMs": 0.5659084821731748
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `bookingId` , `flightId` , `noOfSeats` , `totalCost` , `status` , `createdAt` , `updatedAt` FROM `Reservations` AS `Reservation` WHERE `Reservation` . `bookingId` = ? FOR UPDATE",
+        "count": 1266,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 644.128104,
+        "meanMs": 0.5087899715639811
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "START TRANSACTION",
+        "count": 1266,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 275.05232,
+        "meanMs": 0.21726091627172198
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ?",
+        "count": 411,
+        "rowsExamined": 411,
+        "rowsPerQuery": 1,
+        "totalMs": 215.111186,
+        "meanMs": 0.5233848807785888
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "ROLLBACK",
+        "count": 855,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 167.462367,
+        "meanMs": 0.19586241754385966
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE ( `Booking` . `status` = ? OR ( `Booking` . `cancelRequested` = TRUE AND `Booking` . `reservationReleased` = FALSE ) ) AND `Booking` . `requestKey` IS NOT NULL AND `Booking` . `nextAttemptAt` <= ? ORDER BY `Booking` . `nextAttemptAt` ASC , `Booking` . `id` ASC LIMIT ?",
+        "count": 4,
+        "rowsExamined": 100,
+        "rowsPerQuery": 25,
+        "totalMs": 5.216524,
+        "meanMs": 1.304131
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SET `time_zone` = ?",
+        "count": 5,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 2.87425,
+        "meanMs": 0.57485
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SET `time_zone` = ?",
+        "count": 4,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 2.123913,
+        "meanMs": 0.53097825
+      }
+    ]
+  },
+  {
+    "run": "indexed-baseline",
+    "kind": "baseline",
+    "requests": 1203,
+    "throughput": 20.023478868865723,
+    "failureRate": 0,
+    "businessSuccess": 1,
+    "p95": 125.58306999999999,
+    "p99": 234.32986200000025,
+    "searchP95": 82.8388,
+    "detailsP95": 74.3248,
+    "bookingP95": 264.3377,
+    "dropped": 0,
+    "exitCode": 0,
+    "inventoryDrift": 0,
+    "peakConnections": 8,
+    "peakRunning": 3,
+    "maxConnectionErrors": 0,
+    "questions": 2526,
+    "elapsed": 60.54,
+    "processes": [
+      {
+        "pid": 23672,
+        "cpuSeconds": 1.703125,
+        "workingSetMiB": 108.015625
+      },
+      {
+        "pid": 28876,
+        "cpuSeconds": 0.015625,
+        "workingSetMiB": 48.31640625
+      },
+      {
+        "pid": 33716,
+        "cpuSeconds": 0,
+        "workingSetMiB": 48
+      },
+      {
+        "pid": 36212,
+        "cpuSeconds": 0.03125,
+        "workingSetMiB": 60.3515625
+      },
+      {
+        "pid": 39448,
+        "cpuSeconds": 18.875,
+        "workingSetMiB": 101.69140625
+      }
+    ],
+    "digestDeltas": [
+      {
+        "schema": "baseline_flights",
+        "sql": "COMMIT",
+        "count": 121,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 1292.334401,
+        "meanMs": 10.680449595041322
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE ( `Flight` . `price` >= ? AND `Flight` . `price` <= ? ) AND `Flight` . `arrivalAirportId` = ? AND `Flight` . `departureAirportId` = ?",
+        "count": 841,
+        "rowsExamined": 84100,
+        "rowsPerQuery": 100,
+        "totalMs": 1070.95814,
+        "meanMs": 1.2734341736028536
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ?",
+        "count": 241,
+        "rowsExamined": 241,
+        "rowsPerQuery": 1,
+        "totalMs": 154.643786,
+        "meanMs": 0.6416754605809128
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `id` = ?",
+        "count": 242,
+        "rowsExamined": 242,
+        "rowsPerQuery": 1,
+        "totalMs": 152.993073,
+        "meanMs": 0.6322027809917355
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `requestKey` = ?",
+        "count": 121,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 95.809483,
+        "meanMs": 0.7918139090909091
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ? FOR UPDATE",
+        "count": 121,
+        "rowsExamined": 121,
+        "rowsPerQuery": 1,
+        "totalMs": 77.584949,
+        "meanMs": 0.6411979256198347
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `bookingId` , `flightId` , `noOfSeats` , `totalCost` , `status` , `createdAt` , `updatedAt` FROM `Reservations` AS `Reservation` WHERE `Reservation` . `bookingId` = ? FOR UPDATE",
+        "count": 121,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 65.156327,
+        "meanMs": 0.5384820413223141
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "START TRANSACTION",
+        "count": 121,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 31.122593,
+        "meanMs": 0.2572115123966942
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SET `time_zone` = ?",
+        "count": 3,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 15.789251,
+        "meanMs": 5.263083666666667
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SET `time_zone` = ?",
+        "count": 11,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 11.885598,
+        "meanMs": 1.080508909090909
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE ( `Booking` . `status` = ? OR ( `Booking` . `cancelRequested` = TRUE AND `Booking` . `reservationReleased` = FALSE ) ) AND `Booking` . `requestKey` IS NOT NULL AND `Booking` . `nextAttemptAt` <= ? ORDER BY `Booking` . `nextAttemptAt` ASC , `Booking` . `id` ASC LIMIT ?",
+        "count": 12,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 11.188327,
+        "meanMs": 0.9323605833333333
+      }
+    ]
+  },
+  {
+    "run": "pre-index-10x",
+    "kind": "10x",
+    "requests": 12002,
+    "throughput": 199.93483910032262,
+    "failureRate": 0.34102649558406933,
+    "businessSuccess": 0.6120646558906849,
+    "p95": 449.5798449999999,
+    "p99": 639.7440909999999,
+    "searchP95": 345.9367,
+    "detailsP95": 343.8288,
+    "bookingP95": 702.0866349999998,
+    "dropped": 0,
+    "exitCode": 99,
+    "inventoryDrift": 0,
+    "peakConnections": 12,
+    "peakRunning": 7,
+    "maxConnectionErrors": 0,
+    "questions": 16717,
+    "elapsed": 60.997,
+    "processes": [
+      {
+        "pid": 23672,
+        "cpuSeconds": 16.375,
+        "workingSetMiB": 107.33203125
+      },
+      {
+        "pid": 28876,
+        "cpuSeconds": 0,
+        "workingSetMiB": 48.3125
+      },
+      {
+        "pid": 33716,
+        "cpuSeconds": 0,
+        "workingSetMiB": 48
+      },
+      {
+        "pid": 36212,
+        "cpuSeconds": 0.046875,
+        "workingSetMiB": 60.51953125
+      },
+      {
+        "pid": 39448,
+        "cpuSeconds": 55.125,
+        "workingSetMiB": 151.4765625
+      }
+    ],
+    "digestDeltas": [
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE ( `Flight` . `price` >= ? AND `Flight` . `price` <= ? ) AND `Flight` . `arrivalAirportId` = ? AND `Flight` . `departureAirportId` = ?",
+        "count": 1438,
+        "rowsExamined": 14817152,
+        "rowsPerQuery": 10304,
+        "totalMs": 16553.507106,
+        "meanMs": 11.51147921140473
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "COMMIT",
+        "count": 779,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 8447.250038,
+        "meanMs": 10.843709933247753
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ? FOR UPDATE",
+        "count": 1342,
+        "rowsExamined": 1342,
+        "rowsPerQuery": 1,
+        "totalMs": 1970.93593,
+        "meanMs": 1.4686556855439643
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `id` = ?",
+        "count": 2684,
+        "rowsExamined": 2684,
+        "rowsPerQuery": 1,
+        "totalMs": 1599.728809,
+        "meanMs": 0.5960241464232489
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `bookingId` , `flightId` , `noOfSeats` , `totalCost` , `status` , `createdAt` , `updatedAt` FROM `Reservations` AS `Reservation` WHERE `Reservation` . `bookingId` = ? FOR UPDATE",
+        "count": 1342,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 729.373881,
+        "meanMs": 0.54349767585693
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `requestKey` = ?",
+        "count": 1200,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 668.354882,
+        "meanMs": 0.5569624016666667
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ?",
+        "count": 708,
+        "rowsExamined": 707,
+        "rowsPerQuery": 0.998587570621469,
+        "totalMs": 421.947209,
+        "meanMs": 0.595970634180791
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "START TRANSACTION",
+        "count": 1342,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 328.515179,
+        "meanMs": 0.24479521535022353
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "ROLLBACK",
+        "count": 563,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 126.926948,
+        "meanMs": 0.22544750976909414
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE ( `Booking` . `status` = ? OR ( `Booking` . `cancelRequested` = TRUE AND `Booking` . `reservationReleased` = FALSE ) ) AND `Booking` . `requestKey` IS NOT NULL AND `Booking` . `nextAttemptAt` <= ? ORDER BY `Booking` . `nextAttemptAt` ASC , `Booking` . `id` ASC LIMIT ?",
+        "count": 4,
+        "rowsExamined": 142,
+        "rowsPerQuery": 35.5,
+        "totalMs": 5.081726,
+        "meanMs": 1.2704315
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SET `time_zone` = ?",
+        "count": 4,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 2.761578,
+        "meanMs": 0.6903945
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SET `time_zone` = ?",
+        "count": 5,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 2.703531,
+        "meanMs": 0.5407062
+      }
+    ]
+  },
+  {
+    "run": "redis-10x-1",
+    "kind": "10x",
+    "requests": 11999,
+    "throughput": 199.59416795123147,
+    "failureRate": 0.3034419534961247,
+    "businessSuccess": 0.6494707892324361,
+    "p95": 450.97912,
+    "p99": 743.2368940000008,
+    "searchP95": 336.1095599999998,
+    "detailsP95": 331.84486999999996,
+    "bookingP95": 840.1116599999995,
+    "dropped": 2,
+    "exitCode": 99,
+    "inventoryDrift": -1,
+    "peakConnections": 12,
+    "peakRunning": 7,
+    "maxConnectionErrors": 0,
+    "questions": 16669,
+    "elapsed": 61.184,
+    "processes": [
+      {
+        "pid": 23672,
+        "cpuSeconds": 19.703125,
+        "workingSetMiB": 102.1484375
+      },
+      {
+        "pid": 28876,
+        "cpuSeconds": 0,
+        "workingSetMiB": 38.765625
+      },
+      {
+        "pid": 31216,
+        "cpuSeconds": 53.859375,
+        "workingSetMiB": 168.43359375
+      },
+      {
+        "pid": 33716,
+        "cpuSeconds": 0,
+        "workingSetMiB": 36.2265625
+      },
+      {
+        "pid": 36212,
+        "cpuSeconds": 0,
+        "workingSetMiB": 60.49609375
+      }
+    ],
+    "digestDeltas": [
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE ( `Flight` . `price` >= ? AND `Flight` . `price` <= ? ) AND `Flight` . `arrivalAirportId` = ? AND `Flight` . `departureAirportId` = ?",
+        "count": 1360,
+        "rowsExamined": 13933827,
+        "rowsPerQuery": 10245.461029411765,
+        "totalMs": 17390.130569,
+        "meanMs": 12.786860712500001
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "COMMIT",
+        "count": 774,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 9125.515004,
+        "meanMs": 11.790071064599484
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `id` = ?",
+        "count": 2679,
+        "rowsExamined": 2679,
+        "rowsPerQuery": 1,
+        "totalMs": 2305.009892,
+        "meanMs": 0.8603993624486749
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ? FOR UPDATE",
+        "count": 1339,
+        "rowsExamined": 1340,
+        "rowsPerQuery": 1.0007468259895445,
+        "totalMs": 1889.203134,
+        "meanMs": 1.410906
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `requestKey` = ?",
+        "count": 1199,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 752.4627,
+        "meanMs": 0.6275752293577982
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `bookingId` , `flightId` , `noOfSeats` , `totalCost` , `status` , `createdAt` , `updatedAt` FROM `Reservations` AS `Reservation` WHERE `Reservation` . `bookingId` = ? FOR UPDATE",
+        "count": 1339,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 739.418648,
+        "meanMs": 0.552217063480209
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ?",
+        "count": 740,
+        "rowsExamined": 740,
+        "rowsPerQuery": 1,
+        "totalMs": 429.237952,
+        "meanMs": 0.5800512864864865
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "START TRANSACTION",
+        "count": 1340,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 322.447952,
+        "meanMs": 0.24063279999999998
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "ROLLBACK",
+        "count": 564,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 136.376746,
+        "meanMs": 0.24180274113475178
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE ( `Booking` . `status` = ? OR ( `Booking` . `cancelRequested` = TRUE AND `Booking` . `reservationReleased` = FALSE ) ) AND `Booking` . `requestKey` IS NOT NULL AND `Booking` . `nextAttemptAt` <= ? ORDER BY `Booking` . `nextAttemptAt` ASC , `Booking` . `id` ASC LIMIT ?",
+        "count": 5,
+        "rowsExamined": 185,
+        "rowsPerQuery": 37,
+        "totalMs": 8.154208,
+        "meanMs": 1.6308416000000001
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SET `time_zone` = ?",
+        "count": 5,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 4.706986,
+        "meanMs": 0.9413971999999999
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SET `time_zone` = ?",
+        "count": 4,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 2.869605,
+        "meanMs": 0.71740125
+      }
+    ]
+  },
+  {
+    "run": "redis-10x-2",
+    "kind": "10x",
+    "requests": 12001,
+    "throughput": 199.14921252674267,
+    "failureRate": 0.44421298225147904,
+    "businessSuccess": 0.5027914340471628,
+    "p95": 486.3195,
+    "p99": 738.7856,
+    "searchP95": 366.3117,
+    "detailsP95": 339.5836,
+    "bookingP95": 819.9308799999998,
+    "dropped": 2,
+    "exitCode": 99,
+    "inventoryDrift": 0,
+    "peakConnections": 12,
+    "peakRunning": 7,
+    "maxConnectionErrors": 0,
+    "questions": 16799,
+    "elapsed": 61.054,
+    "processes": [
+      {
+        "pid": 23672,
+        "cpuSeconds": 20.421875,
+        "workingSetMiB": 103.078125
+      },
+      {
+        "pid": 25476,
+        "cpuSeconds": 55.328125,
+        "workingSetMiB": 156.5703125
+      },
+      {
+        "pid": 28876,
+        "cpuSeconds": 0,
+        "workingSetMiB": 48.04296875
+      },
+      {
+        "pid": 33716,
+        "cpuSeconds": 0,
+        "workingSetMiB": 48.21875
+      },
+      {
+        "pid": 36212,
+        "cpuSeconds": 0.0625,
+        "workingSetMiB": 60.6953125
+      }
+    ],
+    "digestDeltas": [
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE ( `Flight` . `price` >= ? AND `Flight` . `price` <= ? ) AND `Flight` . `arrivalAirportId` = ? AND `Flight` . `departureAirportId` = ?",
+        "count": 1648,
+        "rowsExamined": 16946384,
+        "rowsPerQuery": 10283,
+        "totalMs": 30271.149149,
+        "meanMs": 18.36841574575243
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "COMMIT",
+        "count": 695,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 9491.847647,
+        "meanMs": 13.657334743884892
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ? FOR UPDATE",
+        "count": 1331,
+        "rowsExamined": 1331,
+        "rowsPerQuery": 1,
+        "totalMs": 1683.779525,
+        "meanMs": 1.2650484785875282
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `id` = ?",
+        "count": 2661,
+        "rowsExamined": 2662,
+        "rowsPerQuery": 1.0003757985719655,
+        "totalMs": 1572.301537,
+        "meanMs": 0.5908686723036453
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `bookingId` , `flightId` , `noOfSeats` , `totalCost` , `status` , `createdAt` , `updatedAt` FROM `Reservations` AS `Reservation` WHERE `Reservation` . `bookingId` = ? FOR UPDATE",
+        "count": 1331,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 730.572287,
+        "meanMs": 0.5488897723516153
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `requestKey` = ?",
+        "count": 1199,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 726.045413,
+        "meanMs": 0.6055424628857382
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ?",
+        "count": 681,
+        "rowsExamined": 681,
+        "rowsPerQuery": 1,
+        "totalMs": 388.411819,
+        "meanMs": 0.570355093979442
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "START TRANSACTION",
+        "count": 1331,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 325.441326,
+        "meanMs": 0.24450888504883547
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "ROLLBACK",
+        "count": 635,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 154.730562,
+        "meanMs": 0.24367017637795274
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE ( `Booking` . `status` = ? OR ( `Booking` . `cancelRequested` = TRUE AND `Booking` . `reservationReleased` = FALSE ) ) AND `Booking` . `requestKey` IS NOT NULL AND `Booking` . `nextAttemptAt` <= ? ORDER BY `Booking` . `nextAttemptAt` ASC , `Booking` . `id` ASC LIMIT ?",
+        "count": 4,
+        "rowsExamined": 132,
+        "rowsPerQuery": 33,
+        "totalMs": 4.508572,
+        "meanMs": 1.127143
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SET `time_zone` = ?",
+        "count": 5,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 2.751609,
+        "meanMs": 0.5503218000000001
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SET `time_zone` = ?",
+        "count": 4,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 1.789742,
+        "meanMs": 0.4474355
+      }
+    ]
+  },
+  {
+    "run": "redis-baseline-1",
+    "kind": "baseline",
+    "requests": 1202,
+    "throughput": 19.996656898344135,
+    "failureRate": 0,
+    "businessSuccess": 1,
+    "p95": 145.7706450000001,
+    "p99": 233.30228200000005,
+    "searchP95": 110.85246999999993,
+    "detailsP95": 72.1725,
+    "bookingP95": 266.875,
+    "dropped": 0,
+    "exitCode": 0,
+    "inventoryDrift": 0,
+    "peakConnections": 10,
+    "peakRunning": 4,
+    "maxConnectionErrors": 0,
+    "questions": 2521,
+    "elapsed": 62.029,
+    "processes": [
+      {
+        "pid": 23672,
+        "cpuSeconds": 2.71875,
+        "workingSetMiB": 74.171875
+      },
+      {
+        "pid": 28876,
+        "cpuSeconds": 0,
+        "workingSetMiB": 39.11328125
+      },
+      {
+        "pid": 31216,
+        "cpuSeconds": 21.375,
+        "workingSetMiB": 96.32421875
+      },
+      {
+        "pid": 33716,
+        "cpuSeconds": 0,
+        "workingSetMiB": 36.2578125
+      },
+      {
+        "pid": 36212,
+        "cpuSeconds": 0.015625,
+        "workingSetMiB": 49.1953125
+      }
+    ],
+    "digestDeltas": [
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE ( `Flight` . `price` >= ? AND `Flight` . `price` <= ? ) AND `Flight` . `arrivalAirportId` = ? AND `Flight` . `departureAirportId` = ?",
+        "count": 840,
+        "rowsExamined": 8595720,
+        "rowsPerQuery": 10233,
+        "totalMs": 10637.267225,
+        "meanMs": 12.663413363095238
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "COMMIT",
+        "count": 121,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 1541.770117,
+        "meanMs": 12.741901793388429
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ?",
+        "count": 241,
+        "rowsExamined": 241,
+        "rowsPerQuery": 1,
+        "totalMs": 196.453777,
+        "meanMs": 0.8151609004149377
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `id` = ?",
+        "count": 242,
+        "rowsExamined": 242,
+        "rowsPerQuery": 1,
+        "totalMs": 168.96118,
+        "meanMs": 0.6981866942148761
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ? FOR UPDATE",
+        "count": 121,
+        "rowsExamined": 121,
+        "rowsPerQuery": 1,
+        "totalMs": 92.395449,
+        "meanMs": 0.7635987520661157
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `requestKey` = ?",
+        "count": 121,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 91.87703,
+        "meanMs": 0.7593142975206612
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `bookingId` , `flightId` , `noOfSeats` , `totalCost` , `status` , `createdAt` , `updatedAt` FROM `Reservations` AS `Reservation` WHERE `Reservation` . `bookingId` = ? FOR UPDATE",
+        "count": 121,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 83.90715,
+        "meanMs": 0.693447520661157
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "START TRANSACTION",
+        "count": 121,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 32.744973,
+        "meanMs": 0.27061961157024794
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE ( `Booking` . `status` = ? OR ( `Booking` . `cancelRequested` = TRUE AND `Booking` . `reservationReleased` = FALSE ) ) AND `Booking` . `requestKey` IS NOT NULL AND `Booking` . `nextAttemptAt` <= ? ORDER BY `Booking` . `nextAttemptAt` ASC , `Booking` . `id` ASC LIMIT ?",
+        "count": 12,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 16.81122,
+        "meanMs": 1.4009349999999998
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SET `time_zone` = ?",
+        "count": 5,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 11.355074,
+        "meanMs": 2.2710148
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SET `time_zone` = ?",
+        "count": 5,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 5.349011,
+        "meanMs": 1.0698022
+      }
+    ]
+  },
+  {
+    "run": "transactions-10x",
+    "kind": "10x",
+    "requests": 6721,
+    "throughput": 96.03969768109256,
+    "failureRate": 0.6777265287903586,
+    "businessSuccess": 0.15295342954917424,
+    "p95": 10001.0926,
+    "p99": 10004.8606,
+    "searchP95": 10001.29285,
+    "detailsP95": 10001.35248,
+    "bookingP95": 3138.46664,
+    "dropped": 5280,
+    "exitCode": 99,
+    "inventoryDrift": -589,
+    "peakConnections": 13,
+    "peakRunning": 7,
+    "maxConnectionErrors": 0,
+    "questions": 15706,
+    "elapsed": 70.994,
+    "processes": [
+      {
+        "pid": 17680,
+        "cpuSeconds": 60.84375,
+        "workingSetMiB": 322.984375
+      },
+      {
+        "pid": 23672,
+        "cpuSeconds": 23.5625,
+        "workingSetMiB": 106.171875
+      },
+      {
+        "pid": 28876,
+        "cpuSeconds": 0,
+        "workingSetMiB": 48.18359375
+      },
+      {
+        "pid": 33716,
+        "cpuSeconds": 0,
+        "workingSetMiB": 47.671875
+      },
+      {
+        "pid": 36212,
+        "cpuSeconds": 0.046875,
+        "workingSetMiB": 49.984375
+      }
+    ],
+    "digestDeltas": [
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE ( `Flight` . `price` >= ? AND `Flight` . `price` <= ? ) AND `Flight` . `arrivalAirportId` = ? AND `Flight` . `departureAirportId` = ?",
+        "count": 3379,
+        "rowsExamined": 34496136,
+        "rowsPerQuery": 10208.977804084048,
+        "totalMs": 38769.874267,
+        "meanMs": 11.473771609055934
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "COMMIT",
+        "count": 590,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 5484.621193,
+        "meanMs": 9.295968123728814
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `id` = ?",
+        "count": 2343,
+        "rowsExamined": 2343,
+        "rowsPerQuery": 1,
+        "totalMs": 1514.321508,
+        "meanMs": 0.6463173316261204
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `requestKey` = ?",
+        "count": 1153,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 710.625072,
+        "meanMs": 0.6163270355594103
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ? FOR UPDATE",
+        "count": 899,
+        "rowsExamined": 899,
+        "rowsPerQuery": 1,
+        "totalMs": 671.935782,
+        "meanMs": 0.747425786429366
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ?",
+        "count": 1016,
+        "rowsExamined": 1016,
+        "rowsPerQuery": 1,
+        "totalMs": 587.547486,
+        "meanMs": 0.5782947696850395
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `bookingId` , `flightId` , `noOfSeats` , `totalCost` , `status` , `createdAt` , `updatedAt` FROM `Reservations` AS `Reservation` WHERE `Reservation` . `bookingId` = ? FOR UPDATE",
+        "count": 899,
+        "rowsExamined": 8,
+        "rowsPerQuery": 0.008898776418242492,
+        "totalMs": 492.165133,
+        "meanMs": 0.5474584349276975
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "START TRANSACTION",
+        "count": 900,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 220.845718,
+        "meanMs": 0.24538413111111113
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "ROLLBACK",
+        "count": 308,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 68.962816,
+        "meanMs": 0.22390524675324677
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SET `time_zone` = ?",
+        "count": 7,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 4.713457,
+        "meanMs": 0.673351
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE ( `Booking` . `status` = ? OR ( `Booking` . `cancelRequested` = TRUE AND `Booking` . `reservationReleased` = FALSE ) ) AND `Booking` . `requestKey` IS NOT NULL AND `Booking` . `nextAttemptAt` <= ? ORDER BY `Booking` . `nextAttemptAt` ASC , `Booking` . `id` ASC LIMIT ?",
+        "count": 3,
+        "rowsExamined": 53,
+        "rowsPerQuery": 17.666666666666668,
+        "totalMs": 2.34894,
+        "meanMs": 0.7829799999999999
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SET `time_zone` = ?",
+        "count": 5,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 1.891893,
+        "meanMs": 0.3783786
+      }
+    ]
+  },
+  {
+    "run": "transactions-baseline",
+    "kind": "baseline",
+    "requests": 1202,
+    "throughput": 20.001871156742173,
+    "failureRate": 0,
+    "businessSuccess": 1,
+    "p95": 111.25769000000001,
+    "p99": 141.18805,
+    "searchP95": 43.7255,
+    "detailsP95": 24.298454999999997,
+    "bookingP95": 150.5632,
+    "dropped": 0,
+    "exitCode": 0,
+    "inventoryDrift": 0,
+    "peakConnections": 5,
+    "peakRunning": 4,
+    "maxConnectionErrors": 0,
+    "questions": 2507,
+    "elapsed": 60.545,
+    "processes": [
+      {
+        "pid": 17680,
+        "cpuSeconds": 15.109375,
+        "workingSetMiB": 91.88671875
+      },
+      {
+        "pid": 23672,
+        "cpuSeconds": 2.703125,
+        "workingSetMiB": 77.3515625
+      },
+      {
+        "pid": 28876,
+        "cpuSeconds": 0,
+        "workingSetMiB": 48.1953125
+      },
+      {
+        "pid": 33716,
+        "cpuSeconds": 0,
+        "workingSetMiB": 47.67578125
+      },
+      {
+        "pid": 36212,
+        "cpuSeconds": 0.046875,
+        "workingSetMiB": 50.40234375
+      }
+    ],
+    "digestDeltas": [
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE ( `Flight` . `price` >= ? AND `Flight` . `price` <= ? ) AND `Flight` . `arrivalAirportId` = ? AND `Flight` . `departureAirportId` = ?",
+        "count": 841,
+        "rowsExamined": 8571472,
+        "rowsPerQuery": 10192,
+        "totalMs": 8581.203586,
+        "meanMs": 10.20357144589774
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "COMMIT",
+        "count": 121,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 1008.60961,
+        "meanMs": 8.335616611570249
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `id` = ?",
+        "count": 242,
+        "rowsExamined": 242,
+        "rowsPerQuery": 1,
+        "totalMs": 161.527641,
+        "meanMs": 0.6674695909090909
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ?",
+        "count": 240,
+        "rowsExamined": 240,
+        "rowsPerQuery": 1,
+        "totalMs": 146.192253,
+        "meanMs": 0.6091343874999999
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE `Booking` . `requestKey` = ?",
+        "count": 121,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 77.653338,
+        "meanMs": 0.6417631239669422
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `id` , `flightNumber` , `airplaneId` , `departureAirportId` , `arrivalAirportId` , `arrivalTime` , `departureTime` , `price` , `boardingGate` , `totalSeats` , `createdAt` , `updatedAt` FROM `Flights` AS `Flight` WHERE `Flight` . `id` = ? FOR UPDATE",
+        "count": 121,
+        "rowsExamined": 121,
+        "rowsPerQuery": 1,
+        "totalMs": 71.81401,
+        "meanMs": 0.593504214876033
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SELECT `bookingId` , `flightId` , `noOfSeats` , `totalCost` , `status` , `createdAt` , `updatedAt` FROM `Reservations` AS `Reservation` WHERE `Reservation` . `bookingId` = ? FOR UPDATE",
+        "count": 121,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 65.521057,
+        "meanMs": 0.5414963388429752
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "START TRANSACTION",
+        "count": 121,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 30.628753,
+        "meanMs": 0.25313019008264465
+      },
+      {
+        "schema": "baseline_booking",
+        "sql": "SELECT `id` , `requestKey` , `cancelRequested` , `reservationReleased` , `failureCode` , `nextAttemptAt` , `flightId` , `userId` , `status` , `noOfSeats` , `totalCost` , `createdAt` , `updatedAt` FROM `Bookings` AS `Booking` WHERE ( `Booking` . `status` = ? OR ( `Booking` . `cancelRequested` = TRUE AND `Booking` . `reservationReleased` = FALSE ) ) AND `Booking` . `requestKey` IS NOT NULL AND `Booking` . `nextAttemptAt` <= ? ORDER BY `Booking` . `nextAttemptAt` ASC , `Booking` . `id` ASC LIMIT ?",
+        "count": 12,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 10.424808,
+        "meanMs": 0.868734
+      },
+      {
+        "schema": "baseline_flights",
+        "sql": "SET `time_zone` = ?",
+        "count": 3,
+        "rowsExamined": 0,
+        "rowsPerQuery": 0,
+        "totalMs": 1.045494,
+        "meanMs": 0.348498
+      }
+    ]
+  }
+]

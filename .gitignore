@@ -1,0 +1,6 @@
+.npm-cache/
+.local/
+.docker-local/
+**/__pycache__/
+*.pyc
+load-tests/results/**/k6.log

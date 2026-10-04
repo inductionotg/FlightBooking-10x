@@ -1,0 +1,58 @@
+{
+  "timestamp": "2026-10-01T17:58:45.702Z",
+  "checks": [
+    {
+      "name": "Second read is served from Redis without calling the database loader",
+      "passed": true
+    },
+    {
+      "name": "Search keys normalize filter order/types and distinguish different filters",
+      "passed": true
+    },
+    {
+      "name": "TTL expires stale data even without a successful invalidation",
+      "passed": true
+    },
+    {
+      "name": "A read started before invalidation cannot repopulate the current cache generation",
+      "passed": true
+    },
+    {
+      "name": "Evicting generation metadata cannot resurrect an older cached value",
+      "passed": true
+    },
+    {
+      "name": "Concurrent identical misses share one database load within a process",
+      "passed": true
+    },
+    {
+      "name": "Database fallback rejects excess parallel loads instead of building an unbounded queue",
+      "passed": true
+    },
+    {
+      "name": "A hung Redis command has a bounded deadline",
+      "passed": true
+    },
+    {
+      "name": "Creating a flight invalidates a previously cached empty search",
+      "passed": true
+    },
+    {
+      "name": "Both public read endpoints produce verified cache hits",
+      "passed": true
+    },
+    {
+      "name": "Committed reservation invalidates detail and matching search availability",
+      "passed": true
+    },
+    {
+      "name": "Committed cancellation invalidates cached availability",
+      "passed": true
+    },
+    {
+      "name": "Route/price edits invalidate old and new route searches and flight details",
+      "passed": true
+    }
+  ],
+  "passed": true
+}

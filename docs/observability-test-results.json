@@ -1,0 +1,46 @@
+{
+  "timestamp": "2026-10-01T16:06:35.350Z",
+  "checks": [
+    {
+      "name": "Standalone service runtime copies match the canonical source",
+      "passed": true
+    },
+    {
+      "name": "All five services expose protected Prometheus-format metrics",
+      "passed": true
+    },
+    {
+      "name": "Concurrent requests preserve separate trace contexts",
+      "passed": true
+    },
+    {
+      "name": "Invalid incoming trace context is replaced",
+      "passed": true
+    },
+    {
+      "name": "Malformed JSON returns a traced structured error",
+      "passed": true
+    },
+    {
+      "name": "Gateway, auth and flight logs share one trace with linked auth spans",
+      "passed": true
+    },
+    {
+      "name": "Booking and flight reservation spans share a trace and log the booking ID",
+      "passed": true
+    },
+    {
+      "name": "Every service emits JSON logs without tested credentials, tokens, query values or request bodies",
+      "passed": true
+    },
+    {
+      "name": "HTTP latency, dependency latency and booking outcomes are measured with bounded route labels",
+      "passed": true
+    }
+  ],
+  "traces": {
+    "gateway": "a5899b7f910b0dc16220985ff29c8220",
+    "booking": "37d5b90350d414308b95d9d8a86da6e6"
+  },
+  "passed": true
+}
