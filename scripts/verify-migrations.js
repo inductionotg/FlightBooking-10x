@@ -62,6 +62,12 @@ async function main() {
         }
 
         if (service === 'Booking_Service') {
+          const [historyIndex] = await connection.query("SHOW INDEX FROM Bookings WHERE Key_name='bookings_user_id_history'");
+          assert.deepEqual(historyIndex.sort((a,b)=>a.Seq_in_index-b.Seq_in_index).map(row=>row.Column_name), ['userId','id']);
+          await migrate('db:migrate:undo');
+          const [removedHistoryIndex] = await connection.query("SHOW INDEX FROM Bookings WHERE Key_name='bookings_user_id_history'");
+          assert.equal(removedHistoryIndex.length,0);
+          check('Booking: history index contains owner/cursor columns and rolls back cleanly');
           // Undo outbox/contact metadata, recovery columns, then historical seat/cost migration.
           await migrate('db:migrate:undo');
           await migrate('db:migrate:undo');

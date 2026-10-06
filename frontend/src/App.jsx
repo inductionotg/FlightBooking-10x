@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   ArrowLeftRight, ArrowRight, ArrowUpRight, CalendarDays, Check, CheckCircle2,
   ChevronDown, Clock3, Compass, LayoutDashboard, LoaderCircle, LogOut, Mail,
@@ -69,7 +69,7 @@ function AuthModal({ onClose, onSuccess }) {
       <div className="mb-8 flex items-start justify-between"><div className="brand-mark"><Plane size={22} strokeWidth={2.2} /></div><button onClick={onClose} aria-label="Close" className="icon-button"><X size={20} /></button></div>
       <p className="eyebrow">YOUR JOURNEY STARTS HERE</p>
       <h2 className="mt-2 font-display text-4xl text-[#0c2a42]">{mode === 'signin' ? 'Welcome back.' : 'Join the journey.'}</h2>
-      <p className="mt-3 text-sm leading-6 text-slate-500">{mode === 'signin' ? 'Sign in to reserve a flight and keep your booking details in this browser session.' : 'Create an account, then we’ll sign you in automatically.'}</p>
+      <p className="mt-3 text-sm leading-6 text-slate-500">{mode === 'signin' ? 'Sign in to reserve a flight and view your account’s booking history.' : 'Create an account, then we’ll sign you in automatically.'}</p>
       <div className="mt-7 grid grid-cols-2 rounded-xl bg-[#edf2f5] p-1 text-sm font-semibold">
         {[['signin', 'Sign in'], ['signup', 'Create account']].map(([value, label]) => <button key={value} type="button" onClick={() => { setMode(value); setError(''); }} className={`rounded-lg py-2.5 transition ${mode === value ? 'bg-white text-[#0b2a42] shadow-sm' : 'text-slate-500'}`}>{label}</button>)}
       </div>
@@ -184,9 +184,67 @@ function Explore({ catalog, catalogError, onReloadCatalog, airportsById, onSelec
 }
 
 function Journeys({ journeys, session, onSignIn, onRetry, onCancel, busyId }) {
-  const own = journeys.filter(item => (item.userId ?? item.body?.userId) === session?.id).sort((a, b) => b.savedAt - a.savedAt);
-  return <main className="container-xl min-h-[68vh] py-16"><div className="mb-10"><p className="eyebrow">YOUR TRAVEL DESK</p><h1 className="mt-2 font-display text-5xl text-[#0b2a42]">My journeys</h1><p className="mt-3 max-w-xl text-sm leading-6 text-slate-500">Bookings created in this browser session appear here. The backend does not offer a booking-history endpoint yet.</p></div>
-    {!session ? <div className="empty-state"><Ticket size={38} className="mx-auto text-[#6da4ae]" /><h2 className="mt-4 font-display text-3xl">Sign in to see your journeys</h2><Button onClick={onSignIn} className="mt-6">Sign in <ArrowRight size={17} /></Button></div> : !own.length ? <div className="empty-state"><Plane size={38} className="mx-auto -rotate-45 text-[#6da4ae]" /><h2 className="mt-4 font-display text-3xl">Your story starts with a flight</h2><p className="mt-2 text-sm text-slate-500">After you make a booking here, its receipt will be saved for this browser session.</p></div> : <div className="grid gap-4 lg:grid-cols-2">{own.map(item => <article key={item.key} className="flight-card"><div className="flex items-start justify-between gap-3"><div><p className="eyebrow">BOOKING #{item.id || 'PENDING'}</p><h3 className="mt-2 text-xl font-bold text-[#0b2a42]">{item.flight?.flightNumber || `Flight ${item.body.flightId}`}</h3><p className="mt-1 text-sm text-slate-500">{date(item.flight?.departureTime)} · {item.body.noOfSeats} {item.body.noOfSeats === 1 ? 'seat' : 'seats'}</p></div><span className={`rounded-full px-3 py-1 text-xs font-bold ${item.status === 'Booked' ? 'bg-[#e5f5ec] text-[#2c8766]' : item.status === 'Cancelled' ? 'bg-slate-100 text-slate-500' : 'bg-amber-100 text-amber-800'}`}>{item.status}</span></div><div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-4"><strong className="text-xl text-[#0b2a42]">{money(item.totalCost || Number(item.flight?.price) * item.body.noOfSeats)}</strong><div className="flex gap-2">{item.status === 'InProcess' && <Button variant="soft" busy={busyId === item.key} onClick={() => onRetry(item)} className="!px-3 !py-2"><RefreshCw size={15} /> Check status</Button>}{item.status === 'Booked' && <Button variant="outline" busy={busyId === item.key} onClick={() => onCancel(item)} className="!px-3 !py-2">Cancel booking</Button>}</div></div></article>)}</div>}
+  const [rows, setRows] = useState([]);
+  const [nextCursor, setNextCursor] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const requestVersion = useRef(0);
+
+  async function load(reset = true) {
+    if (!session) return;
+    const version = ++requestVersion.current;
+    setLoading(true); setError('');
+    try {
+      const { data } = await api.bookings(session.token, reset ? undefined : nextCursor);
+      if (version !== requestVersion.current) return;
+      setRows(current => reset ? data.items : [...current, ...data.items.filter(row => !current.some(item => item.id === row.id))]);
+      setNextCursor(data.nextCursor);
+    } catch (failure) {
+      if (version === requestVersion.current) setError(failure.message);
+    } finally {
+      if (version === requestVersion.current) setLoading(false);
+    }
+  }
+  useEffect(() => { load(); return () => { requestVersion.current++; }; }, []);
+
+  const local = journeys.filter(item => (item.userId ?? item.body?.userId) === session?.id);
+  const own = [...local.filter(item => !item.id), ...rows.map(row => {
+    const saved = local.find(item => item.id === row.id);
+    return { ...saved, ...row, key: saved?.key || `booking-${row.id}`, serverRecord: true,
+      body: saved?.body || { flightId: row.flightId, noOfSeats: row.noOfSeats } };
+  })];
+  async function act(action, item) {
+    const receipt = await action(item);
+    if (!receipt) return;
+    if (!item.id) { await load(); return; }
+    setRows(current => current.map(row => row.id === receipt.id ? { ...row, ...receipt } : row));
+  }
+
+  return <main className="container-xl min-h-[68vh] py-16">
+    <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+      <div><p className="eyebrow">YOUR TRAVEL DESK</p><h1 className="mt-2 font-display text-5xl text-[#0b2a42]">My journeys</h1>
+        <p className="mt-3 max-w-xl text-sm leading-6 text-slate-500">Your account's bookings, newest first. Sign in again on any browser to see them.</p></div>
+      {session && <Button variant="soft" busy={loading} disabled={Boolean(busyId)} onClick={() => load()}><RefreshCw size={16} /> Refresh</Button>}
+    </div>
+    {error && <p role="alert" className="alert-error mb-5">{error} Use Refresh to try again.</p>}
+    {!session ? <div className="empty-state"><Ticket size={38} className="mx-auto text-[#6da4ae]" /><h2 className="mt-4 font-display text-3xl">Sign in to see your journeys</h2><Button onClick={onSignIn} className="mt-6">Sign in <ArrowRight size={17} /></Button></div>
+      : !own.length ? <div className="empty-state"><Plane size={38} className="mx-auto -rotate-45 text-[#6da4ae]" /><h2 className="mt-4 font-display text-3xl">{loading ? 'Loading your bookings…' : error ? 'Bookings could not be loaded' : 'Your story starts with a flight'}</h2>{!loading && !error && <p className="mt-2 text-sm text-slate-500">Your bookings will appear here after you reserve a flight.</p>}</div>
+      : <div className="grid gap-4 lg:grid-cols-2">{own.map(item => {
+        const pendingCancellation = item.cancelRequested && !item.reservationReleased;
+        return <article key={item.key} className="flight-card">
+          <div className="flex items-start justify-between gap-3"><div><p className="eyebrow">{item.id ? `BOOKING #${item.id}` : 'AWAITING CONFIRMATION'}</p>
+            <h3 className="mt-2 text-xl font-bold text-[#0b2a42]">{item.flight?.flightNumber || `Flight ${item.flightId ?? item.body.flightId}`}</h3>
+            <p className="mt-1 text-sm text-slate-500">{item.flight?.departureTime ? date(item.flight.departureTime) : item.createdAt ? `Booked on ${date(item.createdAt)}` : 'Request awaiting a receipt'} · {item.body.noOfSeats} {item.body.noOfSeats === 1 ? 'seat' : 'seats'}</p></div>
+            <span className={`rounded-full px-3 py-1 text-xs font-bold ${item.status === 'Booked' ? 'bg-[#e5f5ec] text-[#2c8766]' : item.status === 'Cancelled' && !pendingCancellation ? 'bg-slate-100 text-slate-500' : 'bg-amber-100 text-amber-800'}`}>{pendingCancellation ? 'Cancellation pending' : item.status}</span>
+          </div>
+          <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-4"><strong className="text-xl text-[#0b2a42]">{money(item.totalCost ?? Number(item.flight?.price) * item.body.noOfSeats)}</strong><div className="flex gap-2">
+            {(item.status === 'InProcess' || pendingCancellation) && <Button variant="soft" disabled={loading} busy={busyId === item.key} onClick={() => act(onRetry, item)} className="!px-3 !py-2"><RefreshCw size={15} /> Check status</Button>}
+            {item.status === 'Booked' && item.canCancel !== false && <Button variant="outline" disabled={loading} busy={busyId === item.key} onClick={() => act(onCancel, item)} className="!px-3 !py-2">Cancel booking</Button>}
+          </div></div>
+          {item.status === 'Booked' && item.canCancel === false && <p className="mt-3 text-xs text-slate-500">This older booking requires manual cancellation.</p>}
+        </article>;
+      })}</div>}
+    {nextCursor && <div className="mt-8 text-center"><Button variant="outline" busy={loading} disabled={Boolean(busyId)} onClick={() => load(false)}>Load older bookings <ArrowRight size={16} /></Button></div>}
   </main>;
 }
 
@@ -298,14 +356,14 @@ export default function App() {
 
   async function retryJourney(item) {
     setBusyJourney(item.key);
-    try { const response = await api.book(item.body, item.key, session.token); saveJourney(response.data, item, item.flight); setToast(response.data.status === 'Booked' ? 'Booking confirmed.' : 'Booking is still in progress.'); }
+    try { const response = item.id ? await api.booking(item.id, session.token) : await api.book(item.body, item.key, session.token); saveJourney(response.data, item, item.flight); setToast(`Booking status: ${response.data.status}`); return response.data; }
     catch (error) { setToast(error.message); }
     finally { setBusyJourney(''); }
   }
 
   async function cancelJourney(item) {
     setBusyJourney(item.key);
-    try { const response = await api.cancel(item.id, item.key, session.token); saveJourney(response.data, item, item.flight); setToast(response.status === 202 ? 'Cancellation is being processed.' : 'Booking cancelled and seats released.'); }
+    try { const response = await api.cancel(item.id, item.serverRecord ? undefined : item.key, session.token); saveJourney(response.data, item, item.flight); setToast(response.status === 202 ? 'Cancellation is being processed.' : 'Booking cancelled and seats released.'); return response.data; }
     catch (error) { setToast(error.message); }
     finally { setBusyJourney(''); }
   }
@@ -318,7 +376,7 @@ export default function App() {
       <div className="flex items-center gap-2">{session ? <div className="hidden items-center gap-3 sm:flex"><div className="text-right"><p className="text-xs font-bold text-[#0d2f46]">{session.email}</p><p className="text-[11px] text-slate-400">Signed in</p></div><button title="Sign out" aria-label="Sign out" onClick={() => { setSession(null); sessionStorage.removeItem(SESSION_KEY); setToast('Signed out.'); }} className="icon-button"><LogOut size={18} /></button></div> : <Button onClick={() => setAuthOpen(true)} variant="dark" className="hidden !px-4 !py-2.5 sm:inline-flex">Sign in <ArrowUpRight size={15} /></Button>}<button onClick={() => setMobileOpen(value => !value)} aria-label="Open menu" className="icon-button md:hidden"><Menu size={21} /></button></div>
     </div>{mobileOpen && <nav aria-label="Mobile navigation" className="container-xl flex flex-col gap-1 border-t border-slate-100 py-3 md:hidden">{tabs.map(([name, label]) => <button key={name} onClick={() => navigate(name)} className={`rounded-lg px-4 py-2 text-left text-sm font-semibold ${view === name ? 'bg-[#edf5f6] text-[#17637a]' : 'text-slate-600'}`}>{label}</button>)}{!session && <button onClick={() => { setAuthOpen(true); setMobileOpen(false); }} className="rounded-lg px-4 py-2 text-left text-sm font-semibold text-[#17637a]">Sign in</button>}</nav>}</header>
     {view === 'explore' && <Explore catalog={catalog} catalogError={catalogError} onReloadCatalog={reloadCatalog} airportsById={airportsById} onSelectFlight={selectFlight} onOperations={() => navigate('operations')} />}
-    {view === 'journeys' && <Journeys journeys={journeys} session={session} onSignIn={() => setAuthOpen(true)} onRetry={retryJourney} onCancel={cancelJourney} busyId={busyJourney} />}
+    {view === 'journeys' && <Journeys key={session?.token || 'guest'} journeys={journeys} session={session} onSignIn={() => setAuthOpen(true)} onRetry={retryJourney} onCancel={cancelJourney} busyId={busyJourney} />}
     {view === 'operations' && <Operations catalog={catalog} reloadCatalog={reloadCatalog} session={session} onSignIn={() => setAuthOpen(true)} notify={setToast} airportsById={airportsById} />}
     <footer className="border-t border-[#e2eaec] bg-white"><div className="container-xl flex flex-col items-start justify-between gap-4 py-8 text-xs text-slate-500 sm:flex-row sm:items-center"><div className="flex items-center gap-2 font-extrabold text-[#0b2a42]"><Plane size={17} className="-rotate-45 text-[#e8774f]" /> aeris<span className="font-normal text-slate-400">· flight booking demo</span></div><span>Built on live flight, booking, Redis and RabbitMQ services · No payment processing</span></div></footer>
     {authOpen && <AuthModal onClose={() => setAuthOpen(false)} onSuccess={signedIn} />}

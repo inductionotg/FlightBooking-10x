@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-01T09:25:10.063Z",
+  "timestamp": "2026-10-06T10:25:56.780Z",
   "checks": [
     {
       "name": "Auth_Service: complete migration history on empty schema",
@@ -35,6 +35,10 @@
     },
     {
       "name": "Booking_Service: repeated migrate succeeds",
+      "passed": true
+    },
+    {
+      "name": "Booking: history index contains owner/cursor columns and rolls back cleanly",
       "passed": true
     },
     {
@@ -79,10 +83,10 @@
     }
   ],
   "schemasRemoved": [
-    "migration_check_d1aa53375ba8e456",
-    "migration_check_810a4c863e445ddd",
-    "migration_check_e728be8c3e2b61bf",
-    "migration_check_046df7a522aa6800"
+    "migration_check_ab0240db48137e61",
+    "migration_check_9704122cce0dba4d",
+    "migration_check_d3a794a628ec8c0d",
+    "migration_check_9bcf86e994842dba"
   ],
   "passed": true
 }

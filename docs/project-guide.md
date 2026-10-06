@@ -148,8 +148,10 @@ All service routes below start with `/api/v1`. Replace `{id}` with an integer. T
 | Flights | `PATCH /api/v1/city/{id}`, `DELETE /api/v1/city/{id}` | Update/delete city |
 | Flights | `POST /api/v1/airports` | Create airport |
 | Flights | `POST /api/v1/airplanes` | Create aircraft: `modelNumber`, `capacity` |
+| Booking `:3003` | `GET /api/v1/booking` | Authenticated owner history; `limit` 1–50, optional `beforeId`; returns `items` and `nextCursor` |
+| Booking | `GET /api/v1/booking/{id}` | Current status for the token owner; 404 for another account’s booking |
 | Booking `:3003` | `POST /api/v1/booking` | Authenticated create/retry: `flightId`, `noOfSeats`; optional `notificationEmail`; send token and stable `Idempotency-Key` |
-| Booking | `POST /api/v1/booking/{id}/cancel` | Cancel own booking: send token and original `Idempotency-Key`; no user ID body needed |
+| Booking | `POST /api/v1/booking/{id}/cancel` | Cancel own booking: send token; original `Idempotency-Key` is optional, validated when supplied |
 | Notifications `:3004` | `POST /api/v1/createticket` | Legacy reminder: `subject`, `content`, `recepientEmail`, `notificationTime` (spelling is in the existing API) |
 | Notifications | `DELETE /api/v1/deleteticket/{id}` | Delete legacy reminder ticket |
 

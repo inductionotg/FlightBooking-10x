@@ -12,6 +12,8 @@ The [Aeris UI](frontend/README.md) adds customer flight search/booking and local
 
 Run `node scripts/seed-demo-catalog.js` once the flight service is up to add real Indian city/airport names and recognizable airline labels. [Demo-data details and sources](docs/demo-data.md) distinguish those real names from the fictional schedules and fares.
 
+My journeys now loads [durable booking history](docs/booking-history.md) from the authenticated Booking API. Sign in again after closing your browser to see and cancel your own reservations.
+
 ## First-time setup (PowerShell)
 
 Start Docker Desktop. From the root of your `FlightBooking-10x` checkout, install the locked dependencies:

@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-10-06T10:23:04.573Z",
+  "before": [
+    {
+      "id": 1,
+      "select_type": "SIMPLE",
+      "table": "Bookings",
+      "partitions": null,
+      "type": "index",
+      "possible_keys": null,
+      "key": "PRIMARY",
+      "key_len": "4",
+      "ref": null,
+      "rows": 21,
+      "filtered": 10,
+      "Extra": "Using where; Backward index scan"
+    }
+  ],
+  "after": [
+    {
+      "id": 1,
+      "select_type": "SIMPLE",
+      "table": "Bookings",
+      "partitions": null,
+      "type": "index",
+      "possible_keys": "bookings_user_id_history",
+      "key": "PRIMARY",
+      "key_len": "4",
+      "ref": null,
+      "rows": 21,
+      "filtered": 100,
+      "Extra": "Using where; Backward index scan"
+    }
+  ]
+}

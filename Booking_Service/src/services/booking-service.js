@@ -20,6 +20,32 @@ function validateKey(key) {
 class BookingService {
     constructor({flightClient = axios} = {}) { this.flightClient = flightClient; }
 
+    async listBookings(userId, {limit = '20', beforeId} = {}) {
+        if (!/^\d+$/.test(String(limit)) || Number(limit) < 1 || Number(limit) > 50 ||
+            (beforeId !== undefined && (!/^\d+$/.test(String(beforeId)) || !Number.isSafeInteger(Number(beforeId)) || Number(beforeId) < 1))) {
+            throw problem(400, 'INVALID_PAGE', 'Use limit 1–50 and a positive beforeId cursor');
+        }
+        const size = Number(limit);
+        const rows = await Booking.findAll({
+            where:{userId, ...(beforeId === undefined ? {} : {id:{[Op.lt]:Number(beforeId)}})},
+            order:[['id','DESC']], limit:size + 1
+        });
+        return {items:rows.slice(0,size), nextCursor:rows.length > size ? rows[size - 1].id : null};
+    }
+
+    async getOwnedBooking(id, userId) {
+        if (!Number.isSafeInteger(id) || id <= 0) throw problem(400, 'INVALID_BOOKING', 'A valid booking ID is required');
+        const booking = await Booking.findOne({where:{id,userId}});
+        if (!booking) throw problem(404, 'BOOKING_NOT_FOUND', 'Booking not found');
+        return booking;
+    }
+
+    async cancelOwnedBooking(id, userId) {
+        const booking = await this.getOwnedBooking(id,userId);
+        if (!booking.requestKey) throw problem(409, 'LEGACY_BOOKING', 'This older booking requires manual cancellation');
+        return this.cancelExistingBooking(booking);
+    }
+
     async createBooking(data, key = crypto.randomUUID()) {
         validateKey(key);
         const payload = {flightId: Number(data.flightId), userId: Number(data.userId), noOfSeats: Number(data.noOfSeats ?? 1)};
@@ -115,6 +141,11 @@ class BookingService {
         }
         const booking = await Booking.findOne({where: {id, userId, requestKey: requestKey(userId, key)}});
         if (!booking) throw problem(404, 'BOOKING_NOT_FOUND', 'Booking not found for this request key');
+        return this.cancelExistingBooking(booking);
+    }
+
+    async cancelExistingBooking(booking) {
+        const id = booking.id;
         await Booking.update({status: 'Cancelled', cancelRequested: true, reservationReleased: false, nextAttemptAt: later()}, {
             where: {id, cancelRequested: false}
         });

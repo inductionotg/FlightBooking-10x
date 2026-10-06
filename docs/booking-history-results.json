@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-10-06T10:27:03.322Z",
+  "checks": [
+    {
+      "name": "History requires a valid token",
+      "passed": true
+    },
+    {
+      "name": "Fresh sign-in retrieves durable history with stable cursor pagination",
+      "passed": true
+    },
+    {
+      "name": "History omits internal keys, trace context, and notification addresses",
+      "passed": true
+    },
+    {
+      "name": "Another user cannot list, read, or cancel these bookings",
+      "passed": true
+    },
+    {
+      "name": "Invalid pagination is rejected",
+      "passed": true
+    },
+    {
+      "name": "Owner cancellation works without a browser key and repeated calls release seats once",
+      "passed": true
+    }
+  ],
+  "passed": true
+}

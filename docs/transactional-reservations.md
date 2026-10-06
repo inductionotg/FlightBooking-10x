@@ -51,7 +51,7 @@ Idempotency-Key: booking-attempt-unique-uuid
 
 Keys are scoped to the user ID and stored as a SHA-256 digest with a unique database index. Clients should generate and persist their key **before** the first call. For backward compatibility, omitting the key still works and the server returns a generated key in the `Idempotency-Key` header; if that first response is lost, a client without a preselected key cannot safely deduplicate the retry. Key reuse with changed flight/seat data returns 409.
 
-Cancel using the original key and user ID:
+Cancel using the owner token. The original key can optionally be supplied for compatibility:
 
 ```http
 POST /api/v1/booking/789/cancel
@@ -62,7 +62,7 @@ Idempotency-Key: booking-attempt-unique-uuid
 {}
 ```
 
-Returns 200 when release is complete, or 202 while it is being retried. Wrong keys or a different authenticated owner return 404. Booking and cancellation now require a verified token and ignore body `userId`. Cancellation additionally requires the original key. See [authorization](authorization.md).
+Returns 200 when release is complete, or 202 while it is being retried. Wrong keys or a different authenticated owner return 404. Booking and cancellation now require a verified token and ignore body `userId`. Owner cancellation no longer requires the browser’s original key; if one is supplied, it is still validated. See [authorization](authorization.md).
 
 Flight reservation endpoints require `x-reservation-key` matching `RESERVATION_SERVICE_KEY` in both services. A missing configured key disables those endpoints (503); a missing/wrong request key returns 401. Generated local secrets stay in ignored .env files.
 

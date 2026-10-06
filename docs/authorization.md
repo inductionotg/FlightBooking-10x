@@ -29,7 +29,8 @@ sequenceDiagram
 | Direct flight search, detail, cities, catalog | Public reads |
 | City create/bulk create/update/delete; airport, aircraft, flight create; flight update | Valid token and current ADMIN role |
 | Booking create/retry | Valid token; body `userId` is ignored |
-| Booking cancellation | Valid owner token and original idempotency key; body `userId` is ignored |
+| Booking history/status | Valid owner token; account IDs supplied by the client are ignored |
+| Booking cancellation | Valid owner token; original key is optional, validated when supplied; body `userId` is ignored |
 | Auth `/me`, `/isAuthenticated`, `/isAdmin` | Valid `x-access-token`; role checks use its owner |
 | Auth user lookup/deletion | Same account or ADMIN |
 | Internal reservation/release and metrics | Existing independent service keys |
@@ -58,7 +59,7 @@ The seed script signs in using the local admin credentials. The smoke, reservati
 
 ## Scope and capacity
 
-The React console checks roles for navigation, while the backend remains the enforcement boundary. My journeys still contains only receipts retained in the current browser session; durable booking history is a separate next step. Legacy notification-ticket routes and the development proxy remain local-only. This is an authorization retrofit, not a claim that the entire system is ready for public deployment.
+The React console checks roles for navigation, while the backend remains the enforcement boundary. My journeys loads durable account history through the authenticated Booking API; see [booking history](booking-history.md). Legacy notification-ticket routes and the development proxy remain local-only. This is an authorization retrofit, not a claim that the entire system is ready for public deployment.
 
 Booking now performs an additional auth lookup, including retries and cancellation. Public flight reads do not acquire that dependency. Existing 20/200 requests-per-second measurements predate these guards and must not be presented as measurements of this version. Rerun those benchmarks when returning to the deferred capacity work.
 

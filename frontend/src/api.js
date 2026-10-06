@@ -41,9 +41,11 @@ export const api = {
   signUp: (email, password) => request('auth', '/signup', { method: 'POST', body: { email, password } }),
   verifyToken: token => request('auth', '/isAuthenticated', { headers: { 'x-access-token': token } }),
   me: token => request('auth', '/me', { headers: { 'x-access-token': token } }),
+  bookings: (token, beforeId) => request('booking', `/booking?limit=20${beforeId ? `&beforeId=${encodeURIComponent(beforeId)}` : ''}`, { headers: { 'x-access-token': token } }),
+  booking: (id, token) => request('booking', `/booking/${encodeURIComponent(id)}`, { headers: { 'x-access-token': token } }),
   book: (body, key, token) => request('booking', '/booking', { method: 'POST', body, headers: { 'Idempotency-Key': key, 'x-access-token': token } }),
   cancel: (id, key, token) => request('booking', `/booking/${encodeURIComponent(id)}/cancel`, {
-    method: 'POST', headers: { 'Idempotency-Key': key, 'x-access-token': token }
+    method: 'POST', headers: { ...(key ? {'Idempotency-Key': key} : {}), 'x-access-token': token }
   }),
   createCity: (name, token) => request('flights', '/city', { method: 'POST', body: { name }, headers: { 'x-access-token': token } }),
   createAirport: (body, token) => request('flights', '/airports', { method: 'POST', body, headers: { 'x-access-token': token } }),
