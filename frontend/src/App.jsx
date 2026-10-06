@@ -306,6 +306,7 @@ export default function App() {
   const [catalog, setCatalog] = useState(null);
   const [catalogError, setCatalogError] = useState('');
   const [session, setSession] = useState(() => readStored(SESSION_KEY, null));
+  const authVersion = useRef(0);
   const [journeys, setJourneys] = useState(() => readStored(JOURNEYS_KEY, []));
   const [authOpen, setAuthOpen] = useState(false);
   const [selectedFlight, setSelectedFlight] = useState(null);
@@ -325,12 +326,30 @@ export default function App() {
     } catch (error) { setCatalogError(error.message); }
   }
   useEffect(() => { reloadCatalog(); }, []);
-  useEffect(() => { if (session) api.me(session.token).then(({ data }) => { const verified = {token: session.token, ...data}; setSession(verified); sessionStorage.setItem(SESSION_KEY, JSON.stringify(verified)); }).catch(() => { setSession(null); sessionStorage.removeItem(SESSION_KEY); }); }, []);
+  useEffect(() => {
+    const version = ++authVersion.current;
+    if (session) api.me(session.token).then(({ data }) => {
+      if (version !== authVersion.current) return;
+      const verified = { token: session.token, ...data };
+      setSession(verified); sessionStorage.setItem(SESSION_KEY, JSON.stringify(verified));
+    }).catch(() => {
+      if (version !== authVersion.current) return;
+      setSession(null); sessionStorage.removeItem(SESSION_KEY);
+    });
+    return () => { authVersion.current++; };
+  }, []);
   useEffect(() => { sessionStorage.setItem(JOURNEYS_KEY, JSON.stringify(journeys)); }, [journeys]);
   useEffect(() => { if (!toast) return; const timer = setTimeout(() => setToast(''), 4500); return () => clearTimeout(timer); }, [toast]);
   const airportsById = useMemo(() => Object.fromEntries((catalog?.airports || []).map(airport => [airport.id, airport])), [catalog]);
   const navigate = target => { setView(target); setMobileOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); };
-  const signedIn = value => { setSession(value); sessionStorage.setItem(SESSION_KEY, JSON.stringify(value)); setAuthOpen(false); setToast(`Welcome, ${value.email}`); };
+  const signedIn = value => { authVersion.current++; setSession(value); sessionStorage.setItem(SESSION_KEY, JSON.stringify(value)); setAuthOpen(false); setToast(`Welcome, ${value.email}`); };
+  const signOut = () => {
+    authVersion.current++;
+    setSession(null); sessionStorage.removeItem(SESSION_KEY);
+    setMobileOpen(false); setAuthOpen(false); setSelectedFlight(null);
+    setActiveAttempt(null); setBookingFeedback(null); setBookingError('');
+    setView('explore'); setToast('Logged out.');
+  };
   const saveJourney = (receipt, attempt, flight) => setJourneys(current => [{ ...receipt, key: attempt.key, body: attempt.body, userId: receipt.userId ?? attempt.userId, flight, savedAt: Date.now() }, ...current.filter(item => item.key !== attempt.key)]);
 
   async function book(form) {
@@ -373,8 +392,8 @@ export default function App() {
   return <div className="min-h-screen bg-[#f6f8f8] text-[#12354a]">
     <header className="relative z-30 border-b border-[#e5edef] bg-white"><div className="container-xl flex h-20 items-center justify-between gap-6"><button onClick={() => navigate('explore')} className="flex items-center gap-2.5 text-left"><span className="brand-mark"><Plane size={21} strokeWidth={2.2} className="-rotate-45" /></span><span className="text-2xl font-extrabold tracking-[-0.065em] text-[#092843]">aeris<span className="text-[#e8774f]">.</span></span></button>
       <nav aria-label="Main navigation" className="hidden items-center gap-1 md:flex">{tabs.map(([name, label]) => <button key={name} onClick={() => navigate(name)} className={`nav-link ${view === name ? 'nav-link-active' : ''}`}>{label}</button>)}</nav>
-      <div className="flex items-center gap-2">{session ? <div className="hidden items-center gap-3 sm:flex"><div className="text-right"><p className="text-xs font-bold text-[#0d2f46]">{session.email}</p><p className="text-[11px] text-slate-400">Signed in</p></div><button title="Sign out" aria-label="Sign out" onClick={() => { setSession(null); sessionStorage.removeItem(SESSION_KEY); setToast('Signed out.'); }} className="icon-button"><LogOut size={18} /></button></div> : <Button onClick={() => setAuthOpen(true)} variant="dark" className="hidden !px-4 !py-2.5 sm:inline-flex">Sign in <ArrowUpRight size={15} /></Button>}<button onClick={() => setMobileOpen(value => !value)} aria-label="Open menu" className="icon-button md:hidden"><Menu size={21} /></button></div>
-    </div>{mobileOpen && <nav aria-label="Mobile navigation" className="container-xl flex flex-col gap-1 border-t border-slate-100 py-3 md:hidden">{tabs.map(([name, label]) => <button key={name} onClick={() => navigate(name)} className={`rounded-lg px-4 py-2 text-left text-sm font-semibold ${view === name ? 'bg-[#edf5f6] text-[#17637a]' : 'text-slate-600'}`}>{label}</button>)}{!session && <button onClick={() => { setAuthOpen(true); setMobileOpen(false); }} className="rounded-lg px-4 py-2 text-left text-sm font-semibold text-[#17637a]">Sign in</button>}</nav>}</header>
+      <div className="flex shrink-0 items-center gap-2">{session ? <><div className="hidden max-w-[180px] text-right lg:block"><p className="truncate text-xs font-bold text-[#0d2f46]">{session.email}</p><p className="text-[11px] text-slate-400">Signed in</p></div><Button onClick={signOut} variant="outline" className="!px-3 !py-2.5"><LogOut size={16} /> Log out</Button></> : <Button onClick={() => setAuthOpen(true)} variant="dark" className="!px-3 !py-2.5">Sign in <ArrowUpRight size={15} /></Button>}<button onClick={() => setMobileOpen(value => !value)} aria-label="Open menu" className="icon-button md:hidden"><Menu size={21} /></button></div>
+    </div>{mobileOpen && <nav aria-label="Mobile navigation" className="container-xl flex flex-col gap-1 border-t border-slate-100 py-3 md:hidden">{tabs.map(([name, label]) => <button key={name} onClick={() => navigate(name)} className={`rounded-lg px-4 py-2 text-left text-sm font-semibold ${view === name ? 'bg-[#edf5f6] text-[#17637a]' : 'text-slate-600'}`}>{label}</button>)}{session ? <><p className="truncate px-4 pt-3 text-xs text-slate-500">{session.email}</p><button onClick={signOut} className="flex items-center gap-2 rounded-lg px-4 py-2 text-left text-sm font-semibold text-[#17637a]"><LogOut size={16} /> Log out</button></> : <button onClick={() => { setAuthOpen(true); setMobileOpen(false); }} className="rounded-lg px-4 py-2 text-left text-sm font-semibold text-[#17637a]">Sign in</button>}</nav>}</header>
     {view === 'explore' && <Explore catalog={catalog} catalogError={catalogError} onReloadCatalog={reloadCatalog} airportsById={airportsById} onSelectFlight={selectFlight} onOperations={() => navigate('operations')} />}
     {view === 'journeys' && <Journeys key={session?.token || 'guest'} journeys={journeys} session={session} onSignIn={() => setAuthOpen(true)} onRetry={retryJourney} onCancel={cancelJourney} busyId={busyJourney} />}
     {view === 'operations' && <Operations catalog={catalog} reloadCatalog={reloadCatalog} session={session} onSignIn={() => setAuthOpen(true)} notify={setToast} airportsById={airportsById} />}

@@ -25,4 +25,6 @@ Vite proxies `/backend/auth` to auth on port 3001, `/backend/flights` to flights
 3. **My journeys:** loads your account’s booking history from MySQL, newest first. Refresh status, load older pages, and cancel your own reservations after signing in again on any browser. See [history behavior](../docs/booking-history.md).
 4. **Admin tools:** sign in with the generated local admin account, create catalog entries for a route, publish a flight, or find a flight by ID to change its fare or gate. The new `GET /api/v1/catalog` and `POST /api/v1/airplanes` flight-service routes support this screen.
 
+5. **Log out:** use the labelled header button on desktop or mobile, or the mobile-menu action. It clears your signed-in session and returns to Explore.
+
 **Authorization:** Flight write APIs verify the token and require the ADMIN role. Booking and cancellation derive the user ID from the token; a browser-supplied `userId` is ignored. Run `node scripts/create-local-admin.js` from the repository root once; sign in with the credentials saved in ignored `.local/admin-credentials.json`. New sign-ups have no admin role. See [backend authorization](../docs/authorization.md).
