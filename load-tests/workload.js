@@ -40,8 +40,8 @@ export function details() {
 }
 export function booking() {
   const id=fixture.bookingIds[exec.scenario.iterationInTest%fixture.bookingIds.length];
-  const response=http.post(`${bookingBase}/api/v1/booking`,JSON.stringify({userId:fixture.userId,flightId:id,noOfSeats:1}),
-    {headers:{'Content-Type':'application/json'},tags:{name:'booking'},timeout:'10s'});
+  const response=http.post(`${bookingBase}/api/v1/booking`,JSON.stringify({flightId:id,noOfSeats:1}),
+    {headers:{'Content-Type':'application/json','x-access-token':fixture.token},tags:{name:'booking'},timeout:'10s'});
   record('booking',response,data=>data.flightId===id&&data.status==='Booked'&&data.totalCost===2500);
 }
 export function handleSummary(data) {

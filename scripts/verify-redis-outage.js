@@ -4,13 +4,15 @@ const fs=require('node:fs');
 const path=require('node:path');
 const crypto=require('node:crypto');
 const root=path.resolve(__dirname,'..');
+let token;
 const fixture=JSON.parse(fs.readFileSync(path.join(root,'.local/redis-test-fixture.json')));
 const env=require(path.join(root,'FlightandSearchService/node_modules/dotenv')).parse(fs.readFileSync(path.join(root,'FlightandSearchService/.env')));
 async function request(port,route,method='GET',data,key){
-  const response=await fetch(`http://[::1]:${port}${route}`,{method,headers:{'Content-Type':'application/json','x-reservation-key':env.RESERVATION_SERVICE_KEY,...(key?{'Idempotency-Key':key}:{})},...(data?{body:JSON.stringify(data)}:{}),signal:AbortSignal.timeout(5000)});
+  const response=await fetch(`http://[::1]:${port}${route}`,{method,headers:{'Content-Type':'application/json','x-access-token':token,'x-reservation-key':env.RESERVATION_SERVICE_KEY,...(key?{'Idempotency-Key':key}:{})},...(data?{body:JSON.stringify(data)}:{}),signal:AbortSignal.timeout(5000)});
   assert.equal(response.status,200);return (await response.json()).data;
 }
 async function main(){
+  token=await require('./local-auth').adminToken();
   const started=Date.now();
   const metrics=await request(3002,'/api/v1/internal/cache-metrics');assert.equal(metrics.ready,false);
   const before=await request(3002,`/api/v1/flights/${fixture.flightId}`);

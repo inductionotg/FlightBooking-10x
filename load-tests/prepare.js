@@ -54,6 +54,8 @@ async function prepare(run) {
       bookingIds.push(flight.id);
     }
     const fixture={...catalog,bookingIds,initialSeats:300};
+    const {signIn} = require('../scripts/local-auth');
+    fixture.token = await signIn(catalog.email, catalog.password);
     fs.writeFileSync(fixturePath,JSON.stringify(fixture));
     return fixturePath;
   } finally {for(const db of dbs) await db.sequelize.close();}

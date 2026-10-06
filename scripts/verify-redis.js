@@ -3,6 +3,7 @@ const path=require('node:path');
 const fs=require('node:fs');
 const crypto=require('node:crypto');
 const root=path.resolve(__dirname,'..');
+let token;
 require(path.join(root,'FlightandSearchService/node_modules/dotenv')).config({path:path.join(root,'FlightandSearchService/.env')});
 const {FlightCache,cache,searchKey}=require(path.join(root,'FlightandSearchService/src/utils/flight-cache'));
 const db=require(path.join(root,'FlightandSearchService/src/models'));
@@ -17,11 +18,12 @@ async function createCache(options={}){
   assert.ok(instance.client.isReady);return instance;
 }
 async function request(port,route,method='GET',data,key){
-  const response=await fetch(`http://[::1]:${port}${route}`,{method,headers:{'Content-Type':'application/json','x-reservation-key':process.env.RESERVATION_SERVICE_KEY,...(key?{'Idempotency-Key':key}:{})},...(data?{body:JSON.stringify(data)}:{}),signal:AbortSignal.timeout(10000)});
+  const response=await fetch(`http://[::1]:${port}${route}`,{method,headers:{'Content-Type':'application/json','x-access-token':token,'x-reservation-key':process.env.RESERVATION_SERVICE_KEY,...(key?{'Idempotency-Key':key}:{})},...(data?{body:JSON.stringify(data)}:{}),signal:AbortSignal.timeout(10000)});
   assert.equal(response.status,200===response.status?200:method==='POST'&&route==='/api/v1/flights'?201:200,`${route} returned ${response.status}`);
   return (await response.json()).data;
 }
 async function main(){
+  token=await require('./local-auth').adminToken();
   const c=await createCache();let loads=0;
   await c.read('flight:1',1,async()=>{loads++;return {id:1,totalSeats:10};});
   await c.read('flight:1',1,async()=>{loads++;return {};});assert.equal(loads,1);

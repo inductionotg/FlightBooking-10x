@@ -19,7 +19,7 @@ const normal = new BookingService();
 const report={timestamp:new Date().toISOString(),checks:[],flights:[]};
 function passed(name){report.checks.push({name,passed:true});console.log(`PASS: ${name}`);}
 const hash = (user,key) => crypto.createHash('sha256').update(`${user}\0${key}`).digest('hex');
-const userId=987654; // Synthetic user; original booking domain has no cross-DB user FK.
+let userId, token;
 async function newFlight(seats=1){
   const flight=await flightDb.Flight.create({flightNumber:`TX-${crypto.randomUUID()}`,airplaneId:1,
     departureAirportId:1,arrivalAirportId:2,departureTime:'2099-01-01T10:00:00Z',arrivalTime:'2099-01-01T12:00:00Z',price:2500,totalSeats:seats});
@@ -27,7 +27,7 @@ async function newFlight(seats=1){
 }
 const seats = async id => (await flightDb.Flight.findByPk(id)).totalSeats;
 async function post(port, route, data, key, extra={}){
-  const response=await fetch(`http://[::1]:${port}${route}`,{method:'POST',headers:{'Content-Type':'application/json',...(key?{'Idempotency-Key':key}:{}),...extra},body:JSON.stringify(data),signal:AbortSignal.timeout(15000)});
+  const response=await fetch(`http://[::1]:${port}${route}`,{method:'POST',headers:{'Content-Type':'application/json','x-access-token':token,...(key?{'Idempotency-Key':key}:{}),...extra},body:JSON.stringify(data),signal:AbortSignal.timeout(15000)});
   return {status:response.status,body:await response.json(),key:response.headers.get('Idempotency-Key')};
 }
 async function waitFor(id,predicate){
@@ -36,6 +36,7 @@ async function waitFor(id,predicate){
   throw new Error(`Recovery deadline exceeded for booking ${id}`);
 }
 async function main(){
+  const identity=await require('./local-auth').adminIdentity(); userId=identity.id; token=identity.token;
   let flight=await newFlight();
   const competing=await Promise.all(Array.from({length:20},()=>post(3003,'/api/v1/booking',{flightId:flight.id,userId,noOfSeats:1},crypto.randomUUID())));
   assert.equal(competing.filter(r=>r.status===200).length,1);

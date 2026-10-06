@@ -42,6 +42,8 @@ flowchart LR
   Client -->|"Direct booking or cancellation"| Booking
   Client -->|"Legacy reminder ticket API"| Notifications
 
+  Flights -->|"Verify token and ADMIN role on writes"| Auth
+  Booking -->|"Verify caller token"| Auth
   Auth -->|"Users and roles"| AuthDB
   Flights -->|"Catalog and seat reservations"| FlightDB
   Flights -->|"Search and detail cache"| Redis
@@ -60,7 +62,7 @@ flowchart LR
   Grafana -->|"Queries metrics"| Prometheus
 ```
 
-Solid arrows are request, data, or event paths. Dotted arrows are Prometheus pulling metrics from services. The UI's `/backend/*` calls are forwarded by Vite directly to auth, flights and booking; they do not pass through the existing gateway. The admin screen has no backend role enforcement, so it is for trusted local development only. The four database schemas share one MySQL container; the diagram does not imply four database servers. Service HTTP ports use `http://[::1]:PORT` in the local setup, while Docker UI ports bind to `127.0.0.1`. The gateway currently proxies **flight routes only**. Booking and legacy reminder APIs are called directly and must not be treated as protected by the gateway's token check. The [API reference](project-guide.md#api-reference) lists the exact routes.
+Solid arrows are request, data, or event paths. Dotted arrows are Prometheus pulling metrics from services. The UI's `/backend/*` calls are forwarded by Vite directly to auth, flights and booking; they do not pass through the existing gateway. Flight write routes enforce ADMIN roles in the backend, and booking routes use the verified caller identity. See [authorization](authorization.md). The four database schemas share one MySQL container; the diagram does not imply four database servers. Service HTTP ports use `http://[::1]:PORT` in the local setup, while Docker UI ports bind to `127.0.0.1`. The gateway currently proxies **flight routes only**. Booking validates tokens itself. Legacy reminder APIs remain local-only and are not protected by the gateway. The [API reference](project-guide.md#api-reference) lists the exact routes.
 
 | Component | What it owns |
 | --- | --- |
@@ -110,6 +112,7 @@ Search and detail responses have a maximum **five-second TTL**. Flight edits and
 sequenceDiagram
   participant C as Client
   participant B as Booking
+  participant A as Auth
   participant BD as Booking MySQL
   participant F as Flights
   participant FD as Flight MySQL
@@ -118,7 +121,9 @@ sequenceDiagram
   participant ND as Notification MySQL
   participant M as Mailpit
 
-  C->>B: POST /api/v1/booking + Idempotency-Key
+  C->>B: POST /api/v1/booking + token + Idempotency-Key
+  B->>A: GET /api/v1/me + token
+  A-->>B: Verified caller identity
   B->>BD: Save InProcess booking with request key
   B->>F: POST /api/v1/reservations + internal key
   F->>FD: Lock flight row, verify seats, deduct and save receipt
@@ -146,7 +151,7 @@ sequenceDiagram
 
 The flight row lock, seat deduction, and reservation receipt are one MySQL transaction. Booking confirmation and its outbox event are another transaction in the booking schema; no transaction spans both services. A stable booking ID and `Idempotency-Key` let recovery retry without deducting seats twice. Insufficient seats produce a terminal booking rejection; a 202 response means **pending**, not confirmed. The outbox publisher can retry when RabbitMQ is down, and the notification consumer records each event before acknowledging it. Mailpit captures local SMTP messages, not external delivery. See [reservation correctness](transactional-reservations.md) and [RabbitMQ delivery](rabbitmq.md).
 
-Cancellation uses `POST /api/v1/booking/{id}/cancel` with the original key and `userId`. Booking saves cancellation intent, then asks Flights to release the reservation. The flight service restores seats and marks the receipt released transactionally. If release is delayed, the API returns 202 and recovery retries it. A confirmed-booking notification may already have been sent; cancellation notifications are not implemented.
+Cancellation uses `POST /api/v1/booking/{id}/cancel` with the original key and the owner's token. Booking saves cancellation intent, then asks Flights to release the reservation. The flight service restores seats and marks the receipt released transactionally. If release is delayed, the API returns 202 and recovery retries it. A confirmed-booking notification may already have been sent; cancellation notifications are not implemented.
 
 ## Observability and operational boundary
 

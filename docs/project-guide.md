@@ -54,12 +54,15 @@ The four MySQL schemas are in **one** local MySQL container. Redis, RabbitMQ, Pr
 sequenceDiagram
   participant C as Client
   participant B as Booking
+  participant A as Auth
   participant F as Flights
   participant DB as MySQL
   participant Q as RabbitMQ
   participant N as Notifications
   participant M as Mailpit
-  C->>B: POST /api/v1/booking + Idempotency-Key
+  C->>B: POST /api/v1/booking + token + Idempotency-Key
+  B->>A: GET /api/v1/me + token
+  A-->>B: Verified caller identity
   B->>DB: Save InProcess booking
   B->>F: POST /api/v1/reservations (internal key)
   F->>DB: Lock flight row, deduct seats, save receipt
@@ -95,6 +98,7 @@ node scripts/configure-monitoring.js
 node scripts/build-dashboard.js
 docker compose -f compose.local.yml --profile messaging --profile observability up -d --wait
 ./scripts/start-local.ps1
+node scripts/create-local-admin.js
 node scripts/seed-demo-catalog.js
 node scripts/smoke-local.js
 node scripts/verify-monitoring.js
@@ -129,9 +133,10 @@ All service routes below start with `/api/v1`. Replace `{id}` with an integer. T
 | Auth `:3001` | `POST /api/v1/signup` | Create user: `email`, `password` |
 | Auth | `POST /api/v1/signIn` | Get token: `email`, `password` |
 | Auth | `GET /api/v1/isAuthenticated` | Verify `x-access-token` header; called by gateway |
-| Auth | `GET /api/v1/user/{id}` | Get user |
-| Auth | `GET /api/v1/isAdmin` | Admin check; implementation reads `id` from request body |
-| Auth | `DELETE /api/v1/signup/{id}` | Delete user |
+| Auth | `GET /api/v1/me` | Verified caller ID, email, and current roles; requires `x-access-token` |
+| Auth | `GET /api/v1/user/{id}` | Caller or admin only; requires `x-access-token` |
+| Auth | `GET /api/v1/isAdmin` | Check the token owner's current ADMIN role; ignores body IDs |
+| Auth | `DELETE /api/v1/signup/{id}` | Delete own account or, for an admin, another account; requires token |
 | Gateway `:3010` | `* /flightService/api/v1/...` | Authenticates `x-access-token`, strips `/flightService`, forwards to flight service; rate limited |
 | Flights `:3002` | `GET /api/v1/flights` | Search; filters: `departureAirportId`, `arrivalAirportId`, `minPrice`, `maxPrice` |
 | Flights | `GET /api/v1/catalog` | List cities, airports and aircraft for the UI |
@@ -143,12 +148,12 @@ All service routes below start with `/api/v1`. Replace `{id}` with an integer. T
 | Flights | `PATCH /api/v1/city/{id}`, `DELETE /api/v1/city/{id}` | Update/delete city |
 | Flights | `POST /api/v1/airports` | Create airport |
 | Flights | `POST /api/v1/airplanes` | Create aircraft: `modelNumber`, `capacity` |
-| Booking `:3003` | `POST /api/v1/booking` | Create/retry: `flightId`, `userId`, `noOfSeats`; optional `notificationEmail`; send stable `Idempotency-Key` |
-| Booking | `POST /api/v1/booking/{id}/cancel` | Cancel: `userId` body and original `Idempotency-Key` |
+| Booking `:3003` | `POST /api/v1/booking` | Authenticated create/retry: `flightId`, `noOfSeats`; optional `notificationEmail`; send token and stable `Idempotency-Key` |
+| Booking | `POST /api/v1/booking/{id}/cancel` | Cancel own booking: send token and original `Idempotency-Key`; no user ID body needed |
 | Notifications `:3004` | `POST /api/v1/createticket` | Legacy reminder: `subject`, `content`, `recepientEmail`, `notificationTime` (spelling is in the existing API) |
 | Notifications | `DELETE /api/v1/deleteticket/{id}` | Delete legacy reminder ticket |
 
-The flight service also has `POST /api/v1/reservations`, `POST /api/v1/reservations/release`, and `GET /api/v1/internal/cache-metrics`; these require an internal `x-reservation-key` and are **not client APIs**. Each service exposes `/internal/metrics` protected by `x-observability-key`, plus a dedicated local metrics port for Prometheus. Direct booking currently trusts the submitted `userId`; keep these direct APIs on the trusted local network and do not treat the gateway's flight authentication as booking authentication.
+The flight service also has `POST /api/v1/reservations`, `POST /api/v1/reservations/release`, and `GET /api/v1/internal/cache-metrics`; these require an internal `x-reservation-key` and are **not client APIs**. Each service exposes `/internal/metrics` protected by `x-observability-key`, plus a dedicated local metrics port for Prometheus. All public flight/catalog write routes require a token with the ADMIN role. Booking routes verify the token and derive the caller ID from it. Missing/invalid tokens return 401, insufficient roles return 403, and an unavailable auth service returns 503 without performing the write. See [authorization and local admin setup](authorization.md). Legacy notification routes still require a trusted local network.
 
 Example using PowerShell after startup, with IDs from your own seeded flights and users:
 
@@ -156,11 +161,13 @@ Example using PowerShell after startup, with IDs from your own seeded flights an
 $base = 'http://[::1]:3002'
 Invoke-RestMethod "$base/api/v1/flights?departureAirportId=1&arrivalAirportId=2"
 
-$booking = @{ flightId = 123; userId = 456; noOfSeats = 2; notificationEmail = 'demo@example.test' } | ConvertTo-Json
-Invoke-RestMethod 'http://[::1]:3003/api/v1/booking' -Method Post -ContentType 'application/json' -Headers @{ 'Idempotency-Key' = 'demo-booking-123-456' } -Body $booking
+$credentials = @{ email = 'your-account@example.test'; password = 'your-password' } | ConvertTo-Json
+$token = (Invoke-RestMethod 'http://[::1]:3001/api/v1/signIn' -Method Post -ContentType 'application/json' -Body $credentials).data
+$booking = @{ flightId = 123; noOfSeats = 2; notificationEmail = 'demo@example.test' } | ConvertTo-Json
+Invoke-RestMethod 'http://[::1]:3003/api/v1/booking' -Method Post -ContentType 'application/json' -Headers @{ 'Idempotency-Key' = 'demo-booking-123'; 'x-access-token' = $token } -Body $booking
 ```
 
-The IDs above are placeholders; the initial database has no guaranteed flight ID 123 or user ID 456. A successful booking returns 200 `Booked`; a timeout/recovery path may return 202 `InProcess`, which can be retried with **the same key and body**. A conflicting key or unavailable seats can return 409. The [booking API behavior](transactional-reservations.md#api-behavior) documents cancellation and retry details. An email is sent to Mailpit only when `notificationEmail` is supplied and the booking confirms.
+The IDs above are placeholders; the initial database has no guaranteed flight ID 123. A successful booking returns 200 `Booked`; a timeout/recovery path may return 202 `InProcess`, which can be retried with **the same key and body**. A conflicting key or unavailable seats can return 409. The [booking API behavior](transactional-reservations.md#api-behavior) documents cancellation and retry details. An email is sent to Mailpit only when `notificationEmail` is supplied and the booking confirms.
 
 ## Current scaling status
 

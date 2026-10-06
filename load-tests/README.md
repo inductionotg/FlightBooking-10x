@@ -56,3 +56,7 @@ Backend tests call flights and booking directly on IPv6 loopback. They do not cl
 Before/after comparisons must use the same rates, durations, data distribution, settings, versions, and host, with fresh booking inventory. Short local runs show behavior at these loads; they do not establish sustained production capacity.
 
 The `pre-index-10x` run is a fresh Redis-enabled control before the route/price index. The `indexed-baseline` and `indexed-10x-*` runs include that index, with the cache settings unchanged. Check both HTTP failures and SQL digest metrics: a faster database query does not by itself prove higher application capacity. The repeated indexed 10x run starts only after the first run's pending bookings have drained.
+
+## Authentication after the security retrofit
+
+`run.js` / `prepare.js` now sign in the existing local fixture user before each run and save its one-hour token in the ignored `.local/` fixture. Booking workloads send that token; prepare a new run after it expires. Existing published measurements predate these guards. Repeat measurements to quantify the additional auth lookup; they are not evidence of post-authorization capacity.

@@ -17,7 +17,7 @@ const createBooking = async (req, res) => {
     const key = req.get('Idempotency-Key') || crypto.randomUUID();
     if (/^[\x21-\x7e]{1,128}$/.test(key)) res.set('Idempotency-Key', key);
     try {
-        const booking = await bookingService.createBooking(req.body, key);
+        const booking = await bookingService.createBooking({...req.body, userId:req.authUser.id}, key);
         telemetry.bookingOutcome(booking);
         const pending = booking.status === 'InProcess';
         const cancelled = booking.status === 'Cancelled';
@@ -30,7 +30,7 @@ const createBooking = async (req, res) => {
 };
 const cancelBooking = async (req, res) => {
     try {
-        const booking = await bookingService.cancelBooking(Number(req.params.id), Number(req.body.userId), req.get('Idempotency-Key'));
+        const booking = await bookingService.cancelBooking(Number(req.params.id), req.authUser.id, req.get('Idempotency-Key'));
         telemetry.log('booking.cancellation', {bookingId:booking.id,outcome:booking.reservationReleased?'released':'pending'});
         return res.status(booking.reservationReleased ? 200 : 202).json({success: true,
             message: booking.reservationReleased ? 'Booking cancelled and seats released' : 'Cancellation pending seat release', data: output(booking)});

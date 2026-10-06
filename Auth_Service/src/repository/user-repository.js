@@ -50,6 +50,14 @@ class UserRepository{
             throw error
         }
     }
+    async getPrincipalById(userId) {
+        const user = await User.findByPk(userId, {
+            attributes: ['id', 'email'],
+            include: [{ model: Role, attributes: ['name'], through: { attributes: [] } }]
+        });
+        if (!user) return null;
+        return { id: user.id, email: user.email, roles: user.Roles.map(role => role.name) };
+    }
     async getUserByEmail(userEmail){
         try {
             const userByEmail = await User.findOne({
@@ -72,18 +80,8 @@ class UserRepository{
         }
     }
     async isAdmin(userId){
-        try {
-            const user = await User.findByPk(userId)
-            const adminRole = await Role.findOne({
-                where:{
-                    name:'ADMIN'
-                }
-            })
-            return user.hasRole(adminRole)
-        } catch (error) {
-
-            throw error
-        }
+        const principal = await this.getPrincipalById(userId)
+        return Boolean(principal && principal.roles.includes('ADMIN'))
     }
 }
 

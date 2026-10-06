@@ -1,0 +1,275 @@
+{
+  "scope": "Functional regression evidence after authorization retrofit; no new capacity measurement.",
+  "regressionReports": [
+    {
+      "command": "node scripts/verify-reservations.js",
+      "timestamp": "2026-10-05T16:06:50.933Z",
+      "checks": [
+        {
+          "name": "20 concurrent requests for one seat: 1 booked, 19 rejected, zero seats left",
+          "passed": true
+        },
+        {
+          "name": "20 simultaneous retries with one key create one booking and deduct seats once",
+          "passed": true
+        },
+        {
+          "name": "Reusing a key with a different payload returns conflict",
+          "passed": true
+        },
+        {
+          "name": "Legacy inventory overwrite cannot bypass active reservations",
+          "passed": true
+        },
+        {
+          "name": "Retry preserves the original price snapshot",
+          "passed": true
+        },
+        {
+          "name": "Cancellation requires the original key; repeated releases restore seats exactly once",
+          "passed": true
+        },
+        {
+          "name": "Reservation insert failure rolls back the seat deduction",
+          "passed": true
+        },
+        {
+          "name": "Lost reservation reply leaves pending state; retry confirms without another deduction",
+          "passed": true
+        },
+        {
+          "name": "Process exit after reservation commit is recovered by the running background worker",
+          "passed": true
+        },
+        {
+          "name": "Temporary flight-service failure is recovered automatically",
+          "passed": true
+        },
+        {
+          "name": "Failed cancellation release is durably retried by the worker",
+          "passed": true
+        },
+        {
+          "name": "Cancellation before a delayed reserve prevents later deduction",
+          "passed": true
+        },
+        {
+          "name": "Invalid seat counts and unauthenticated internal reservation calls are rejected",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "command": "node scripts/verify-redis.js",
+      "timestamp": "2026-10-05T16:07:12.872Z",
+      "checks": [
+        {
+          "name": "Second read is served from Redis without calling the database loader",
+          "passed": true
+        },
+        {
+          "name": "Search keys normalize filter order/types and distinguish different filters",
+          "passed": true
+        },
+        {
+          "name": "TTL expires stale data even without a successful invalidation",
+          "passed": true
+        },
+        {
+          "name": "A read started before invalidation cannot repopulate the current cache generation",
+          "passed": true
+        },
+        {
+          "name": "Evicting generation metadata cannot resurrect an older cached value",
+          "passed": true
+        },
+        {
+          "name": "Concurrent identical misses share one database load within a process",
+          "passed": true
+        },
+        {
+          "name": "Database fallback rejects excess parallel loads instead of building an unbounded queue",
+          "passed": true
+        },
+        {
+          "name": "A hung Redis command has a bounded deadline",
+          "passed": true
+        },
+        {
+          "name": "Creating a flight invalidates a previously cached empty search",
+          "passed": true
+        },
+        {
+          "name": "Both public read endpoints produce verified cache hits",
+          "passed": true
+        },
+        {
+          "name": "Committed reservation invalidates detail and matching search availability",
+          "passed": true
+        },
+        {
+          "name": "Committed cancellation invalidates cached availability",
+          "passed": true
+        },
+        {
+          "name": "Route/price edits invalidate old and new route searches and flight details",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "command": "node scripts/smoke-local.js",
+      "timestamp": "2026-10-05T16:07:14.822Z",
+      "checks": [
+        {
+          "name": "signup",
+          "status": 200
+        },
+        {
+          "name": "sign-in",
+          "status": 201
+        },
+        {
+          "name": "authentication",
+          "status": 201
+        },
+        {
+          "name": "create-flight",
+          "status": 201
+        },
+        {
+          "name": "search-flight",
+          "status": 200
+        },
+        {
+          "name": "create-booking",
+          "status": 200
+        },
+        {
+          "name": "verify-remaining-seats",
+          "status": 200
+        },
+        {
+          "name": "create-notification-ticket",
+          "status": 201
+        },
+        {
+          "name": "delete-notification-ticket",
+          "status": 200
+        },
+        {
+          "name": "gateway-flight-route",
+          "status": 200
+        },
+        {
+          "name": "gateway-search-filters",
+          "status": 200
+        },
+        {
+          "name": "gateway-search-excludes-price",
+          "status": 200
+        },
+        {
+          "name": "gateway-missing-token",
+          "status": 401
+        },
+        {
+          "name": "gateway-invalid-token",
+          "status": 401
+        }
+      ]
+    },
+    {
+      "command": "node scripts/verify-observability.js",
+      "timestamp": "2026-10-05T16:10:04.200Z",
+      "checks": [
+        {
+          "name": "Standalone service runtime copies match the canonical source",
+          "passed": true
+        },
+        {
+          "name": "All five services expose protected Prometheus-format metrics",
+          "passed": true
+        },
+        {
+          "name": "Concurrent requests preserve separate trace contexts",
+          "passed": true
+        },
+        {
+          "name": "Invalid incoming trace context is replaced",
+          "passed": true
+        },
+        {
+          "name": "Malformed JSON returns a traced structured error",
+          "passed": true
+        },
+        {
+          "name": "Gateway, auth and flight logs share one trace with linked auth spans",
+          "passed": true
+        },
+        {
+          "name": "Booking authorization shares the booking trace with a linked auth span",
+          "passed": true
+        },
+        {
+          "name": "Booking and flight reservation spans share a trace and log the booking ID",
+          "passed": true
+        },
+        {
+          "name": "Every service emits JSON logs without tested credentials, tokens, query values or request bodies",
+          "passed": true
+        },
+        {
+          "name": "HTTP latency, dependency latency and booking outcomes are measured with bounded route labels",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "command": "node scripts/verify-rabbitmq.js",
+      "timestamp": "2026-10-05T16:10:14.637Z",
+      "checks": [
+        {
+          "name": "Booking confirmation durably creates its outbox event",
+          "passed": true
+        },
+        {
+          "name": "Confirmed publish reaches notifications, preserves the trace and completes as Sent",
+          "passed": true
+        },
+        {
+          "name": "Local SMTP inbox contains the booking confirmation addressed to the requested recipient",
+          "passed": true
+        },
+        {
+          "name": "Concurrent idempotent booking retries create one outbox event",
+          "passed": true
+        },
+        {
+          "name": "Broker redelivery and repeat processing do not duplicate durable notifications",
+          "passed": true
+        },
+        {
+          "name": "Malformed events are routed to the durable dead-letter queue",
+          "passed": true
+        },
+        {
+          "name": "Transient consumer failure uses a confirmed delayed retry",
+          "passed": true
+        },
+        {
+          "name": "Exhausted consumer retries reach the dead-letter queue",
+          "passed": true
+        },
+        {
+          "name": "Outbox insert failure rolls back confirmation; retry reuses the reservation without another seat deduction",
+          "passed": true
+        },
+        {
+          "name": "Existing booking requests without email remain compatible and require a recipient",
+          "passed": true
+        }
+      ]
+    }
+  ]
+}

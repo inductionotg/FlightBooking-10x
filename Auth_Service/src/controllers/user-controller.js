@@ -13,7 +13,7 @@ const create = async (req,res)=>{
         return res.status(200).json({
             message:'User created successfully',
             success:true,
-            data:{response},
+            data:{response:{id:response.id, email:response.email}},
             err:{}
         })
     } catch (error) {
@@ -29,6 +29,9 @@ const create = async (req,res)=>{
 
 const destroy = async (req,res) =>{
     try {
+        const principal = await userService.getPrincipal(req.headers['x-access-token']);
+        if (principal.id !== Number(req.params.id) && !principal.roles.includes('ADMIN'))
+            return res.status(403).json({success:false, message:'Cannot delete another account', data:{}});
         const response = await userService.destroy(req.params.id)
         return res.status(201).json({
             message:'User deleted successfully',
@@ -39,17 +42,20 @@ const destroy = async (req,res) =>{
         
     } catch (error) {
         require('../observability').log('operation.failed', {errorType:error.name || 'Error'}, 'error');
-        return res.status(500).json({
-            message:'User not deleted successfully',
+        return res.status(error.statusCode || 503).json({
+            message:error.statusCode ? error.message : 'User not deleted successfully',
             success:false,
             data:{},
-            err:error
+            err:{}
         })
     }
 }
 
 const getUser = async (req,res) =>{
     try {
+        const principal = await userService.getPrincipal(req.headers['x-access-token']);
+        if (principal.id !== Number(req.params.id) && !principal.roles.includes('ADMIN'))
+            return res.status(403).json({success:false, message:'Cannot read another account', data:{}});
         const response = await userService.getUserById(req.params.id)
         return res.status(201).json({
             message:'User fetched successfully',
@@ -60,8 +66,8 @@ const getUser = async (req,res) =>{
         
     } catch (error) {
         require('../observability').log('operation.failed', {errorType:error.name || 'Error'}, 'error');
-        return res.status(error.statusCode).json({
-            message:error.message,
+        return res.status(error.statusCode || 503).json({
+            message:error.statusCode ? error.message : 'User lookup unavailable',
             success:false,
             data:{},
             err:error.explanation
@@ -85,8 +91,8 @@ const signIn = async (req,res) =>{
         })
     } catch (error) {
         require('../observability').log('operation.failed', {errorType:error.name || 'Error'}, 'error');
-        return res.status(error.statusCode).json({
-            message:error.message,
+        return res.status(error.statusCode || 401).json({
+            message:error.statusCode ? error.message : 'Invalid email or password',
             success:false,
             data:{},
             err:error.explanation
@@ -106,18 +112,19 @@ const isAuthenticated = async (req,res)=>{
         })
     } catch (error) {
         require('../observability').log('operation.failed', {errorType:error.name || 'Error'}, 'error');
-        return res.status(500).json({
-            message:'Something went wrong',
+        return res.status(error.statusCode || 503).json({
+            message:error.statusCode ? error.message : 'Authentication unavailable',
             success:false,
             data:{},
-            err:error
+            err:{}
         })
     }
 }
 
 const isAdmin = async (req,res)=>{
     try {
-        const response = await userService.isAdmin(req.body.id)
+        const principal = await userService.getPrincipal(req.headers['x-access-token'])
+        const response = principal.roles.includes('ADMIN')
         return res.status(200).json({
             message:'Successfullly fetched whether user is Admin or not',
             success:true,
@@ -126,14 +133,25 @@ const isAdmin = async (req,res)=>{
         })
     } catch (error) {
         require('../observability').log('operation.failed', {errorType:error.name || 'Error'}, 'error');
-        return res.status(500).json({
-            message:'Something went wrong',
+        return res.status(error.statusCode || 503).json({
+            message:error.statusCode ? error.message : 'Authentication unavailable',
             success:false,
             data:{},
-            err:error
+            err:{}
         })
     }
 }
+
+const me = async (req, res) => {
+    try {
+        const principal = await userService.getPrincipal(req.headers['x-access-token']);
+        return res.status(200).json({success:true, data:principal});
+    } catch (error) {
+        require('../observability').log('operation.failed', {errorType:error.name || 'Error'}, 'error');
+        return res.status(error.statusCode || 503).json({success:false,
+            message:error.statusCode ? error.message : 'Authentication unavailable', data:{}});
+    }
+};
 
 
 
@@ -143,5 +161,6 @@ module.exports = {
     getUser,
     signIn,
     isAuthenticated,
-    isAdmin
+    isAdmin,
+    me
 }

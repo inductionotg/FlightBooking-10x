@@ -36,10 +36,11 @@ Create or retry the same booking attempt:
 
 ```http
 POST /api/v1/booking
+x-access-token: <caller-token>
 Content-Type: application/json
 Idempotency-Key: booking-attempt-unique-uuid
 
-{"flightId":123,"userId":456,"noOfSeats":2}
+{"flightId":123,"noOfSeats":2}
 ```
 
 - 200: Booked.
@@ -54,13 +55,14 @@ Cancel using the original key and user ID:
 
 ```http
 POST /api/v1/booking/789/cancel
+x-access-token: <owner-token>
 Content-Type: application/json
 Idempotency-Key: booking-attempt-unique-uuid
 
-{"userId":456}
+{}
 ```
 
-Returns 200 when release is complete, or 202 while it is being retried. Wrong keys/user IDs return 404. The original application trusts the userId supplied to its direct booking endpoint; this change does not retrofit end-user authentication. Cancellation additionally requires possession of the original key. Deploy booking behind verified user identity, and protect service network access, before exposing these direct APIs publicly.
+Returns 200 when release is complete, or 202 while it is being retried. Wrong keys or a different authenticated owner return 404. Booking and cancellation now require a verified token and ignore body `userId`. Cancellation additionally requires the original key. See [authorization](authorization.md).
 
 Flight reservation endpoints require `x-reservation-key` matching `RESERVATION_SERVICE_KEY` in both services. A missing configured key disables those endpoints (503); a missing/wrong request key returns 401. Generated local secrets stay in ignored .env files.
 

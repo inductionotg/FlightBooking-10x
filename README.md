@@ -8,7 +8,7 @@ Quick links: [whole-system diagram](docs/architecture.md#whole-system-diagram) Â
 
 ## React web UI
 
-The [Aeris UI](frontend/README.md) adds customer flight search/booking and local admin catalog tools using React, JavaScript, and Tailwind CSS. After starting the backend below, run `cd frontend`, `npm ci`, and `npm run dev`; open [http://127.0.0.1:5173](http://127.0.0.1:5173). The UI is for local development: backend write routes still need role-based authorization before public deployment.
+The [Aeris UI](frontend/README.md) adds customer flight search/booking and local admin catalog tools using React, JavaScript, and Tailwind CSS. After starting the backend below, run `cd frontend`, `npm ci`, and `npm run dev`; open [http://127.0.0.1:5173](http://127.0.0.1:5173). Flight writes now require an ADMIN role; booking and cancellation use the verified token identity. See [authorization and admin setup](docs/authorization.md).
 
 Run `node scripts/seed-demo-catalog.js` once the flight service is up to add real Indian city/airport names and recognizable airline labels. [Demo-data details and sources](docs/demo-data.md) distinguish those real names from the fictional schedules and fares.
 
@@ -48,8 +48,10 @@ The earlier local baseline used model sync and has no migration history. Do not 
 
 ```powershell
 ./scripts/start-local.ps1
+node scripts/create-local-admin.js
 node scripts/seed-demo-catalog.js
 node scripts/smoke-local.js
+node scripts/verify-security.js
 ```
 
 Services run on ports 3001â€“3004 and 3010, accessed over IPv6 loopback (`http://[::1]:PORT`). Startup launches processes but does not assert readiness; inspect `.local/*.stderr.log` if the smoke test fails. Results are saved to `docs/step-1-smoke-results.json`; the smoke command exits nonzero if a check or gateway routing fails. Repeated gateway requests may trigger its existing five-request/two-minute limit.

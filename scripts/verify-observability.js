@@ -12,7 +12,10 @@ const parent = value=>`00-${value}-1234567890abcdef-01`;
 async function request(port,route,options={}) {
   return fetch(`http://[::1]:${port}${route}`,{...options,headers:{'content-type':'application/json',...options.headers},signal:AbortSignal.timeout(10000)});
 }
-const logs = dir=>fs.readFileSync(path.join(root,'.local',`${dir}.stdout.log`),'utf8').trim().split('\n').filter(Boolean).map(line=>JSON.parse(line));
+const logs = dir=>{
+  const entry=JSON.parse(fs.readFileSync(path.join(root,'.local/processes.json'),'utf8')).find(item=>item.Service===dir);
+  return fs.readFileSync(entry?.StdoutLog || path.join(root,'.local',`${dir}.stdout.log`),'utf8').trim().split('\n').filter(Boolean).map(line=>JSON.parse(line));
+};
 async function main() {
   const canonical=fs.readFileSync(path.join(root,'observability/runtime.js'),'utf8');
   for(const [dir] of services)assert.equal(fs.readFileSync(path.join(root,dir,'src/observability.js'),'utf8'),canonical);
@@ -46,11 +49,11 @@ async function main() {
   assert.equal(proxied.headers.get('x-trace-id'),gatewayTrace);
   const bookingTrace=trace(),key=crypto.randomUUID();let booking;
   try {
-    const booked=await request(3003,'/api/v1/booking',{method:'POST',headers:{traceparent:parent(bookingTrace),'Idempotency-Key':key},body:JSON.stringify({flightId:fixture.flightId,userId:catalog.userId,noOfSeats:1})});
+    const booked=await request(3003,'/api/v1/booking',{method:'POST',headers:{traceparent:parent(bookingTrace),'Idempotency-Key':key,'x-access-token':token},body:JSON.stringify({flightId:fixture.flightId,userId:catalog.userId,noOfSeats:1})});
     assert.equal(booked.status,200);booking=(await booked.json()).data;
     assert.equal(booking.status,'Booked');
   } finally {
-    if(booking){const cancelled=await request(3003,`/api/v1/booking/${booking.id}/cancel`,{method:'POST',headers:{'Idempotency-Key':key},body:JSON.stringify({userId:catalog.userId})});assert.equal(cancelled.status,200);}
+    if(booking){const cancelled=await request(3003,`/api/v1/booking/${booking.id}/cancel`,{method:'POST',headers:{'Idempotency-Key':key,'x-access-token':token},body:JSON.stringify({userId:catalog.userId})});assert.equal(cancelled.status,200);}
   }
   await request(3004,`/does-not-exist/${secret}`);
   const malformed=await request(3002,'/api/v1/flights',{method:'POST',body:'{"password":"'+secret+'"'});
@@ -62,6 +65,10 @@ async function main() {
   const authSpan=all.gateway.find(row=>row.traceId===gatewayTrace&&row.dependency==='auth');
   assert.ok(all.auth.some(row=>row.traceId===gatewayTrace&&row.parentSpanId===authSpan.spanId));
   pass('Gateway, auth and flight logs share one trace with linked auth spans');
+  const bookingAuth=all.booking.find(row=>row.traceId===bookingTrace&&row.dependency==='auth');
+  assert.ok(bookingAuth);
+  assert.ok(all.auth.some(row=>row.traceId===bookingTrace&&row.parentSpanId===bookingAuth.spanId));
+  pass('Booking authorization shares the booking trace with a linked auth span');
   const call=all.booking.find(row=>row.traceId===bookingTrace&&row.dependency==='flights');
   assert.ok(call);assert.ok(all.flights.some(row=>row.traceId===bookingTrace&&row.parentSpanId===call.spanId));
   assert.ok(all.booking.some(row=>row.traceId===bookingTrace&&row.bookingId===booking.id));

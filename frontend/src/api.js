@@ -40,13 +40,14 @@ export const api = {
   signIn: (email, password) => request('auth', '/signIn', { method: 'POST', body: { email, password } }),
   signUp: (email, password) => request('auth', '/signup', { method: 'POST', body: { email, password } }),
   verifyToken: token => request('auth', '/isAuthenticated', { headers: { 'x-access-token': token } }),
-  book: (body, key) => request('booking', '/booking', { method: 'POST', body, headers: { 'Idempotency-Key': key } }),
-  cancel: (id, userId, key) => request('booking', `/booking/${encodeURIComponent(id)}/cancel`, {
-    method: 'POST', body: { userId }, headers: { 'Idempotency-Key': key }
+  me: token => request('auth', '/me', { headers: { 'x-access-token': token } }),
+  book: (body, key, token) => request('booking', '/booking', { method: 'POST', body, headers: { 'Idempotency-Key': key, 'x-access-token': token } }),
+  cancel: (id, key, token) => request('booking', `/booking/${encodeURIComponent(id)}/cancel`, {
+    method: 'POST', headers: { 'Idempotency-Key': key, 'x-access-token': token }
   }),
-  createCity: name => request('flights', '/city', { method: 'POST', body: { name } }),
-  createAirport: body => request('flights', '/airports', { method: 'POST', body }),
-  createAirplane: body => request('flights', '/airplanes', { method: 'POST', body }),
-  createFlight: body => request('flights', '/flights', { method: 'POST', body }),
-  updateFlight: (id, body) => request('flights', `/flights/${encodeURIComponent(id)}`, { method: 'POST', body })
+  createCity: (name, token) => request('flights', '/city', { method: 'POST', body: { name }, headers: { 'x-access-token': token } }),
+  createAirport: (body, token) => request('flights', '/airports', { method: 'POST', body, headers: { 'x-access-token': token } }),
+  createAirplane: (body, token) => request('flights', '/airplanes', { method: 'POST', body, headers: { 'x-access-token': token } }),
+  createFlight: (body, token) => request('flights', '/flights', { method: 'POST', body, headers: { 'x-access-token': token } }),
+  updateFlight: (id, body, token) => request('flights', `/flights/${encodeURIComponent(id)}`, { method: 'POST', body, headers: { 'x-access-token': token } })
 };

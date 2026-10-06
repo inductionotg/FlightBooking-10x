@@ -1,6 +1,8 @@
 // Add a small, repeatable local demo catalog through the public flight-service API.
 // Airport and airline names/codes are real; flight numbers, dates and fares are fictional.
 const base = (process.env.FLIGHT_API_URL || 'http://[::1]:3002/api/v1').replace(/\/$/, '');
+const {adminToken} = require('./local-auth');
+let token;
 
 const places = [
   { city: 'Delhi', code: 'DEL', airport: 'Indira Gandhi International Airport (DEL)' },
@@ -25,7 +27,7 @@ const routes = [
 async function api(path, body) {
   const response = await fetch(`${base}${path}`, {
     method: body ? 'POST' : 'GET',
-    headers: body ? { 'content-type': 'application/json' } : {},
+    headers: body ? { 'content-type': 'application/json', 'x-access-token': token } : {},
     body: body ? JSON.stringify(body) : undefined,
     signal: AbortSignal.timeout(15000)
   });
@@ -44,6 +46,7 @@ function flightTimes(route, date) {
 }
 
 async function main() {
+  token = await adminToken();
   const catalog = await api('/catalog');
   if (!catalog || !Array.isArray(catalog.cities) || !Array.isArray(catalog.airports) || !Array.isArray(catalog.airplanes)) {
     throw new Error('Flight service catalog response is missing; start the updated backend first.');

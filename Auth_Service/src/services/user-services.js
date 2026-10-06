@@ -57,21 +57,17 @@ class UserServices{
         }
     }
     async isAuthenticated(token){
-        try {
-            const response = this.verifyToken(token)
-            if(!response){
-                throw {error:"Invalid token"}
-            }
-            const user = await this.userRepository.getUserById(response.id)
-            if(!user){
-                throw {error:"No user with corressponding ID"}
-            }
-
-            return user.id
-        } catch (error) {
-
-            throw error;
-        }
+        return (await this.getPrincipal(token)).id
+    }
+    async getPrincipal(token) {
+        if (!token) throw Object.assign(new Error('Authentication required'), {statusCode:401});
+        let claims;
+        try { claims = this.verifyToken(token); }
+        catch { throw Object.assign(new Error('Invalid or expired token'), {statusCode:401}); }
+        if (!Number.isInteger(claims.id)) throw Object.assign(new Error('Invalid token'), {statusCode:401});
+        const principal = await this.userRepository.getPrincipalById(claims.id);
+        if (!principal) throw Object.assign(new Error('Account no longer exists'), {statusCode:401});
+        return principal;
     }
     createToken(user){
         try {

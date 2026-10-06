@@ -2,6 +2,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
+const {adminToken} = require('./local-auth');
 const report = {timestamp:new Date().toISOString(), checks:[], scope:'Local functional smoke test; not a load test or payment/email delivery test.'};
 async function request(name, port, route, options = {}) {
   const response = await fetch(`http://[::1]:${port}${route}`, {
@@ -30,6 +31,7 @@ async function main() {
     const user = (await request('signup', 3001, '/api/v1/signup', post({email,password}))).response;
     const token = await request('sign-in', 3001, '/api/v1/signIn', post({email,password}));
     const headers = {'x-access-token':token};
+    const adminHeaders = {'x-access-token':await adminToken()};
     const authenticated = await request('authentication', 3001, '/api/v1/isAuthenticated', {headers});
     assert.equal(authenticated.response, user.id);
     const origin = await db.City.create({name:`Smoke origin ${suffix}`});
@@ -37,15 +39,16 @@ async function main() {
     const a = await db.Airport.create({name:'Smoke airport A', cityId:origin.id});
     const b = await db.Airport.create({name:'Smoke airport B', cityId:destination.id});
     const airplane = await db.Airplane.create({modelNumber:'Smoke aircraft', capacity:10});
-    const flight = await request('create-flight', 3002, '/api/v1/flights', post({
+    const flight = await request('create-flight', 3002, '/api/v1/flights', {...post({
       flightNumber:`SM${suffix}`, airplaneId:airplane.id, departureAirportId:a.id,
       arrivalAirportId:b.id, departureTime:'2099-01-01T10:00:00Z',
       arrivalTime:'2099-01-01T12:00:00Z', price:2500
-    }));
+    }),headers:adminHeaders});
     const flights = await request('search-flight', 3002, `/api/v1/flights?departureAirportId=${a.id}&arrivalAirportId=${b.id}`);
     assert.ok(flights.some(item => item.id === flight.id));
-    const booking = await request('create-booking', 3003, '/api/v1/booking', post({flightId:flight.id,userId:user.id,noOfSeats:2}));
+    const booking = await request('create-booking', 3003, '/api/v1/booking', {...post({flightId:flight.id,userId:999999,noOfSeats:2}),headers});
     assert.equal(booking.status, 'Booked');
+    assert.equal(booking.userId, user.id);
     assert.equal(booking.totalCost, 5000);
     const after = await request('verify-remaining-seats', 3002, `/api/v1/flights/${flight.id}`);
     assert.equal(after.totalSeats, 8);
