@@ -10,7 +10,7 @@ Quick links: [whole-system diagram](docs/architecture.md#whole-system-diagram) Â
 
 The [Aeris UI](frontend/README.md) adds customer flight search/booking and local admin catalog tools using React, JavaScript, and Tailwind CSS. After starting the backend below, run `cd frontend`, `npm ci`, and `npm run dev`; open [http://127.0.0.1:5173](http://127.0.0.1:5173). Flight writes now require an ADMIN role; booking and cancellation use the verified token identity. See [authorization and admin setup](docs/authorization.md).
 
-Run `node scripts/seed-demo-catalog.js` once the flight service is up to add real Indian city/airport names and recognizable airline labels. [Demo-data details and sources](docs/demo-data.md) distinguish those real names from the fictional schedules and fares.
+Run `node scripts/seed-demo-catalog.js` once the flight service is up to add **100 sample flights** between real Indian cities/airports with recognizable airline labels. The [schedule CSV](docs/demo-flight-schedule.csv) lists flight numbers, routes, and timings. [Demo-data details and sources](docs/demo-data.md) distinguish those real names from the fictional schedules and fares.
 
 My journeys now loads [durable booking history](docs/booking-history.md) from the authenticated Booking API. Sign in again after closing your browser to see and cancel your own reservations.
 

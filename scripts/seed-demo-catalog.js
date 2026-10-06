@@ -1,7 +1,9 @@
-// Add a small, repeatable local demo catalog through the public flight-service API.
+// Add 100 repeatable sample flights through the authenticated flight-service API.
 // Airport and airline names/codes are real; flight numbers, dates and fares are fictional.
 const base = (process.env.FLIGHT_API_URL || 'http://[::1]:3002/api/v1').replace(/\/$/, '');
 const {adminToken} = require('./local-auth');
+const fs = require('node:fs');
+const path = require('node:path');
 let token;
 
 const places = [
@@ -24,6 +26,38 @@ const routes = [
   { number: 'AI 9103', from: 'BOM', to: 'DEL', hour: 18, minute: 0, duration: 125, price: 5200 }
 ];
 
+// Approximate demo durations in minutes; these are not airline schedules.
+const durations = {
+  'BOM-DEL': 130, 'BLR-DEL': 170, 'DEL-HYD': 135, 'DEL-MAA': 175, 'CCU-DEL': 145,
+  'BLR-BOM': 110, 'BOM-HYD': 95, 'BOM-MAA': 125, 'BOM-CCU': 160,
+  'BLR-HYD': 75, 'BLR-MAA': 60, 'BLR-CCU': 150, 'HYD-MAA': 80,
+  'CCU-HYD': 130, 'CCU-MAA': 135
+};
+const directedRoutes = places.flatMap(origin => places.filter(destination => destination.code !== origin.code)
+  .map(destination => ({ from: origin.code, to: destination.code })));
+for (let i = 0; routes.length < 100; i++) {
+  const route = directedRoutes[i % directedRoutes.length];
+  const duration = durations[[route.from, route.to].sort().join('-')];
+  if (!duration) throw new Error(`Missing demo duration for ${route.from}-${route.to}`);
+  routes.push({ ...route, number: `${['AI', '6E', 'QP'][i % 3]} ${9600 + i}`,
+    hour: 6 + (i * 3) % 16, minute: (i % 4) * 15, duration,
+    dayOffset: Math.floor(i / directedRoutes.length), price: 2800 + Math.floor(duration / 10) * 150 + (i % 7) * 200 });
+}
+const airlineNames = {AI:'Air India', '6E':'IndiGo', QP:'Akasa Air'};
+function writeSchedule(flights) {
+  const format = new Intl.DateTimeFormat('sv-SE', {timeZone:'Asia/Kolkata', year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'});
+  const csv = value => '"' + String(value).replaceAll('"', '""') + '"';
+  const rows = [['flightNumber','airline','from','originCity','originAirport','to','destinationCity','destinationAirport','departureIST','arrivalIST','fareINR','availableSeats']];
+  for (const {route, flight} of flights) {
+    const origin = places.find(place => place.code === route.from);
+    const destination = places.find(place => place.code === route.to);
+    rows.push([flight.flightNumber, airlineNames[flight.flightNumber.split(' ')[0]], route.from, origin.city, origin.airport,
+      route.to, destination.city, destination.airport, format.format(new Date(flight.departureTime)),
+      format.format(new Date(flight.arrivalTime)), flight.price, flight.totalSeats]);
+  }
+  fs.writeFileSync(path.join(__dirname, '../docs/demo-flight-schedule.csv'), rows.map(row => row.map(csv).join(',')).join('\n') + '\n');
+}
+
 async function api(path, body) {
   const response = await fetch(`${base}${path}`, {
     method: body ? 'POST' : 'GET',
@@ -39,8 +73,8 @@ async function api(path, body) {
 }
 
 function flightTimes(route, date) {
-  // All sample departures occur seven calendar days after seeding, in India time.
-  const utc = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), route.hour - 5, route.minute - 30);
+  // Added sample departures span four days, starting seven days after seeding in India time.
+  const utc = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + (route.dayOffset || 0), route.hour - 5, route.minute - 30);
   const departure = new Date(utc);
   return { departureTime: departure.toISOString(), arrivalTime: new Date(utc + route.duration * 60000).toISOString() };
 }
@@ -71,21 +105,29 @@ async function main() {
     airplane = await api('/airplanes', { modelNumber: 'Airbus A320neo (demo cabin)', capacity: 180 });
     counts.airplanes++;
   }
-  const date = new Date();
+  const date = new Date(Date.now() + 330 * 60000); // India calendar date, independent of host timezone.
   date.setUTCDate(date.getUTCDate() + 7);
+  const existingRoutes = new Map();
+  const schedule = [];
   for (const route of routes) {
     const departureAirportId = airportIds[route.from];
     const arrivalAirportId = airportIds[route.to];
     const query = new URLSearchParams({ departureAirportId, arrivalAirportId });
-    const existing = await api(`/flights?${query}`);
-    if (existing.some(flight => flight.flightNumber === route.number)) { counts.skippedFlights++; continue; }
-    await api('/flights', {
+    const routeKey = `${route.from}-${route.to}`;
+    if (!existingRoutes.has(routeKey)) existingRoutes.set(routeKey, await api(`/flights?${query}`));
+    const existing = existingRoutes.get(routeKey);
+    const saved = existing.find(flight => flight.flightNumber === route.number);
+    if (saved) { counts.skippedFlights++; schedule.push({route, flight:saved}); continue; }
+    const flight = await api('/flights', {
       flightNumber: route.number, airplaneId: airplane.id, departureAirportId, arrivalAirportId,
       ...flightTimes(route, date), price: route.price
     });
+    existing.push(flight);
+    schedule.push({route, flight});
     counts.flights++;
   }
-  console.log(`Demo catalog ready: ${JSON.stringify(counts)}. Cities and airports are real; flight schedules and fares are fictional.`);
+  writeSchedule(schedule);
+  console.log(`Demo catalog ready (100 flights across 30 directed routes; CSV: docs/demo-flight-schedule.csv): ${JSON.stringify(counts)}. Cities and airports are real; flight schedules and fares are fictional.`);
 }
 
 main().catch(error => { console.error(error.message); process.exitCode = 1; });
