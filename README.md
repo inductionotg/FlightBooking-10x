@@ -14,6 +14,14 @@ Run `node scripts/seed-demo-catalog.js` once the flight service is up to add **1
 
 My journeys now loads [durable booking history](docs/booking-history.md) from the authenticated Booking API. Sign in again after closing your browser to see and cancel your own reservations.
 
+## Project Demo
+
+This 3-minute 34-second recording shows sign-in, admin flight publishing with its success message, catalog management, flight search, and booking confirmation in the local application.
+
+[![Aeris flight booking project demo](docs/media/project-demo-preview.jpg)](https://github.com/inductionotg/FlightBooking-10x/raw/refs/heads/main/docs/media/project-demo.mp4)
+
+[Watch or download the demo video (MP4)](https://github.com/inductionotg/FlightBooking-10x/raw/refs/heads/main/docs/media/project-demo.mp4). Click the preview above to open the recording; your browser may download it for playback.
+
 ## First-time setup (PowerShell)
 
 Start Docker Desktop. From the root of your `FlightBooking-10x` checkout, install the locked dependencies:
