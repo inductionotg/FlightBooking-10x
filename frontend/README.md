@@ -23,7 +23,7 @@ Vite proxies `/backend/auth` to auth on port 3001, `/backend/flights` to flights
 1. **Explore:** choose departure and arrival airports, optionally date or price, then search. The date and displayed times use your browser's local time zone. Open a flight to see availability and fare.
 2. **Book:** create an account or sign in, select seats and optional email, then confirm. The UI retains the booking's `Idempotency-Key`; if a request times out, retry it from **My journeys**. Confirmation email is captured by local Mailpit when configured. No payment is processed.
 3. **My journeys:** loads your account’s booking history from MySQL, newest first. Refresh status, load older pages, and cancel your own reservations after signing in again on any browser. See [history behavior](../docs/booking-history.md).
-4. **Admin tools:** sign in with the generated local admin account, create catalog entries for a route, publish a flight, or find a flight by ID to change its fare or gate. The new `GET /api/v1/catalog` and `POST /api/v1/airplanes` flight-service routes support this screen.
+4. **Admin tools:** sign in with the generated local admin account, create catalog entries for a route, publish a flight, or find a flight by ID to change its fare or gate. After a successful publish, the form shows **Flight added successfully** with the flight number and ID, even after the inputs reset. The new `GET /api/v1/catalog` and `POST /api/v1/airplanes` flight-service routes support this screen.
 
 5. **Log out:** use the labelled header button on desktop or mobile, or the mobile-menu action. It clears your signed-in session and returns to Explore.
 
