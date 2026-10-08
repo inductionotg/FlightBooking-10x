@@ -18,9 +18,9 @@ My journeys now loads [durable booking history](docs/booking-history.md) from th
 
 This 3-minute 34-second recording shows sign-in, admin flight publishing with its success message, catalog management, flight search, and booking confirmation in the local application.
 
-[![Aeris flight booking project demo](docs/media/project-demo-preview.jpg)](https://github.com/inductionotg/FlightBooking-10x/raw/refs/heads/main/docs/media/project-demo.mp4)
+https://github.com/user-attachments/assets/247d547f-dfd7-40aa-bad8-045d2e1703fa
 
-[Watch or download the demo video (MP4)](https://github.com/inductionotg/FlightBooking-10x/raw/refs/heads/main/docs/media/project-demo.mp4). Click the preview above to open the recording; your browser may download it for playback.
+Press play to watch the recording directly in this README.
 
 ## First-time setup (PowerShell)
 
